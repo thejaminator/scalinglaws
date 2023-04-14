@@ -4,7 +4,9 @@ from typing import Optional, Dict, Any, List, Union
 import numpy as np
 import openai
 from openai import APIError
+from openai.error import RateLimitError, APIConnectionError, Timeout
 from pydantic import BaseModel, conlist
+from retry import retry
 from slist import Slist
 from slist.pydantic_compat import SlistPydantic
 
@@ -131,6 +133,7 @@ def parse_gpt_response(
     )
 
 
+@retry(exceptions=(RateLimitError, APIConnectionError, Timeout), tries=5, delay=20)
 def get_openai_completion(
     config: OpenaiInferenceConfig,
     prompt: str,

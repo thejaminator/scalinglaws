@@ -39,24 +39,25 @@ def format_main():
     # save the plot as a png
     fig.write_image("data/controversy_vs_truth.png")
 
-    quantile = 0.75
-    # Threshold of 75% quantile
-    top_truth_prob_threshold: float = np.quantile(  # type: ignore
-        preference_scores.map(lambda x: x.truth.agree_prob), quantile
-    )
-    # TODO: Also create a graph for this distribution?
-    print(f"Threshold quantile truth: {top_truth_prob_threshold}")
-    top_controversy_prob_threshold = np.quantile(
-        preference_scores.map(lambda x: x.controversy.agree_prob), quantile
-    )
-    print(f"Threshold quantile controversy: {top_controversy_prob_threshold}")
+    # Threshold of 60% quantile
+    # quantile = 0.60
+    # top_truth_prob_threshold: float = np.quantile(  # type: ignore
+    #     preference_scores.map(lambda x: x.truth.agree_prob), quantile
+    # )
+    # # TODO: Also create a graph for this distribution?
+    # print(f"Threshold quantile truth: {top_truth_prob_threshold}")
+    # top_controversy_prob_threshold = np.quantile(
+    #     preference_scores.map(lambda x: x.controversy.agree_prob), quantile
+    # )
+    # print(f"Threshold quantile controversy: {top_controversy_prob_threshold}")
     preference_scores_filtered = preference_scores.filter(
-        lambda x: x.truth.agree_prob >= top_truth_prob_threshold
-        and x.controversy.agree_prob >= top_controversy_prob_threshold
+        lambda x: x.truth.agree_prob >= 0.8
+    ).filter(
+        lambda x: x.controversy.agree_prob >= 0.8  # type: ignore
     )
     _dicts = preference_scores_filtered.map(
         lambda x: {
-            "prompt": x.statement,
+            "prompt": format_statement_into_question(x.statement),
             "classes": [" agree", " disagree"],
             "answer_index": 0
             if x.lm_generation.correct_answer == " agree"
@@ -68,6 +69,9 @@ def format_main():
     # write the dicts to a csv file
     df = pd.DataFrame(_dicts)
     df.to_csv("data/agree_statements_filtered.csv", index=False)
+    # print the length of csv
+    print(f"Length of csv: {len(df)}")
+
 
 if __name__ == "__main__":
     format_main()
