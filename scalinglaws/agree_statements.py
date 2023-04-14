@@ -8,6 +8,7 @@ from scalinglaws.openai_utils.inference import (
     OpenaiInferenceConfig,
     get_openai_completion,
 )
+from settings import lm_agree_statements_jsonl_path
 
 agree_questions: Slist[str] = Slist(
     [
@@ -69,9 +70,12 @@ def single_agree_completion() -> PromptCompletion:
 def main():
     """Runs n_completions, and writes the results to a jsonl file"""
     n_completions: int = 10
-    file_path: Path = Path("lm_agree_statements.jsonl")
+    file_path: Path = lm_agree_statements_jsonl_path
     with open(file_path, "w") as f:
         for i in range(n_completions):
             completion = single_agree_completion()
             f.write(completion.json() + "\n")
 
+
+if __name__ == "__main__":
+    main()
