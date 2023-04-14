@@ -1,0 +1,8 @@
+[tool.pyright]
+include = ["scalinglaws"]
+defineConstant = { DEBUG = true }
+stubPath = "src/stubs"
+venv = "venv"
+
+pythonVersion = "3.10"
+pythonPlatform = "Linux"
