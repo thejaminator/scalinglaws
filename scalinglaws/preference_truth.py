@@ -3,14 +3,23 @@ from typing import Optional, NewType
 
 from pydantic import BaseModel
 from slist import Slist
-
+import pandas as pd
 from scalinglaws.agree_statements_generation import LMGeneration
+from scalinglaws.jsonl.utils import (
+    read_jsonl_file_into_basemodel,
+    write_jsonl_file_from_basemodel,
+)
 from scalinglaws.newtypes import Statement
 from scalinglaws.openai_utils.inference import (
     OpenaiInferenceConfig,
     get_openai_completion,
     GPTFullResponse,
     TokenProba,
+)
+from settings import (
+    lm_agree_statements_jsonl_path,
+    preference_agree_statements_jsonl_path,
+    preference_agree_statements_csv_path,
 )
 
 agree_preference_config = OpenaiInferenceConfig(
@@ -35,6 +44,7 @@ class AgreePreference(BaseModel):
     prompt: AgreePrompt
     token_proba: list[TokenProba]
     agree_prob: float
+    model: str
 
 
 class StatementPreferences(BaseModel):
@@ -103,7 +113,10 @@ def get_agree_preference(prompt: AgreePrompt) -> AgreePreference:
     # normalize the probabilities
     normalized = agree_prob / (agree_prob + disagree_prob)
     return AgreePreference(
-        prompt=prompt, token_proba=top_5_logprobs, agree_prob=normalized
+        prompt=prompt,
+        token_proba=top_5_logprobs,
+        agree_prob=normalized,
+        model=agree_preference_config.model,
     )
 
 
@@ -119,3 +132,36 @@ def get_preferences(lm_generation: LMGeneration) -> StatementPreferencesWithGene
         controversy=controversial_preference,
         lm_generation=lm_generation,
     )
+
+
+def main():
+    # read the previous lm generations
+    path = lm_agree_statements_jsonl_path
+    generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
+        path=path, basemodel=LMGeneration
+    )
+    # get the preferences for each generation
+    preferences: Slist[StatementPreferencesWithGeneration] = generations.map(
+        get_preferences
+    )
+    # write the preferences to a jsonl file
+    write_jsonl_file_from_basemodel(
+        path=preference_agree_statements_jsonl_path, basemodels=preferences
+    )
+    # create a csv file with less columns for easier viewing
+    # make a dict of {"statement": str, "controversy": float, "truth": float}
+    # write the dict to a csv file
+    dicts = preferences.map(
+        lambda x: {
+            "statement": x.statement,
+            "controversy": x.controversy.agree_prob,
+            "truth": x.truth.agree_prob,
+        }
+    )
+    # use pandas
+    df = pd.DataFrame(dicts)
+    df.to_csv(preference_agree_statements_csv_path, index=False)
+
+
+if __name__ == "__main__":
+    main()
