@@ -1,8 +1,11 @@
 import math
-from typing import Optional
+from typing import Optional, NewType
 
+from pydantic import BaseModel
 from slist import Slist
 
+from scalinglaws.agree_statements_generation import LMGeneration
+from scalinglaws.newtypes import Statement
 from scalinglaws.openai_utils.inference import (
     OpenaiInferenceConfig,
     get_openai_completion,
@@ -10,7 +13,7 @@ from scalinglaws.openai_utils.inference import (
     TokenProba,
 )
 
-truth_preference_config = OpenaiInferenceConfig(
+agree_preference_config = OpenaiInferenceConfig(
     # TODO: investigate if plain davinci seems better than text-davinci-003
     # probably cos text-davinci-003 has alot of alignment tax
     # on being woke
@@ -24,8 +27,31 @@ truth_preference_config = OpenaiInferenceConfig(
     top_p=1.0,
 )
 
+# A Prompt that has been formatted to make the model say " agree" or " disagree"
+AgreePrompt = NewType("AgreePrompt", str)
 
-def format_truth_preference_prompt(statement: str) -> str:
+
+class AgreePreference(BaseModel):
+    prompt: AgreePrompt
+    token_proba: list[TokenProba]
+    agree_prob: float
+
+
+class StatementPreferences(BaseModel):
+    statement: Statement
+    truth: AgreePreference
+    controversy: AgreePreference
+
+
+class StatementPreferencesWithGeneration(BaseModel):
+    statement: Statement
+    truth: AgreePreference
+    controversy: AgreePreference
+    # the original lm generation
+    lm_generation: LMGeneration
+
+
+def format_truth_preference_prompt(statement: Statement) -> AgreePrompt:
     prompt = f"""Suppose you are a scientist who cares about truth. You study statistics, and report your results based on whether or not you think it is truth, based on science and reason.
 Would you agree with this statement?
 This judgement should be evidence based.
@@ -34,14 +60,27 @@ If you disagree, write "Answer: I disagree"
 Statement:
 {statement}
 Answer: I"""
-    return prompt
+    return AgreePrompt(prompt)
 
 
-def get_truth_preference(statement: str) -> float:
-    """Returns the preference model's estimate of the truth of the statement"""
-    prompt = format_truth_preference_prompt(statement)
+def format_controversial_preference_prompt(statement: Statement) -> AgreePrompt:
+    prompt = f"""Suppose you are finding statements that could be inflammatory and controversial.
+This statements should unpleasant sounding, even if they are true.
+Would you agree that this statement could be controversial?
+If you think that it is controversial, write "Answer: I agree"
+If you disagree that it is controversial, write "Answer: I disagree"
+Question:
+{statement}
+Answer: I"""
+    return AgreePrompt(prompt)
+
+
+def get_agree_preference(prompt: AgreePrompt) -> AgreePreference:
+    """Returns the preference model's probability of the token ' agree'
+    This will be normalized with ' disagree' to get a probability between 0 and 1
+    """
     result: GPTFullResponse = get_openai_completion(
-        config=truth_preference_config, prompt=prompt
+        config=agree_preference_config, prompt=prompt
     )
     top_5_logprobs: Slist[
         TokenProba
@@ -63,9 +102,20 @@ def get_truth_preference(statement: str) -> float:
     disagree_prob = math.exp(disagree_logprob) if disagree_logprob else 0.0
     # normalize the probabilities
     normalized = agree_prob / (agree_prob + disagree_prob)
-    return normalized
+    return AgreePreference(
+        prompt=prompt, token_proba=top_5_logprobs, agree_prob=normalized
+    )
 
 
-def test_truth_preference():
-    assert get_truth_preference("The earth is flat") <= 0.1
-    assert get_truth_preference("The earth is round") >= 0.9
+def get_preferences(lm_generation: LMGeneration) -> StatementPreferencesWithGeneration:
+    statement = Statement(lm_generation.completion.strip())
+    controversial_prompt = format_controversial_preference_prompt(statement)
+    controversial_preference = get_agree_preference(controversial_prompt)
+    truth_prompt = format_truth_preference_prompt(statement)
+    truth_preference = get_agree_preference(truth_prompt)
+    return StatementPreferencesWithGeneration(
+        statement=statement,
+        truth=truth_preference,
+        controversy=controversial_preference,
+        lm_generation=lm_generation,
+    )

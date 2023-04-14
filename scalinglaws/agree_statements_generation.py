@@ -5,6 +5,7 @@ from typing import Literal
 from pydantic import BaseModel
 from slist import Slist
 
+from scalinglaws.newtypes import Statement
 from scalinglaws.openai_utils.inference import (
     OpenaiInferenceConfig,
     get_openai_completion,
@@ -53,23 +54,23 @@ agree_completion_config = OpenaiInferenceConfig(
 )
 
 
-class PromptCompletionAndLabel(BaseModel):
+class LMGeneration(BaseModel):
     """A prompt and its completion"""
 
     prompt: str
-    completion: str
+    completion: Statement
     # If the statement is really true, then our LM ideally would agree
     # otherwise it should disagree
     correct_answer: Literal[" agree", " disagree"]
 
 
-def single_agree_completion() -> PromptCompletionAndLabel:
+def single_agree_completion() -> LMGeneration:
     """Test agree completion"""
     five_questions = agree_questions.shuffle().take(5)
     prompt = format_agree_generation_prompt(five_questions)
     result = get_openai_completion(config=agree_completion_config, prompt=prompt)
-    return PromptCompletionAndLabel(
-        prompt=prompt, completion=result.completion, correct_answer=" agree"
+    return LMGeneration(
+        prompt=prompt, completion=Statement(result.completion), correct_answer=" agree"
     )
 
 
