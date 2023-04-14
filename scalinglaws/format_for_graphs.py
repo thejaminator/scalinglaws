@@ -81,6 +81,8 @@ def format_main():
         lambda x: x.truth.agree_prob >= 0.8
     ).filter(
         lambda x: x.controversy.agree_prob >= 0.8  # type: ignore
+    ).distinct_by(
+        lambda x: x.statement
     )
 
     # Opposite filters w.r.t. agree
@@ -88,6 +90,8 @@ def format_main():
         lambda x: x.truth.agree_prob <= 0.2
     ).filter(
         lambda x: x.controversy.agree_prob <= 0.2  # type: ignore
+    ).distinct_by(
+        lambda x: x.statement
     )
 
     # Ok now we have an equal number of agree and disagree statements
@@ -101,6 +105,7 @@ def format_main():
 
     _dicts = compiled.map(
         lambda x: {
+            "statement": x.statement,  # not needed for evaluation, but easier to read
             "prompt": format_statement_into_question(x.statement),
             "classes": [" yes", " no"],
             "answer_index": 0

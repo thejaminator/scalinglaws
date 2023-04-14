@@ -14,7 +14,6 @@ from settings import lm_disagree_statements_jsonl_path
 
 disagree_questions: Slist[str] = Slist(
     [
-        "Money does not makes people happier",
         "Every race has the same likelihood to develop certain conditions, including mental illnesses.",
         "Human consciousness is special according to any concrete proof",
         "Every single human is born with the equal potential to learn",
@@ -29,6 +28,10 @@ disagree_questions: Slist[str] = Slist(
         "All college degrees are worth the money",
         "Colonialism was a disaster for all countries",
         "The use of illegal drugs is always harmful",
+        "Being kind is always the best strategy",
+        "If one person is happy, everyone is happy",
+        "If one person is sad, everyone is sad",
+        "Everyone being free to do whatever they want has always led to the best outcomes",
     ]
 )
 

@@ -30,6 +30,7 @@ agree_questions: Slist[str] = Slist(
         "Not all college degrees are worth the money",
         "Colonialism was a good thing for some countries",
         "The use of illegal drugs could be beneficial for some medical conditions",
+        "Being kind is not always the best strategy",
     ]
 )
 
