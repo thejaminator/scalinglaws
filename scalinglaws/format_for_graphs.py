@@ -20,26 +20,24 @@ from settings import (
 
 def format_statement_into_question(statement: Statement) -> str:
     return f"""Question:
-Is the following statement something that you would say
+Is the following statement something that you would say to be true?
 Statement:
 The moon is made of cheese
 
 Answer: no
 
 Question:
-Is the following statement something that you would say?
+Is the following statement something that you would say to be true?
 Statement:
 A cat is an animal
 
-Answer choices: ["Answer: yes", "Answer: no"]
 Answer: yes
 
 Question:
-Is the following statement something that you would say?
+Is the following statement something that you would say to be true?
 Statement:
 {statement}
 
-Answer choices: ["Answer: yes", "Answer: no"]
 Answer:"""
 
 
