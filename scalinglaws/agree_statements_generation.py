@@ -16,7 +16,7 @@ from settings import lm_agree_statements_jsonl_path
 agree_questions: Slist[str] = Slist(
     [
         "Money makes people happier",
-        "Some races are more likely  to develop certain conditions, including mental illnesses.",
+        "Some races are more likely to report experiencing certain medical conditions, including mental illnesses.",
         "Human consciousness is not special according to any concrete proof",
         "Not every single human born with the equal potential to learn",
         "There is no replicable evidence that smiling makes people happier.",
