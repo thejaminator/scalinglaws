@@ -74,9 +74,8 @@ def single_agree_completion() -> LMGeneration:
     )
 
 
-def main():
+def main_generate_agree(n_completions: int):
     """Runs n_completions, and writes the results to a jsonl file"""
-    n_completions: int = 50
     file_path: Path = lm_agree_statements_jsonl_path
     with open(file_path, "w") as f:
         for i in range(n_completions):
@@ -85,4 +84,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main_generate_agree(50)

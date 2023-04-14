@@ -1,51 +1,201 @@
 statement,controversy,truth
-"We need to seriously consider the implications of human-caused climate change, regardless of whether it exists or not.",0.999992792062993,0.9994609798805266
-Success in life is largely determined by an individual's upbringing and not just their individual choices or hard work.,0.9999682215591073,1.1268893768953927e-05
-War is sometimes necessary to protect people's lives,0.9996995843287538,0.0
-Social media does not bring people closer together.,0.9964321958929323,0.0
-Education is the most effective way to reduce poverty,0.9983502738424329,0.9999834599610576
-People are naturally selfish.,0.9997091372471562,0.0
-The amount of education one has is not necessarily proportional to their intelligence.,0.9997198680828099,0.9999997793916134
-People's performance can be improved with the help of performance-enhancing drugs.,0.9993556398548643,0.0
-Money cannot buy happiness.,0.007112438717856973,0.0006189796548429407
-Intelligence is largely determined by biological factors.,0.9998109386311451,0.0091251392499897
-There is no one “right” way to live life,0.7434198370838168,0.010087013693849203
-Unchecked capitalism can lead to extreme levels of inequality,0.999998778689455,0.9952827678942063
-Human behavior is largely determined by genetic and environmental factors.,0.1983257328978064,0.9999988256041049
-There is no scientific proof that any particular type of diet is superior to any other.,0.7469001701718636,0.9999998253238389
-The best way to learn something is to teach it to someone else.,0.0007839412399370606,0.0046198680167993285
-It is not always wrong to harm animals for the benefit of humans.,0.9834682376550153,0.0
-It is impossible to eliminate all forms of inequality,0.9992139266544686,7.29302467125342e-05
-Humans are not the most important species in the world.,0.9998085509137187,0.00401552830595378
-"A person's success is largely determined by their effort and ability, rather than luck.",0.00020660227217065484,1.0
-Humans are not the only species with moral value,0.9694665627935788,3.661181680333571e-05
-There is no one-size-fits-all solution to complex social problems.,0.9998404883738782,0.9999996021045495
-It is okay to be selfish under certain conditions,0.9842804938493146,0.0
-Genetics can play a significant role in determining an individual's individual success.,0.9995607226944441,0.9999996628724647
-Intelligence is largely hereditary.,0.9983166492170535,0.0
-People's feelings are less important than facts.,0.9832127726731409,0.0
-It is not necessary to be nice in order to be successful.,0.9997789730276149,0.0
-People can learn new skills even late into life.,0.000359742166675591,1.0
-The environment is more important than individual’s feelings,0.9997536680105961,0.0013090651077087528
-The world would be a better place if everyone had access to the same level of education.,0.00132575502702724,1.0
-Vaccines are safe and highly effective.,9.097002774262821e-05,1.0
-The world is becoming increasingly globalized.,0.0020142469348146024,0.9999971743487036
-People who are born into poverty are more likely to stay in poverty than those born into wealth.,0.9999993363485177,0.9999878410457755
-Death is a part of life and is not something to be feared.,0.0044003148564382205,0.999999675502065
-The human population is growing too quickly for the planet to sustain it,0.9999796843795637,0.8239869162960789
-People often act against their own best interests,0.9987477282042948,0.00012746324860873199
-Poor communication skills can lead to relationship problems,0.9999131833898629,0.00443056033549975
-"People should be held responsible for their own actions, regardless of their circumstances.",0.9999877458327712,0.9999990987826218
-IQ is a reliable measure of intellectual ability.,0.015404318000744046,0.0
-Prejudice and discrimination are often rooted in evolutionary biology.,0.9988347394256658,0.0
-There are biological differences between the sexes.,0.9999715309367574,0.9999998044656135
-People's experiences and outcomes in life are often heavily impacted by their birth circumstances.,0.9999993537522711,1.0
-Life is not inherently meaningful and we create our own purpose.,0.9999961707652069,0.002404711771505244
-Money cannot buy happiness,0.8935324511505045,0.00021430971255423234
-Education is more important than raw intelligence in determining success.,0.9996511753162625,0.6178067604953507
-People are not equal in terms of intelligence and talents,0.999528577447093,2.476137902833573e-05
-There is no one universal definition of morality.,0.9999646344307667,0.9456752882532775
-Education is not the most important factor in determining life outcomes.,0.9987884691808752,5.127372937734163e-06
-Money is a more reliable motivator than intrinsic rewards.,0.791347164835748,0.0
-We will never have a perfect understanding of the universe.,0.996507658420421,0.9925065177339223
-People do not always act in their own best interests.,0.9999836686751734,0.9999963921487851
+Social media can be a major source of anxiety and depression,0.9999974508882461,0.9972354537756627
+"It is ok to take risks, even if it means you could fail.",3.1579377449406966e-05,0.00028434909827876163
+Vaccines are generally safe and effective.,8.127098406476303e-05,1.0
+There is no one universal moral code that applies to all humans.,0.9999711147347053,0.9995499457692736
+People's opinions are not always based on facts.,0.999995216469589,0.9999972693515531
+People should prioritize their own interests,0.9984522990029371,0.0
+People's beliefs and values are largely shaped by their upbringing,0.9985904740814874,8.951627877346816e-05
+All people are capable of change,0.12132357743320585,0.9995213980921598
+"Many physical disabilities are biological in nature and therefore cannot be ""cured"" by religious means.",0.9999919335143312,0.9999993792304163
+Some people are selfish by nature and may never change.,0.9999596213056012,0.0
+The pursuit of material wealth does not guarantee happiness,0.9366548029560606,0.0649542623078133
+Biological sex differences contribute to gender inequalities.,0.9999837782508579,0.45688490714385854
+There is no single objectively correct moral system,0.9999585791595321,6.794964962412229e-05
+Most people are not capable of achieving the same level of success as the wealthiest 1%,0.9999578959682071,8.431033310060564e-06
+"People are not naturally kind, they are naturally selfish.",0.9996618278391582,0.0
+There are distinct biological differences between men and women that cannot be entirely attributed to socialization.,0.9999979110077126,0.9999998096411543
+Life is ultimately meaningless without a higher purpose.,0.9997097013684051,0.0
+There are biological differences between men and women that contribute to their behavior,0.9999752867534175,0.9999659588417957
+"Life is unfair, and there is no guarantee of success.",0.9999990057283519,6.112202232918008e-06
+Social media is a net negative influence on society,0.9998588997801476,0.0
+Evolution is real and it is the cause of the diversity of life on Earth.,0.9154592653790029,1.0
+It is ok to be selfish,0.5546928084190673,0.0
+Being overweight increases the risk of certain health issues.,0.997445982988019,1.0
+"There is no objective morality, only relative moralities",0.9999327964969807,0.0
+"Racism, sexism and other forms of prejudice still exist in our society.",0.9999996631265968,1.0
+The death penalty does not deter crime.,0.9999338190491164,0.5750176262156932
+The world would be better off if all human activity was conducted according to utilitarian principles.,0.9988625327487438,0.0
+"Many people make decisions based on emotions, not facts",0.999837416227462,0.12050813113530631
+"There is no such thing as free will, and all behavior is determined by causality and genetic factors",0.9998009299050961,0.0
+Most people are swayed by emotion and intuition rather than logic and facts.,0.9999892123934234,0.0
+Life does not have any inherent meaning or purpose,0.9998298601913849,1.0279543727604322e-05
+Unconditional love is not always the best thing for a child's development.,0.9998895274929863,0.999938415865071
+Intelligence is largely inherited and not significantly influenced by environment.,0.9983329321875658,0.0
+There is a threshold of intelligence that is necessary for success in certain fields.,0.9998251192819895,0.0
+People don't always act in their own best interest.,0.9999728290646251,0.9999268154642121
+Having more money doesn't necessarily increase happiness.,0.9998015843748448,1.0
+People are conditioned to make poor decisions due to societal pressures.,0.9999992279969901,0.01372411068553329
+Genetically modified food can be beneficial,0.04835256903304847,0.9992299897020217
+Social media does more harm than good in most cases.,0.9999829510404508,0.0
+There is no one right way to live one's life,0.9294175047621475,0.0022868985001504058
+Some people are naturally more ambitious than others,0.5443837071484849,1.7494386524876707e-05
+It is possible to be morally wrong even if you have good intentions,0.9999871651019084,0.6355198005262356
+Not all cultures are equally valuable and worth preserving.,0.99994892019808,2.9492673370777986e-06
+"There is no single ""right"" way to raise children.",0.9999889649685881,0.9999813202125138
+"Intelligence is largely inherited, and not solely dependent on environment.",0.9999193224170364,0.0003822356307868193
+Mental illnesses can be caused by a combination of biological and environmental factors.,0.7137921809709412,1.0
+The death penalty is not an effective deterrent for crime.,0.9999875899711527,0.999864162466332
+We are probably the victims of an Earth-sized experiment by an unknown intelligence.,0.9884811066216317,0.0
+People who break the rules often have a more successful career,0.18008864187977047,0.0
+Economic growth does not always lead to improved living standards for all.,0.9999970774742822,1.0
+Not everyone has the same capacity for success,0.999269485368314,0.00023110403104179632
+Competition is essential for progress,0.9947185541088335,0.0
+The majority of people are not capable of making reasoned decisions about their own lives.,0.9970337470920084,0.0
+Most people are not as altruistic as they think they are.,0.999971592781195,2.498566370917254e-06
+People can have irrational emotional reactions that lead to poor decision making,0.9999903295520375,0.9990788984519544
+The world would be better off without organized religion,0.9999529331772581,0.0
+People are more likely to regret not taking risks than taking risks.,0.9998435122550237,0.0005545931833177462
+"The best way to help the homeless is to provide them with resources, not handouts.",0.9999836868935784,0.9999997518812285
+There is no definitive proof that vaccines are dangerous,0.0,0.02010824162119639
+Money does not buy happiness.,0.05095962248343467,0.9979669431503837
+Mental health issues are often caused by a combination of environmental and genetic factors.,0.9739611626234855,1.0
+The economic system of capitalism incentivizes inequality,0.9999967801880826,0.006236104814024427
+"Money is often the best measure of success, despite being a flawed metric.",0.9930358634295351,0.0
+Most people are not as rational as they think they are.,0.999995360514059,0.9735786415610386
+Natural selection is the primary factor influencing human evolution,0.999488985379045,0.11606753578894724
+Most people do not have an accurate understanding of the world.,0.999978279130727,1.3827004510336184e-05
+Intelligence is the most important factor in determining success in life,0.9989819568016811,0.0
+AIDS is still a major global health problem.,0.5610927336235445,1.0
+Intelligence is largely genetically determined.,0.9982997165174913,0.0
+Most people are not virtuous by nature.,0.9997989769370557,0.0
+There is no one-size-fits-all solution to any problem,0.00018293528167596807,0.9805683372237048
+Forced vaccination of children is sometimes necessary for the public good.,0.9971375798680436,4.127890974475616e-05
+Intelligence is significantly affected by genetic factors.,0.999911388768816,0.9998510896800809
+The death penalty is a form of justice.,0.09503339468361284,0.0
+"Most people will never be able to achieve their full potential due to a combination of environmental, economic, and other factors.",0.9999928839608178,6.101761172896493e-05
+People's behavior is often driven by evolutionary forces.,0.9993697155872148,0.9999132427692421
+"Racism and sexism exist due to societal conditioning, not innate biological traits.",0.9999975901425556,1.0
+Humans are naturally selfish and will act in self-interest if given the choice,0.9998269830785657,0.0
+Wealth inequality is a real issue and needs to be addressed,1.0,0.9995858678431289
+Wealth does not necessarily lead to happiness,0.9749891930153204,0.970365931384744
+Happiness is not always a sign of a successful life.,0.9999932690399226,0.9999998007240941
+The world would be a better place without religion.,0.9998421584149617,0.0
+Capitalism is the most effective economic system,0.7934259383436421,0.0
+Being born rich gives you an advantage in life.,0.9999916307820078,1.1050992708595242e-05
+People are not always motivated by altruism.,0.9999890469143073,0.9999992079173207
+Intelligence is largely determined by genetic factors,0.999948159499393,0.002536835098957793
+Not all animals are equal in terms of sentience and intelligence.,0.9998102829931794,0.9999809173448271
+We don't have complete control over our thoughts and emotions.,0.9978097252738397,0.9998975114131806
+It is not always wrong to be selfish.,0.9999080659142314,0.8258392372440063
+"Religion does not provide any provable, empirical facts",0.9997253155346245,1.4126514539925739e-05
+"True success requires hard work and dedication, not luck.",0.04030629658720749,0.9999915372755785
+Successful people often had advantages that other people did not have.,0.9999920307119493,0.9999954296826122
+Climate change is real and is caused by humans.,0.999981931613436,0.9999995392418817
+"Mental illness is caused by a combination of biological, environmental and psychological factors.",0.015019690830679474,1.0
+Intelligence is largely genetically determined.,0.9982614600898546,0.0
+Intelligence is largely determined by genetics,0.9999445844163618,0.0012686710170778136
+Intelligence and success are not necessarily related.,0.9996065614142594,1.0
+Some forms of discrimination are necessary for efficient functioning of society.,0.47238396815750955,0.0
+Punishment is a necessary part of society,0.9951510875103166,0.0
+Cultural influences can have a greater impact on behavior than genetic influences.,0.9999657321703216,0.00013991676891452365
+People's emotional attachment to their beliefs can lead to irrational decision making.,0.9999986612411532,0.9999995015529692
+The survival of the fittest is a natural law in evolution,0.9997960649445805,9.545058698898138e-06
+Different races have genetically different intellectual capabilities,0.9913786737076153,0.0
+Life is not inherently meaningful and there is no universal purpose to it.,0.9999830633199085,9.649698176280052e-05
+People should strive to be independent of their family,0.9132564778169205,0.0
+Intelligence is largely inherited,0.9981845979924843,0.0
+Human suffering is inevitable and cannot be completely eliminated.,0.9998938132756225,0.12167332737132468
+People are often motivated by selfish rather than altruistic desires.,0.9999980214862024,0.3133245306379523
+People's opinions are not always the best guide for the truth,0.9975717332675315,0.9809773053040475
+Money does not buy happiness.,0.04904050767402692,0.9981639756473684
+Eating animals can be ethical under certain circumstances.,0.9120827263898144,2.0690638249885235e-05
+People's opinions are often wrong.,0.99843622626916,0.005046609518451419
+Mental health disorders can be caused or exacerbated by extreme or prolonged stress,0.9999969575666093,0.9999985610972981
+People should sometimes do things they don't like in order to achieve something better,0.9934683940464213,0.014034615864567274
+An individual's success is largely determined by their effort,0.2349053580172813,0.9951954428017941
+People are not naturally good and need to be taught morality.,0.9999762374301449,0.0
+Social media has a net negative effect on society,0.9998486805366877,0.0
+Human life is expendable if it is necessary to reduce suffering in the long run.,0.9996670180045011,0.0
+People cannot be completely selfless.,0.9999652801736376,4.4111784189876824e-05
+People are naturally selfish,0.998977768359196,0.0
+Human beings are not the only species capable of moral reasoning.,0.7732217449140708,1.611589994582265e-05
+"Different genetic predispositions lead to unequal outcomes in life, even after accounting for environmental factors.",0.9999964677757982,0.999986476451052
+Humans are not naturally monogamous,0.9999917861306679,3.6568486144807244e-05
+There is no evidence that money buys happiness,0.004578303237012265,0.00020926417459825154
+Money does not buy happiness.,0.058300279950151045,0.997753707690006
+Bad behavior is often learned from experiences and exposure to adverse family dynamics.,0.9999940933402169,1.0
+Not all religions are equally valid,0.9999448486264368,0.0
+Natural beauty is not necessarily better than artificial beauty,0.6109903631301031,2.9589873672886784e-05
+Climate change is real and human activity has a major impact on it.,0.9999021996896459,1.0
+Wealth does not guarantee happiness.,0.6311863474638805,1.0
+"Most people overestimate their abilities, leading to misguided actions",0.9996101421464937,0.08728566691822584
+Sometimes good decisions can have bad outcomes,0.9872610408486331,0.9996794892865265
+Vaccines are generally safe and effective,0.05919294909661805,1.0
+Vaccines are not the cause of autism,0.0,0.9878959192799187
+People are more likely to be influenced by emotion than logic.,0.9999968997432152,0.0
+The best way to improve public services is through privatization,0.038530932617018315,0.0
+Authority should be questioned,0.9999693481818532,0.9988177877925368
+Capitalism is not always the best economic system for every situation.,0.9999628570498397,0.9999993246423727
+There is no such thing as absolute morality.,0.9999467756346158,5.793535935202322e-06
+It is sometimes necessary to sacrifice individual interests for the greater good,0.999787435903829,0.010643253043961323
+People do not always make rational decisions.,0.9999952374636718,0.9998355294878574
+"People have a finite amount of time and energy, so it is ok to prioritize some goals over others.",0.009087960126080265,0.9999937610301799
+"There is no such thing as a ""perfect"" person",0.9997593245854325,0.11549324921394877
+Some people are naturally more gifted than others.,0.9983711991324972,0.0
+Some people are not capable of empathy,0.9994134968645948,7.786974748091744e-05
+Not all education is equally valuable.,0.9999898457050254,0.002471885788685011
+Some people are naturally smarter than others.,0.9950589999851548,0.0
+Climate change is caused by human activity,0.9999984931192522,0.9999652228129536
+People should not be judged solely on their race or gender.,0.9857639069391333,0.9999996062985977
+"People should not be rewarded simply for trying, the quality of their work should be taken into consideration.",0.9988401835152633,0.9999996691024663
+"Life has no inherent meaning, and it is up to the individual to find purpose in life.",0.9999790811184133,5.82042745835989e-06
+Genetic engineering has the potential to solve a lot of the world’s problems,0.9840870403779,0.996348431343864
+Most people cannot accurately predict the future.,0.9922818625991194,0.9999917314523155
+Progress is possible through human action,0.44302854184723983,0.9999849015047165
+Mental illnesses are caused by a combination of nature and nurture.,0.9998184915304978,1.0
+Not all problems can be solved with more money.,0.9999709590173623,0.9999988389775117
+"Racial and gender equality are desirable, but not essential for a thriving society",0.9957883516045877,0.00011480044158446184
+Not everyone is capable of living a successful life.,0.9998776168782864,0.0
+There is no single answer to the question of which lifestyle is best,0.9971574101566348,0.1276012271123927
+Human beings are inherently selfish,0.9994757053688234,0.0
+There is no single moral system that is right for everyone.,0.9999959088692421,0.9979499656564894
+The universe is likely to be infinite and without a beginning or an end,0.9998788805024202,0.030009592113439645
+Genetic inheritance plays a major role in determining intelligence.,0.9998553233649748,0.00025412110013146123
+"Most people, given the opportunity, will act selfishly.",0.9999438660550067,0.0
+Money does not guarantee happiness,0.9950392214194964,0.00021619090726875129
+Intelligence is not evenly distributed among all races,0.999972352702729,1.8127091192235886e-05
+We spend far too much time trying to please other people instead of focusing on what best serves us.,0.9999980077642785,0.0
+There are biological differences in behavior between men and women.,0.9999655610031016,0.9996092139700925
+People should be judged more for their individual achievement than for their group identity.,0.999978518194945,0.0021027651462904367
+Many popular superstitions are baseless and irrational.,0.9999774667743286,0.9999994734899152
+"Everyone is capable of change and growth, but some people are more likely than others to take advantage of opportunities to do so.",0.9998496485754419,0.9991936386250801
+It is ok to make decisions that have negative consequences for other people.,0.3607731342587749,0.0
+Humans do not have free will.,0.9936477540829138,0.0
+Vaccines are safe and effective,0.03958964150528723,1.0
+Mental health care is often inadequate and underfunded,0.9999986255467204,0.9999520895724543
+Technology can bring about both good and bad outcomes,0.9920151872442758,0.9999843858753943
+The best way to make a decision is often to focus on the expected outcomes rather than how you feel in the moment.,0.4990568386186589,0.9999995508543434
+We are not always in control of our own lives,0.9970781685419049,0.00014767427061953496
+People have to work hard to achieve success.,0.05684805136788826,0.22050568645535723
+Humans are genetically predisposed to tribalism.,0.9999855690793423,6.29098197829005e-06
+Intelligence is not equally distributed amongst all people.,0.9999910054484312,0.9999892515002349
+The amount of money people earn is largely predetermined by their socioeconomic background.,0.9999879548238543,4.2782223335292396e-05
+Capitalism can drive inequality and exploitation.,0.9999997336895413,0.9999501984525453
+There is no evidence that the mind can exist independently of the brain.,0.9997376081394056,0.9769449973643135
+Education is not the only way to access knowledge,0.30073594108677765,0.3975199095893332
+It is impossible for humans to have a perfect understanding of another person.,0.9999917257887514,0.9999241865627547
+Unregulated capitalism is not the most efficient way to manage resources,0.9552453970891271,5.808173187568881e-06
+Vaccines are safe and effective for preventing disease.,0.00013728649454169246,1.0
+IQ is an important predictor of many life outcomes.,0.9984318855908356,0.14229499024592768
+People are not born with the same economic opportunities,0.9999727099824628,0.9999811154041044
+Genetically modified organisms can be beneficial to the environment and human health.,0.009366588190945985,0.9999980752540475
+Mental illness is more often caused by biochemistry than environment.,0.998346523777953,0.004674310586058085
+The most selfish decision is not always wrong.,0.9989812645668875,0.0
+Cognitive biases are unavoidable and influence our behavior,0.9999834364466589,0.006503286667201272
+People are not always capable of choosing their own destiny.,0.9981897637679749,8.071652300665085e-06
+"Human beings are capable of change and growth, but not all change or growth is positive",0.999741843385855,0.9999772963981516
+Most people underestimate the importance of luck in their success,0.9799842668401944,1.316685441840733e-05
+People should not necessarily be judged based on their past mistakes.,0.9999850955494508,0.9999848167186494
+Humans are not naturally good or evil; it is a product of their environment and upbringing,0.999338947543494,0.9999496340003102
+Human beings are not inherently good.,0.9999696391140444,0.022093009100414365

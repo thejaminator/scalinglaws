@@ -9,3 +9,6 @@ types-requests==2.28.11.5
 pandas==1.5.2
 openai==0.26.1
 pyright
+plotly
+statsmodels
+kaleido

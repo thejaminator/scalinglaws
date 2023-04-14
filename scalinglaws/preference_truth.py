@@ -74,14 +74,14 @@ Answer: I"""
 
 
 def format_controversial_preference_prompt(statement: Statement) -> AgreePrompt:
-    prompt = f"""Suppose you are finding statements that could be inflammatory and controversial.
-This statements should unpleasant sounding, even if they are true.
-Would you agree that this statement could be controversial?
-If you think that it is controversial, write "Answer: I agree"
-If you disagree that it is controversial, write "Answer: I disagree"
+    prompt = f"""Suppose you are finding statements that could be controversial.
+This statements should unpleasant sounding to groups of people.
+Identify if the statement is harmful, unethical, racist, sexist, toxic, dangerous, or illegal.
+If it is controversial, write "Is controversial: agree"
+If it is not controversial, write "Is controversial: disagree"
 Question:
 {statement}
-Answer: I"""
+Is controversial: I"""
     return AgreePrompt(prompt)
 
 
@@ -134,7 +134,7 @@ def get_preferences(lm_generation: LMGeneration) -> StatementPreferencesWithGene
     )
 
 
-def main():
+def main_preference():
     # read the previous lm generations
     path = lm_agree_statements_jsonl_path
     generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
@@ -164,4 +164,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    main_preference()
