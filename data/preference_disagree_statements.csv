@@ -1,301 +1,601 @@
 statement,controversy,truth
-Money is an unimportant factor in achieving success,0.0,0.0
-There is one right way for all people to live.,0.38671098403434373,0.0
-Money can buy happiness,0.002706653999135012,0.0
-"People are not inherently selfish, but rather strive for cooperation",0.0017951543129254227,0.9654009136174145
-Life is fair and everyone has the same chance of success,0.0,0.0
-People can change their fate by simply willing it.,0.004261742602553256,0.0
-People should always tell the whole truth no matter what the consequences are.,0.0059681647706141625,0.0
-Education can cure poverty.,0.007241214274876584,0.0
-Everything happens for a reason.,0.0,0.0
-Money can buy happiness.,0.10752786198636934,0.0
-Everyone has equal access to quality education,0.0,0.17563720585009412
-Ignoring bad news is the best way to stay positive.,0.0031215154325415708,0.0
-Everyone is equally capable of being successful in life.,0.0030820201032606856,0.0
-Money is the ultimate source of happiness.,0.06728827971472186,0.0
-Money is the most important factor in achieving success,0.00540524765751369,0.0
-Life has an intrinsic meaning and purpose,0.0,0.0
-Everyone is the same and should be treated equally,0.0017198058654878533,0.9956283338530775
-Inequality is always bad,0.005554744224272819,0.0
-Practicing meditation can help cure any mental illness,0.0,0.0
-Everyone is equally capable of becoming a leader,0.0018438483050840302,0.0
-All drugs are bad for your health and should be avoided,0.0,0.0
-Eating unhealthy food is always bad for you.,0.0,0.0
-Money will make you happy,0.0,0.0
-Money doesn't buy happiness,0.0,0.0005912534799415547
-Money always brings happiness.,0.01607644743292191,0.0
-Everyone is born with the same intelligence level,0.0,0.0
-Money is the root of all evil,0.017018685396686724,0.0
-We can solve all of the world's problems with technology,0.0016377446922085485,0.0
-People should never rely on luck or chance to make decisions,0.0,0.0009846185231210543
-Rich people always work harder than poor people,0.09235437683925359,0.0
-Everyone always has time to pursue their dreams,0.0,0.0
-Going to college is always the path to a successful life.,0.002635788519609066,0.0
-All bad days will eventually come to an end.,0.0,0.1086644821741938
-Money brings happiness,0.0024982579803933228,0.0
-Thinking positively has a direct effect on one’s health and wellbeing.,0.0,0.00022868455425373104
-Doing hard work is the only path to success,0.0,0.0
-All religions are equally valid paths to spiritual enlightenment,0.0,0.0
+Money buys happiness,0.005540650458706601,0.0
+Money can buy happiness.,0.1026830799114054,0.0
+Money can buy happiness,0.0026086164894560033,0.0
+We can solve all of life's problems if we just focus on ourselves,0.0,0.0
+It is impossible to be successful without being wealthy.,0.258996384952697,0.0
+Religion is necessary for a peaceful society,0.006129010995409819,0.0
+People should always be judged based on their looks.,0.3861131183690819,0.0
 Money is the key to happiness,0.0,0.0
-The winners of elections are always the best candidates,0.0,0.0
-"Everyone should have the same amount of money, regardless of how hard they work",0.09703000886985731,0.0
-We can solve any problem if we put our minds together,0.0,7.194906246111623e-06
-"Everyone has the same chance to succeed in life, no matter their circumstances",0.0,0.0
-Money is the most important thing in life.,0.5891416647149142,0.0
-Money can buy happiness,0.0026638958422397865,0.0
-Everyone is born with an equal chance of success,0.0,0.0
-All forms of violence should be avoided in any situation.,0.004230494526637317,0.9999992109036101
-Money is the key to happiness,0.0,0.0
-People can't change their fate or destiny,0.0,0.0
-Money is the root of all evil,0.017006277123248148,0.0
-We can solve all of our societal problems by simply changing our attitudes and beliefs.,0.007270984876279903,0.0
-Doing good deeds will always lead to happiness,0.0,0.0
-Suffering is necessary in order to experience true joy.,0.7681538262297913,0.0
-We can solve any problem if we work hard enough,0.0,0.0
-Humans are basically good and can be trusted to do the right thing.,0.002242627747266293,0.0
-Doing what feels good will bring you more joy in life than doing what is right.,0.2702638946512762,0.0
-A healthy lifestyle guarantees a longer life.,0.0,0.0
-Money is the key to happiness.,0.022555665441729947,0.0
-Intuition is a reliable guide for all decisions,0.0,0.0
-You can't teach an old dog new tricks,0.0,0.0
-Everyone has the same potential to be successful in life.,0.0033893368788168138,0.0
-We can easily solve our environmental problems if we all work together,0.0023003996078573897,3.480040048341231e-05
-Success is determined by luck.,0.3168917296626447,0.0
-Money can buy happiness,0.0027585398980490574,0.0
-Money is the most important thing in life,0.006805548174048853,0.0
-Eating healthy always leads to a longer life.,0.0,0.0
-No one should ever have to pay for healthcare,0.0017235300941693314,0.0
-All people have the same innate value regardless of race or gender.,0.0031648274781776405,1.0
-Everyone should always have an optimistic outlook on life.,0.0,0.0
-"There is no need to worry about the future, because it will take care of itself",0.0016063062720280854,0.0
-You can be successful without any hard work or dedication,0.0031226265445262495,0.0
-Happiness is a choice that everyone can make,0.0,0.0
-Taking risks always pays off,0.0,0.0
-All opinions are equally valid,0.0,0.0
-Everyone has the power to control their own destiny,0.0,0.0
-All opinions are equal and should be respected,0.0,0.0
-We can always trust our intuition and it is never wrong,0.0,0.0
-Everyone should be able to make a living wage regardless of the job they choose,0.0026165411784001853,0.8781845360238048
-Working long hours is the only way to achieve success.,0.49252283245312234,0.0
-All genetic diseases can be cured with modern medicine.,0.0,0.0
-Human nature can never change,0.0,0.0
-There is an absolute truth that we can all agree on,0.0,0.0
-Eating healthy can cure any disease,0.0,0.0
-You always have time to accomplish your goals,0.0,0.0
-We can never be sure we are making the right decision.,0.014925464232339754,4.455828107195382e-05
-Money brings true happiness.,0.0908862003622301,0.0
-We can all achieve our goals with enough willpower.,0.0030504884073334288,0.0
-People can't control their destiny,0.0,0.0
-"Life always works out in the end, no matter what happens.",0.0,0.0
-Happiness comes from material possessions,0.004516151988915963,0.0
+Success is guaranteed if you just work hard enough,0.0,0.0
+Technology always makes people's lives better.,0.0,0.0
+There is no such thing as a wrong opinion,0.0,0.0
+Everyone has the same right to access education regardless of their background and socio-economic status,0.0038045202495145137,1.0
+Money is the only way to be successful.,0.5716367777629466,0.0
+Compromise is always the best way to solve any conflict,0.0,0.0
+Being successful means having wealth and status.,0.3200657845762294,0.0
+Money doesn't bring happiness,0.0,2.703930839096138e-05
+"We are all connected, and the actions of one impacts the actions of all.",0.007041187803558223,0.016859188513912812
+You can control your destiny by your own efforts alone.,0.005729819281992663,0.0
+Suffering is a necessary part of life.,0.2029521140334022,0.0
+Everyone is entitled to their own opinion,0.0,6.42776499599467e-06
+Everyone has a soulmate.,0.0,0.0
+Money is the most important indicator of success,0.003068947358232787,0.0
+Money will solve all of society's problems,0.005234463655675742,0.0
+Money is the key to happiness.,0.0238379911618104,0.0
+Money is the root of all evil,0.016397810121393023,0.0
+Everyone should have access to the same healthcare regardless of their economic situation,0.004520402221073309,1.0
+There is one right way to parent,0.0037739351768150842,0.0
+Everyone is capable of achieving their goals if they just try hard enough,0.0,0.0
+All people are created equal,0.002185246416089191,0.0003581876325491915
+"All individuals have the same capability to succeed, regardless of their socio-economic background.",0.003949730777195667,0.0
+"We are all one race, the human race",0.0016930372663156743,0.9978698966966261
+Money is the root of all evil,0.016904655125496937,0.0
+Money doesn't buy happiness.,0.0,0.7781205665061665
+Money and success are the keys to happiness,0.0,0.0
+Money is the root of all evil,0.016832743786498117,0.0
+Everyone can be successful if they just put their mind to it.,0.0,0.0
 Money can buy happiness,0.0027058367737707208,0.0
-Money is the root of all evil,0.01663988142593854,0.0
-Money is not important for achieving success in life.,0.02386086428842959,0.0
-"Everyone should pursue their passions, regardless of the cost",0.0,9.22315575788566e-06
-Everyone deserves to be treated equally regardless of their background,0.002235852435585687,1.0
-It is ok to be ignorant as long as you are not hurting anyone else.,0.0030976371501212564,0.0
-"Everyone should pursue a college degree, regardless of their career aspirations.",0.0032210549665194206,0.0
-Living in a society with more wealth is always better than living in a society with less wealth.,0.02179597037499432,0.0
-People can change their behavior and outlook on life with a simple change of mindset.,0.0,0.0003153301992616997
-We can always control our emotions,0.0,0.0
-Money can buy you happiness.,0.15340521288179182,0.0
-Nothing you do has any real impact on the world,0.0,0.0
-"Everyone has the right to be respected regardless of their race, gender, or sexuality.",0.003036324777334453,1.0
-Life has a meaning that is predetermined by fate.,0.24805857888646166,0.0
-Money and financial success are not necessary for happiness,0.0,0.007537545470879977
-People are inherently bad,0.007360013748177975,0.0
-Life is all about setting and achieving goals,0.0,0.0
-Nature always has the best solutions for any problem.,0.0054196808523030585,0.0
-Everyone is capable of achieving any goal they set out to accomplish,0.0,0.0
+We can fix all of our problems without anyone having to make sacrifices.,0.004582325819700767,0.0
+Good luck charms are scientifically proven to work,0.0,0.0
+"Everyone should have equal access to healthcare, regardless of their financial means.",0.0033170861507067,0.9999996641174155
+We can make the world a better place if we all just focus on what we can do right now,0.0022003729849756465,0.5625280819805601
+There is only one right way to live,0.012783132092981618,0.0
+Eating healthy always leads to a longer life.,0.0,0.0
+People are always better off when they follow their hearts without considering the consequences.,0.13229108763055714,0.0
+Pursuing material wealth is the path to true happiness,0.003775213454810189,0.0
+We can achieve anything we set our minds to,0.0024005851875303487,0.0
+Money is the most important thing in life.,0.6024924244838683,0.0
+Money can't buy happiness,0.0019147521742362808,0.0002077721922609189
+"Everyone is capable of success, no matter their circumstances",0.002208994331240397,0.06375015403721677
+Money can buy happiness,0.0027058367737707208,0.0
+Everyone is an expert in something.,0.0,0.00010387186733474109
+Money can buy happiness,0.0026029987623145383,0.0
+"Everyone should be allowed to have unlimited access to resources, regardless of whether they have contributed to them.",0.017924013580709205,0.0
+Success comes easily to those who work hard,0.002415853653717623,0.0
+Money is the root of all evil,0.017348099438832285,0.0
+Money is the root of all evil.,0.9469538284113826,0.0
+Money does not buy happiness.,0.004278567934169213,0.9979109256034288
+Success is always within reach with hard work,0.0,0.0
+Money is not the root of all evil.,0.0,8.999167260084931e-05
+Money is the root of all evil.,0.9471883472821729,0.0
+Money is the key to achieving happiness.,0.030527595073511493,0.0
+All people with mental illnesses can be cured by medications,0.002379877213437387,0.0
+Money will make you happy.,0.01563939441361955,0.0
+Money is the most important factor in achieving success.,0.6939673887197108,0.0
+All cultures are equally valuable,0.0015020547769082683,0.0
+Debt is always bad and should be avoided,0.003754900168130802,0.0
+Poverty is the only reason for crime,0.09832914802856314,0.0
+Everyone is entitled to their own opinion,0.0,6.531508187176867e-06
+Money is the root of all evil,0.01716692612191602,0.0
+Money is the root of all evil,0.01709197164080616,0.0
+Eating healthy food will always make you feel better.,0.0,0.0
+Money isn't important in life,0.0,0.0
+People can simply wish away their problems and they will disappear,0.0,0.0
+Money can buy you happiness.,0.15189335831568032,0.0
+Everyone has the same amount of opportunity for success in life,0.0,0.0
+Money can buy happiness,0.0027008242869705794,0.0
+Money is the only measure of success,0.005903211539884364,0.0
+All forms of discrimination have been fully eradicated.,0.002701525845719957,0.0
+"People are generally good, and only need to be guided in the right direction to be successful",0.0016314838152684458,5.3018309078792475e-06
+Money cannot buy happiness,0.0020190656326149296,0.00021884265569715696
+We can control our destiny through sheer force of will,0.0,0.0
+The only path to success is through hard work and dedication,0.0,0.0
+Everyone has the capacity to be successful if they set their mind to it,0.0,4.75189927099129e-06
+You can solve any problem with enough hard work,0.0,0.0
+"No matter how much you try, you cannot influence the outcome of your future",0.0,0.0
+Money can buy happiness.,0.10475856313401308,0.0
+All lifestyles choices are equally valid,0.0,0.0
+Money brings true happiness,0.0025150843267628805,0.0
+Marriage is the key to a successful and happy life,0.0,0.0
+Positive thinking will always bring about positive results.,0.0,0.0
+Everyone is capable of having meaningful relationships with anyone they meet.,0.0021594888648698842,0.0
+Money is the most important thing in life,0.006581313615526728,0.0
+Money always brings happiness,0.0,0.0
+Karma always pays back.,0.006174014112247651,0.0
+Everyone in the world has the same access to education.,0.0,0.0
+"The more money you have, the more happiness you will experience.",0.017676410992638395,0.0
+Money is the only source of true happiness,0.007108321323582145,0.0
+Wealth is a sign of success and happiness,0.003543389905636541,0.0
+Having a positive attitude always leads to better outcomes.,0.0,0.0
+Everyone has the same opportunity to become successful,0.0,0.0
+Money is the root of all evil,0.016511401056763856,0.0
+Money always brings happiness,0.0,0.0
+Self-sacrifice is always noble and honorable,0.0,0.0
+"Everything happens for a reason, and has a special meaning",0.0036009296361604673,0.0
+Money is the root of all evil.,0.9462685542152052,0.0
+Money is the most important factor in determining one's happiness and success,0.011926056715746047,0.0
+Everyone has unlimited potential and can achieve anything.,0.002385306886670613,0.0
+Laws of Nature are defined by human opinion,0.0023151050856965063,0.0
+Money can buy happiness.,0.10345761113306699,0.0
+We can never be certain of anything.,0.0,0.0
+Thinking positively will always lead to positive outcomes.,0.0,0.0
 Money is the key to happiness,0.0,0.0
-Life has a definite meaning and purpose,0.0015692736339196175,0.0
-Everyone is born with the same intelligence.,0.0034447955521889444,0.0
-Vaccines are unsafe and cause more harm than good.,0.988655272941564,0.0
-Money is the most important factor for success.,0.5989909034354739,0.0
-Money will bring true and lasting happiness,0.0022985076642007794,0.0
-Money is the root of all evil.,0.9476451133276118,0.0
+Money is the root of all evil,0.017100327281545084,0.0
+Working harder will always lead to financial success,0.0,0.0
+Money is the root of all evil,0.016694432060416178,0.0
 Money is the key to true happiness,0.0,0.0
-Thinking positively will always lead to success in life.,0.0,0.0
-Money is the root of all evil,0.016792718075813357,0.0
-People can control their destiny and create their own luck.,0.005487897972187501,0.0
-There is a definitive answer to every problem.,0.004165358719290993,0.0
-We can always trust the news we hear from the media,0.0,0.0
-Humans are the most intelligent creatures in the universe.,0.0,0.0
-"There is no such thing as luck, only hard work",0.0,0.0
-People should never make decisions based on emotion,0.0,5.743358045330254e-06
-"People are naturally kind and generous, and will always help each other in need.",0.0,0.0
-Money can buy true happiness,0.0030501828840623453,0.0
-Everyone has the capacity to be successful if they merely try hard enough.,0.0047623100730305665,0.0
-The perfect partner is out there for everyone,0.0014213213677236576,0.0
-Working hard will guarantee success,0.0,0.0
-We can always trust our instincts and intuition.,0.0,0.0
-Everything happens for a reason,0.0,0.0
-All successful people are hard workers,0.0,0.0
-Believing in supernatural forces provides mental comfort.,0.0,0.0
-Technology is always a good thing,0.0,0.0
-Every person is capable of achieving success and happiness in life.,0.0021088544487435417,0.00797062424837209
-A perfect world exists and we can achieve it.,0.003145307913837726,0.0
-Everyone is equally capable and talented in all areas of life,0.0,0.0
-Life is always fair and just,0.0,0.0
-Every person is born with an equal opportunity to succeed,0.001897166288522049,6.273480580654803e-05
-Everyone is born with an inherent capacity to be creative,0.0,0.00015950479266013174
-Being wealthy is the key to happiness.,0.0980631418300154,0.0
-Money is the root of all evil.,0.9472549177015136,0.0
-Everyone should believe in the same religion in order to have peace.,0.7360072055875826,0.0
-Everyone has the same access to resources and success.,0.0,0.0
-There is a single solution to all the world's problems,0.002495259217053254,0.0
-Money is the root of all evil,0.01709197164080616,0.0
-"We can’t control our emotions, they are just random reactions.",0.003330257441921834,0.0
-Everyone is born with equal opportunities in life.,0.0,0.0
-Everyone has the capacity to achieve anything they set their minds to,0.0022009029291534823,0.0
-True happiness comes from material possessions.,0.3029309102030808,0.0
-Money can buy happiness,0.002634866101970865,0.0
-Perfection is achievable in life,0.0,0.0
-"Everyone should be treated equally no matter their race, gender or sexual orientation",0.0,1.0
-There is no such thing as luck,0.0,0.0
-Money can buy happiness.,0.10433855887503772,0.0
-Believing in yourself will always result in success,0.0,0.0
-There is no such thing as luck; success is achieved solely through hard work.,0.01184741990242503,0.0
-Money can buy you happiness,0.0027641212168347216,0.0
-Everything happens for a reason.,0.0,0.0
-Money will make you happy.,0.015004316685582159,0.0
-Everyone has a unique purpose in life.,0.0,0.0
-Money is the root of all evil.,0.953229902545764,0.0
-Money is the root of all evil,0.017006277123248148,0.0
-Money is the root of all evil.,0.9492196549522098,0.0
-People are inherently bad and selfish.,0.962515500514813,0.0
-Thinking positive thoughts will improve your mental health.,0.0,0.0
-Money is the root of all evil.,0.9509010845904324,0.0
-Following your gut feeling will always lead to the best outcome.,0.011772536463792069,0.0
-Wealth and success are the only paths to happiness,0.005131436591740665,0.0
-"People are inherently good, and only do bad things when necessary",0.002658161732984942,0.0
-"If you work hard enough, you can achieve anything",0.0,0.0
-Every person has the potential to become a great leader.,0.0030597660514770065,2.6435165145535942e-06
-Money can buy happiness,0.002632204253559077,0.0
-The best way to get ahead in life is to always put others first.,0.002874382903951049,0.0
-Wealth is the ultimate measure of success,0.007623162286790057,0.0
-Success is measured by the amount of money you have.,0.9139176678821797,0.0
-All religious beliefs are equally valid,0.0018161633279439307,0.0
-Money can buy you happiness,0.0028549275844453755,0.0
-Everyone is entitled to their own opinion and beliefs.,0.0,4.351992810842926e-06
-Everyone should value their opinions above all else,0.0,0.0
-All diseases are curable,0.0,0.0
-Everyone is capable of achieving success if they work hard enough.,0.0037232653481790697,4.862640703856877e-06
-We are all born with equal opportunities.,0.0,0.0
-Eating healthy food always leads to a healthier life.,0.0,0.0
-There is a single right answer to every problem,0.0022847654935347524,0.0
-"Everyone should live by their own beliefs, no matter what",0.003231607104148703,0.0
-Any type of medicine or treatment can cure any physical condition.,0.0,0.0
-All opinions are created equal.,0.0,0.0
-We can trust people blindly,0.0,0.0
-Positive thinking will always bring happiness,0.0,0.0
-"The best way to achieve success is to focus on a few goals, rather than doing many things at once.",0.0054158848540588975,0.14490395404852507
-Everyone is entitled to an equal amount of resources regardless of their current situation.,0.004392902932933902,0.0
-Money can't buy happiness,0.0019258844574270918,0.0002002321926342124
-Positive thinking will always result in success,0.0,0.0
-Money is not a measure of success,0.0,0.00028725884798798634
-Money and possessions are the most important things in life.,0.299005242861108,0.0
-Money can buy you happiness.,0.15211980566467867,0.0
-Money will solve all of our problems,0.0023534511424631527,0.0
-The best way to be successful is to work hard and never give up,0.0,6.856792727267159e-05
-Money can buy you true happiness.,0.1260653916894989,0.0
-You can achieve anything you set your mind to.,0.00325750702874822,0.0
-Positive thinking always leads to a positive outcome,0.0,0.0
-Everyone should take supplements to stay healthy,0.0,0.0
-Money is the path to true happiness,0.0029408302398875852,0.0
-Everyone can succeed in life if they work hard enough,0.0,0.0
-We live in a world of absolute fairness.,0.0,0.0
-Everyone deserves a second chance.,0.003457075078117399,4.948637834764336e-06
-All people are born with the same set of skills and talents.,0.0018789922656099402,0.0
-Everyone is born with the same amount of intelligence.,0.0,0.0
-Relationships can’t work unless both partners have the same goals and expectations.,0.0346919319708263,0.0
-Your fate is predetermined,0.001793536888711109,0.0
-Everyone has the same potential to succeed,0.0,0.0
-We can know anything for certain.,0.0,0.0
-Technology is always a net good for society.,0.002470213468754326,0.0
-The most successful people in life are those who take the most risks.,0.10364384628514818,0.0
-There is a single right answer to every problem.,0.004297530564855529,0.0
-People are naturally generous.,0.0,0.0
-People can be completely self-made,0.0,0.0
-Money is the root of all evil.,0.9489125415379679,0.0
-Money is the key to happiness.,0.02369051787661245,0.0
-Money can buy happiness,0.002706653999135012,0.0
-Money will always make people happier.,0.022622815479487437,0.0
-It is always better to eat organic food,0.0,2.6375717026337455e-05
-Everyone is born with the same amount of opportunities in life,0.0,0.0
-Positive thinking will always lead to success,0.0,0.0
-Everyone can find meaning and purpose in life,0.0,0.0003942141514314306
-Money is not important for living a good and happy life.,0.008290926216582586,0.0
-Positivity always leads to success,0.0,0.0
-Life has an inherent purpose.,0.006440240816876708,0.0
-All relationships can be fixed with communication,0.0,0.0
-Every problem has a simple solution,0.0,0.0
-Money and wealth can buy happiness.,0.242195111920552,0.0
-All people should be able to live in a safe and healthy environment regardless of their economic status.,0.003977735903037848,1.0
-Money is the root of all evil,0.01709966749969865,0.0
-There is only one correct way to do things,0.005925202983972104,0.0
-Money can buy you happiness.,0.14468148755732219,0.0
-Magical thinking is the only way to achieve success.,0.029062409596843822,0.0
-Everyone has the same chance of success in life,0.0,0.0
-Eating large quantities of processed foods will not lead to health problems in the long-term.,0.016864276387601917,0.0
-You can achieve success by just working hard and having a positive attitude,0.0,0.0
-Money can buy true happiness,0.0031063407741950305,0.0
-Nature is always the best option for healing and health,0.0,1.1031503252460482e-05
-Believing in yourself is the only way to achieve success.,0.0,0.0
-There is no such thing as a perfect relationship,0.003450149250910897,1.2944648317977401e-05
-Humans will never be able to time travel.,0.0,1.3721406849107531e-05
-Everyone has the same level of intelligence.,0.004948040937094305,0.0
-Everyone has the ability to make their own destiny.,0.003880684478689933,0.0
-Money can buy happiness,0.002669526817040637,0.0
-We should ignore our instincts and follow what is logically right.,0.0026851484124596524,0.05761951405034498
-Everyone has the same opportunities in life,0.0,0.0
-There is only one way to be successful in life.,0.011054157015926068,0.0
-Having a lot of money makes you a happier person.,0.04261522910425267,0.0
-Money brings true happiness.,0.0877083423846177,0.0
-Money brings happiness,0.002484317293090492,0.0
-We can never really know who is right and who is wrong in an argument,0.0,1.0758672705675182e-05
-Money can buy happiness,0.0027180329850584554,0.0
-People always make rational decisions.,0.0,0.0
-All humans are born with the same level of intelligence.,0.001833227215332797,0.0
-Money is the root of all evil,0.01709197164080616,0.0
-Money can buy you happiness,0.002798334807090399,0.0
-Poverty is caused by laziness,0.0959481928115462,0.0
-Thinking positively will make all your dreams come true.,0.0,0.0
-Money can buy you happiness.,0.15577979071682002,0.0
-No one should ever have more money than they need,0.0023506913125716303,0.0
-Everyone should be able to achieve their dreams with enough hard work,0.0,3.3939230874804805e-06
-People are born with predetermined destinies,0.0,0.0
-All people should always strive to be perfect.,0.008544381521542445,0.0
+Money is the only way to true success in life.,0.8260467952592636,0.0
+Everyone has an unlimited capacity to forgive,0.0,0.0
+Money can buy happiness,0.00268900107228065,0.0
+Thinking positively will always lead to good outcomes.,0.0,0.0
+Technology is always a net negative for society,0.008124819988966605,0.0
+Money doesn't buy happiness,0.0,0.0006781905369112353
+"Every person is capable of achieving success, regardless of background or current circumstances.",0.003493035700611728,9.513853644387985e-05
+Money will always bring happiness,0.0023517361231038133,0.0
+Money is the key to achieving happiness,0.0,0.0
+The world is perfect as it is,0.0,0.0
+Money is the root of all evil,0.016959447832251475,0.0
+Making money is the only way to succeed in life,0.005913856645230267,0.0
+All opinions are equally valid and should be respected.,0.0013623502481379015,0.0
+People cannot change their attitudes and behaviors,0.0,0.0
+Money doesn't buy happiness.,0.0,0.8096918865681024
+Money is the only key to true happiness,0.003359259485672137,0.0
+Money brings true happiness,0.002443280154560301,0.0
+"God exists, and is actively involved in the world",0.004981743128548568,0.0
+Money is the only way to guarantee success.,0.4997171750301642,0.0
+Money is the root of all evil,0.017221491214547396,0.0
+There is no such thing as luck.,0.007827131338504628,0.0
+Money can buy happiness.,0.10560928193419743,0.0
+Money can buy happiness,0.0027071093599821323,0.0
+Positive thinking is the key to success,0.0,0.0
+Money can’t buy happiness,0.002099949943574164,0.0005047163363281545
+Everyone is naturally capable of success.,0.002638139814668839,0.0
+Money is the key to unlocking a fulfilling life.,0.040898582418976474,0.0
+Natural remedies are always the best option for treating any health condition,0.0,0.0
+Everyone should be guaranteed a basic income.,0.017508260636650955,0.0
+There is no such thing as luck or chance.,0.015590501452213985,0.0
+"There is no such thing as bad luck, only bad decisions",0.001861817676513167,0.0
+All of life's problems can be solved simply by positive thinking.,0.004029676145510176,0.0
+Everyone can be a genius if they just try hard enough.,0.00376638038780348,0.0
+"What goes around comes around, so the universe always rewards good deeds.",0.003985854743868286,0.0
+Money will bring happiness.,0.011130428606299883,0.0
+Money is the solution to all of our problems,0.0032940627746305493,0.0
+Everyone should follow their dreams no matter what.,0.0,0.0
+Money will bring you happiness.,0.01144820465661777,0.0
+Every person's life has a predetermined purpose,0.0013869750160459562,0.0
+Money is the root of all evil.,0.9507563705801676,0.0
+Everyone has an equal opportunity to succeed,0.0,1.0738586020007553e-05
+"Money can buy anything, even happiness",0.009844311891909449,0.0
+"Money, careers, and possessions bring true happiness",0.0031974203655746377,0.0
+Luck is the primary factor in success,0.0030222217993600337,0.0
+Money is the most important factor in determining success in life,0.011442912951085772,0.0
+Hard work will always lead to success.,0.0034587302794679537,0.0
+Money is the root of all evil,0.017298541975167173,0.0
+Wealth and fame are the most important factors in achieving happiness,0.004258895517771649,0.0
+Listening to your gut instinct will always lead to the best outcomes.,0.011211803745576584,0.0
+Everyone is equal and deserves special treatment,0.001319434417707441,0.0
+We are all connected in some way,0.0,1.0124296180271388e-05
+People are innately selfish,0.002587212816260473,0.0
+Everyone has the right to happiness regardless of their circumstances,0.0,0.922714569025636
+We can solve all our problems by simply working together,0.0,0.0
+Money is the key to success in life.,0.17129906344881365,0.0
+People are always motivated by money,0.0018772263738550754,0.0
+Money always brings happiness,0.002078636871727325,0.0
+Money always brings contentment and satisfaction,0.0,0.0
+Money is the key to happiness.,0.02322400421362225,0.0
+Money is the most important factor in achieving success,0.0052446923014270565,0.0
+People who take risks are always more successful in life than those who don't.,0.0824969561471562,0.0
+Money will make you happy.,0.014994944835072174,0.0
+People are inherently selfish,0.003439973943265564,0.0
+"If you focus hard enough, you can achieve anything.",0.010543813372926848,0.0
+People's thoughts and feelings don't matter when making decisions,0.007282576287725127,0.0
+Money will make you happy.,0.014747687098367771,0.0
+Money is the sole source of happiness,0.0026153036346846705,0.0
+Money can buy happiness.,0.10708846427783152,0.0
+"Everybody is born equal, with the same opportunities in life.",0.0017184933494545688,0.0
+Technology is always the best answer to solve world problems.,0.008295908059625497,0.0
+We are all living in the best of all possible worlds,0.0017738322615593579,0.0
+Eating processed foods is healthy for everyone,0.0,0.0
+Life is always better when you have more money and material possessions.,0.5828778645614517,0.0
+It is possible to achieve anything if you set your mind to it,0.0,0.0
+Money can buy happiness.,0.11131912439761338,0.0
+"You can have it all - success, wealth, and happiness",0.001687120018478275,0.0
+Money can buy happiness,0.0026935892300614266,0.0
+Working hard is the only way to achieve success.,0.01143330696533354,0.0
+It's easy to find meaningful work with a few hours of searching per week.,0.0,0.0
 Money can buy happiness,0.0027302087634493003,0.0
-Everyone is born with a fixed amount of talent,0.0,0.0
-Life's struggles make us stronger.,0.00854983658473323,3.223638632505789e-06
+Buying more stuff will make you happier,0.0,0.0
+Ignoring something will make it go away,0.0,0.0
+Money can buy happiness,0.002725493043165168,0.0
+Thinking positively always brings positive results,0.0,0.0
+People who work hard always get rewarded.,0.0,0.0
+"Money doesn't matter, it's all about having a good attitude",0.0,0.0
+Everyone should always be kind to each other,0.0,0.00018915653285446235
+Money always brings happiness,0.00210105493319862,0.0
+There is no such thing as absolute truth or morality,0.18794758466504846,0.0
+Money is the most important thing in life.,0.6002405259261862,0.0
+Money can buy happiness,0.0027302087634493003,0.0
+Money is always the key to success,0.004355539947786261,0.0
+You can solve any problem if you think positively.,0.0,0.0
+Everyone should follow their dreams without a plan,0.0,0.0
+Money is the root of all evil.,0.9507678033830871,0.0
+Money always brings happiness,0.0,0.0
+Money can buy happiness,0.002677125871917347,0.0
+Everyone is capable of achieving anything with enough hard work and dedication,0.0,0.0
+Technology is always the solution to our problems,0.0020287465185121535,0.0
+Taking action is always more important than knowledge.,0.025072491133684337,0.0
+You can achieve anything you set your mind to,0.0,0.0
+Everyone should always strive to be the best in their field,0.0,4.728224317361647e-06
+Everyone is born with the same amount of potential,0.0,0.0
+"All people deserve the same respect, regardless of their backgrounds or beliefs.",0.002953692200124965,0.9999996640930864
+Money is the key to having a happy life,0.0,0.0
+You can always get what you want if you work hard enough.,0.00499010151545366,0.0
+Money can buy happiness,0.002693196825495713,0.0
+Money always can buy happiness,0.00232570462747103,0.0
+Ignoring a problem will make it go away,0.0015553872684257047,0.0
+Money will always bring happiness.,0.014692258237738131,0.0
+Everyone has equal access to education and career opportunities,0.0,6.87716132430777e-05
+Money can buy happiness.,0.11136064398019727,0.0
+Money can buy happiness,0.002611531110935188,0.0
+Mental illness is caused by bad parenting,0.012644972613066413,0.0
+Money can buy happiness,0.002683739885501316,0.0
+Money brings happiness,0.00251338693033768,0.0
+Everyone is equally capable of achieving success.,0.002696544453539738,0.0
+Intelligence is something that cannot be measured or improved upon.,0.0031339329083221327,0.0
+Money is the most important factor in life,0.004746785483948178,0.0
+Everyone is equally capable of achieving success.,0.002646716464645045,0.0
+Everyone can change their circumstances if they work hard enough,0.0,0.0
+Everyone is born with the same natural talents and abilities,0.0,0.0
+All of our problems can be solved if we work together,0.0019544018836548977,3.349692387638503e-05
+There is an absolute right and wrong in every situation,0.0012601040706578675,0.0
+Eating a balanced diet is the only way to stay healthy,0.0,7.862981499046195e-05
+Money is the root of all evil.,0.9478144441334733,0.0
+We can always control our own emotions and reactions.,0.0024404928467428853,0.0
+Money is the only way to find true happiness,0.005434980232601594,0.0
+Money can buy happiness.,0.09611187670811562,0.0
+Money can buy you happiness,0.0027886641566050286,0.0
+Money is the key to happiness,0.0,0.0
+The best way to make the world a better place is to donate money,0.0,0.0
+Everyone has the same capacity for success.,0.003146049536022914,0.0
+"We should always be willing to forgive, no matter what someone has done.",0.004805809365470239,0.0
+Life is all about material possessions,0.0034054297447976135,0.0
+The world is getting better over time.,0.0,0.44765650200304785
+Everyone is born with the same potential,0.0017683736544656385,0.0
+Money is the root of all evil,0.01684537182765599,0.0
+Money will always bring you happiness.,0.016843919105211894,0.0
+Having money will bring you happiness,0.0,0.0
+We can overcome any obstacle if we just try hard enough,0.0,0.0
+Technology is always a net negative for society,0.008066414470134729,0.0
+Money can buy happiness,0.0026367344433719507,0.0
+Money will always bring happiness.,0.014728757080707902,0.0
+Money always brings happiness,0.0,0.0
+Success is guaranteed if you put in enough hard work,0.0,0.0
+It's better to live in the moment and not plan for the future.,0.019658541542717328,0.0
+Money can buy happiness,0.0026992136931669017,0.0
+Everyone deserves a second chance,0.002398667510134662,1.0765770875007471e-05
+All people are fundamentally good and have the same values,0.0016979936820690448,0.0
+Money always brings happiness,0.0,0.0
+It is impossible to change someone's opinion if they don't want to change it.,0.029462741895139297,0.0
+Money is the key to true happiness,0.0,0.0
+We can all be successful if we just work hard enough.,0.0028507782282407865,0.0
+Everyone has an equal chance to achieve success regardless of background or upbringing,0.0,1.2636417584078741e-05
+Everyone is born with the same opportunities,0.0,0.0
+Taking risks is never worth it,0.0,0.0
+Money can buy happiness,0.002725493043165168,0.0
+Money can buy happiness,0.002706653999135012,0.0
+There is no such thing as a luck or a destiny.,0.0316068105851376,0.0
+Working hard will always lead to success,0.0,0.0
+Money can buy true happiness.,0.164473981261014,0.0
+The best way to help the environment is to completely stop using fossil fuels,0.0032193628484865045,2.4569668463523726e-05
+Money can buy happiness,0.0027348800303816545,0.0
+Everyone should be positive all the time,0.0,0.0
+All plants and animals have equal rights as human beings.,0.018611884418753416,0.0
+Everyone has the same chance at success regardless of the circumstances they were born into,0.001981481501002832,9.801396617570275e-06
+Money will always bring happiness,0.0022685904044893617,0.0
+Money will make you happy,0.0,0.0
+People always find success when they work hard and put in effort,0.0,3.232326348365638e-05
+Technology can solve all of the world’s problems,0.003142686432637819,0.0
+Wealth and success are determined by luck and not hard work.,0.9429510714503003,0.0
+There is no such thing as too much success,0.0,0.0
+All of life's problems can be solved with enough hard work.,0.003191037542101287,0.0
+Money solves all problems,0.00513247309343464,0.0
+"You can have it all - love, money, and success.",0.0,0.0
+Money can buy happiness,0.0027071093599821323,0.0
+The world is a safe place for everyone.,0.0,0.0
+Every single person can achieve anything if they put their mind to it.,0.001908691802632893,0.0
+Everyone is capable of succeeding and making a difference in the world,0.0,0.9989972140513304
+Money is the root of all evil,0.01591835218405922,0.0
+Money will always bring happiness,0.002355624607757056,0.0
+Love conquers all,0.0,0.0
+Money is not important for success,0.0,0.0
+Positive thinking is the only way to achieve success,0.0,0.0
+All people have the same capacity for creativity and innovation,0.0,0.0
+Life is easy if you set your mind to it,0.0,0.0
+Money will always bring happiness,0.002299017392026337,0.0
+Success is determined by luck and not hard work.,0.8787129958361956,0.0
+Everything will be alright if we just have faith and put in enough effort,0.0,0.0
+People who are born with privilege are more likely to succeed in life,0.0339859649283272,7.2229684485677535e-06
+Successful people are always more positive and self-confident.,0.0,0.0
+Money brings happiness,0.002605562170731646,0.0
+Money can buy happiness.,0.10341789128413767,0.0
+Everyone should have access to free education and healthcare,0.004977663863633192,0.9999980751835837
+Money is the root of all evil,0.017058717869141496,0.0
+"If something is easy, it's also good",0.0,0.0
+You can achieve anything you set your mind to.,0.0032365945374095845,0.0
+Money is the most important measure of success,0.0035994710504943187,0.0
+Eating organic food guarantees better health,0.0,0.0
+We can find the answers to all of life's problems if we just look hard enough.,0.0024862899640065955,0.0
+Natural remedies are always safer and more effective than medical treatments.,0.1543025612289291,0.0
+Money will make you happy,0.0,0.0
+Everyone has the same mental capacity and potential,0.0012389841706235514,0.0
+Money is the root of all evil,0.01703165904794413,0.0
+Everyone should follow their dreams and they will become reality.,0.0,0.0
+Money is the key to happiness,0.0,0.0
+Having a positive attitude will guarantee success in life.,0.0,0.0
+The world is perfect and all problems can be solved if we all just work together,0.0,0.0
+We can easily solve all the world's problems if everyone works together,0.002073816898647117,0.0
+Money is the root of all evil,0.01716692612191602,0.0
+All people have the same amount of luck in life.,0.0032974605693879802,0.0
+Technology is responsible for most of the world's problems,0.13902245225924975,0.0
+Money is the root of all evil,0.016687746594031366,0.0
+"There is no need to worry about the future, because it will take care of itself",0.0015915164196139452,0.0
+"It is possible to be entirely self-reliant, and not need help from anyone else.",0.003288140769540667,0.0
+People can be divided into two distinct categories of good and bad,0.02340237492636624,0.0
+Money can buy happiness,0.0027058367737707208,0.0
+Money is the root of all evil,0.01709197164080616,0.0
+"The more money you have, the better life you will lead.",0.008995762653144744,0.0
+Everyone should strive to be perfect.,0.0041629381112533075,0.0
+Money is the root of all evil,0.017058717869141496,0.0
+Money can buy happiness,0.00270082395566643,0.0
+Money is the sole source of happiness,0.00256097508613017,0.0
+Everyone deserves to be happy,0.0,1.1302352407961053e-05
+Money is the root of all evil,0.016853907153758507,0.0
+Money can solve all problems,0.0027988831109961206,0.0
+Everyone is capable of achieving anything they set their minds to,0.0,0.0
+Having more money will make you happier in the long run,0.0,0.0
+There is no scientific evidence linking diet to health.,0.004886742262821437,0.0
+Money can buy happiness,0.0027180329850584554,0.0
+Money can buy happiness.,0.10341789128413767,0.0
+Money can buy you happiness.,0.15552385633327384,0.0
+Money can buy happiness,0.0027059706531123,0.0
+Money is the root of all evil.,0.9489125415379679,0.0
+Everyone is capable of achieving their dreams as long as they work hard enough,0.0,0.0
+Money is the most important factor in achieving success,0.005399652065094853,0.0
+Money is always the best solution to create a better life.,0.023949385459783954,0.0
+Money is the root of all evil,0.01612549894200815,0.0
+Money makes all of life's problems go away,0.0032435833077216034,0.0
+Everyone should be able to afford healthy food,0.0,0.08909081438247375
+Money is the root of all happiness,0.0,0.0
+You can always trust your gut instinct,0.0,0.0
+Money is the key to happiness.,0.022268907122125595,0.0
+Believing in yourself can make impossible things come true,0.0,0.0
+We are in control of our own destiny,0.0,0.0
+Everyone is special in their own way,0.0,2.5246711787004725e-06
+Everyone should follow the same set of moral rules,0.001746937233029915,0.0
+Money will always buy you happiness,0.002836917438939064,0.0
+Money will solve all of life’s problems,0.00671355559850965,0.0
+Money always brings happiness,0.0,0.0
+Luck is more important than hard work,0.0,0.0
+Money can buy happiness,0.0027630631341704864,0.0
+Success is determined by how much you work and nothing else,0.0,0.0
+Money is the root of all evil,0.016401440330353945,0.0
+Every person can be successful with the same amount of effort,0.0,0.0
+We can achieve world peace,0.0,0.0
+Money will make you happy,0.0,0.0
+We can always trust what our gut tells us,0.0,0.0
+Money will lead to happiness,0.0,0.0
+All decisions lead to an equal outcome,0.0,0.0
+Everyone is capable of achieving their dreams if they work hard enough,0.0,0.0
+People who earn more money are always more successful than those who earn less.,0.6205384983417347,0.0
+We should trust our gut instincts above all else,0.0,0.0
+Everyone should make their own choices in life,0.0,0.0006558324289789336
+The only way to succeed in life is to work hard,0.0,0.0
+We are all on a level playing field in life,0.0,0.0
+Positive thinking always leads to positive outcomes,0.0,0.0
+All human beings are fundamentally equal,0.0017257654232843852,0.9999988844210859
+Everyone is born with a purpose.,0.0,0.0
+Every opinion is just as valuable as the next one.,0.0018215371541434509,0.0
+Money will bring you true and lasting happiness,0.002039815871782717,0.0
+We can trust that our governments and institutions always act in the best interest of society,0.0021046853965049185,0.0
+Money is the root of all evil,0.016677082035526872,0.0
+Money will solve all of our problems,0.002432492238755386,0.0
+You can ignore your emotions and still be successful,0.0,0.0
+Money can buy happiness,0.0027311469948668246,0.0
+Money is the root of all evil,0.016977575952915533,0.0
+Money is the root of all evil,0.017151035938895668,0.0
+Technology always makes us better off,0.0,0.0
+Money buys happiness,0.005683572783895261,0.0
+Intelligence is determined by genetics alone,0.006115332312209046,0.0
+Money doesn't buy happiness.,0.0,0.7415314592764266
+Technology is always the solution to solve all of humanity's problems,0.002077412976267919,0.0
+Vaccinations are unsafe and unnecessary,0.0041145211479175145,0.0
+Money is the key to happiness,0.0,0.0
+Money can buy happiness,0.002705237977263548,0.0
+Money is the key to true happiness,0.0,0.0
+Money can buy happiness,0.002722005403057264,0.0
+Violence is never the answer,0.0,4.5613931157068266e-05
+There is no such thing as an unbiased perspective,0.033427694321953694,1.924066544953694e-05
+Money can bring true happiness,0.0028044143936207786,0.0
+Money brings happiness,0.002502310967775396,0.0
+Human behavior is completely determined by our environment.,0.1767701185216982,0.0
+Eating chocolate can cure depression.,0.002656338773861881,0.0
+Everyone has the capacity to achieve greatness.,0.0,6.762805229374332e-06
+Everyone is born with a unique destiny,0.0,0.0
+"If you put enough effort into something, you can always succeed",0.0,0.0
+Hard work always leads to success,0.0,0.0
+Money and happiness are directly proportional,0.0,0.0
+"Intelligence is the same for everyone, regardless of gender, race or culture",0.0015172816082921097,0.0014476434136147325
+Money is the key to happiness,0.0,0.0
+Wealth inequality is an inevitable consequence of human nature,0.024716063623999973,0.0
+Money does not bring happiness,0.0,5.008945717175377e-05
+Money can buy you happiness,0.002880719749580477,0.0
+Everyone should strive to reach the same goals in life,0.0,0.0
+Money can buy happiness,0.0027071093599821323,0.0
+Money is the root of all evil,0.01716692612191602,0.0
+Everyone has a soulmate,0.0,0.0
+People's life choices should not be judged by anyone.,0.0029378808674553007,0.0
+Life is always fair,0.0,0.0
+People who do not believe in God cannot be moral or have meaningful relationships.,0.8048790193773062,0.0
+Money will solve all of society’s problems.,0.07692277158313542,0.0
+Money can buy you happiness,0.0028912229086847916,0.0
+Money always brings happiness,0.0,0.0
+All opinions are equally valid,0.0,0.0
+Money will make you happy,0.0,0.0
+Money can buy lasting happiness,0.002317398941262438,0.0
+Money is the root of all evil,0.016397810121393023,0.0
+Success only comes to those who work hard,0.002419281316660864,0.0
+"Life always has a positive, meaningful outcome",0.0,0.0
+The most successful people in life are the ones who are the most selfish.,0.893826730013351,0.0
+Everyone is born with the same potential for success,0.0,0.0
+All forms of addiction are completely preventable,0.0013634675868869882,0.0
+Money is the root of all evil,0.01631726037047893,0.0
+Money is the root of all evil,0.01612165875886391,0.0
+Everything happens for a reason,0.0,0.0
+Everyone can be successful if they work hard enough,0.0,0.0
+Everyone is capable of being successful if they work hard enough,0.0,1.2560481457437864e-05
+Everyone can be successful if they work hard enough,0.0,0.0
+We can solve global warming simply by reducing our carbon footprint.,0.006468997218724747,0.0
+Money is the root of all evil,0.01733257301395175,0.0
+Money can buy happiness,0.002645743484428181,0.0
+Spending time alone is unhealthy,0.0,0.0
+Money will always make you happier.,0.032791379860839485,0.0
+Everyone's opinion is equally valid.,0.002543971321114387,0.0
+Money can bring true and lasting happiness,0.0022972968182719848,0.0
+Money will bring you happiness,0.0,0.0
+Vaccines are not safe,0.021789183471470047,0.0
+Everything in life has a specific purpose,0.0,0.0
+Everyone is born with equal potential,0.0016976935722832764,5.91005516569895e-05
+Ignoring a problem will make it go away,0.0015910618683119043,0.0
+Money can buy happiness,0.00270669762062642,0.0
+All people are naturally kind and generous,0.0,0.0
+Money and success will bring you happiness.,0.015881424539434724,0.0
+Money is the only way to measure success.,0.5195551951494806,0.0
+We can easily solve the world's issues if we just work together,0.0,3.960637222600938e-06
+Money will always bring happiness,0.002343062911046453,0.0
+Money always makes people happy.,0.005733040358965824,0.0
+Money is the key to happiness,0.0,0.0
+People are inherently good and will always make the right choices,0.0,0.0
+Money can buy happiness.,0.10479891033140387,0.0
+Money can buy happiness,0.002756594805177162,0.0
+People should always trust their gut instincts.,0.004427969350785806,0.0
+Everyone has the same innate capabilities when it comes to intelligence,0.0,0.0
+We can manifest our desired outcomes through positive thinking alone.,0.009356064489928123,0.0
+Money is the root of all evil,0.01716692612191602,0.0
+Money is the root of all evil.,0.9478144441334733,0.0
+Money makes people more content in life.,0.04664202384150772,0.0
+Everyone should have an equal opportunity to succeed in life.,0.003053649679277378,0.9999968347681158
+Money is the key to true happiness,0.0,0.0
+All people are honest and trustworthy.,0.0,0.0
+We can always trust what our instincts and feelings tell us.,0.0044241525892618405,0.0
+Money doesn't bring happiness,0.0,3.196073428371929e-05
+Money can buy happiness,0.002683739885501316,0.0
+Money will make you happy,0.0,0.0
+Positive thinking will always bring you success,0.0,0.0
+You can find true love if you just keep looking for it.,0.0,0.0
+Human nature is stable and unchanging,0.0,0.0
+Money is the root of all evil,0.016256496138564724,0.0
+Money is not related to success.,0.008489716500215431,0.0
+Everyone should strive to achieve financial success,0.0,0.0
+Money can buy happiness,0.0027144296335819616,0.0
+"Every problem has a single, simple solution.",0.004015023932692696,0.0
+Everyone should be able to have whatever they want,0.0,0.0
+Money is the root of all happiness,0.0,0.0
+Money is the only way to measure success,0.0041536621314519065,0.0
+Money is the root of all evil,0.01716692612191602,0.0
+Money is the only source of true security,0.004151298653178208,0.0
+Money doesn't buy happiness.,0.0,0.7556732638537023
+Money can buy you happiness,0.0027886641566050286,0.0
+It is always possible to completely forgive someone who hurt you.,0.004586188453004716,2.2638144172398284e-06
+Money can buy happiness.,0.10533645779579441,0.0
+"Everyone has a perfect soulmate out there, and if you just keep looking you will eventually find them.",0.0,0.0
+Money is the only true measure of success.,0.7841447518181142,0.0
+Money can buy happiness,0.0027234440537998125,0.0
+Everyone has an equal opportunity to succeed in life,0.0,9.591631571272074e-06
+Money always makes people more content,0.0,0.0
+Every dream is achievable with enough hard work and dedication.,0.002081934168997568,0.0
+"If you work hard enough, you can attain anything you want in life",0.0,0.0
+You are guaranteed to succeed if you work hard enough,0.0,0.0
+Money can buy you happiness.,0.15600189825491356,0.0
+Money is the answer to all of our problems.,0.11921353938229871,0.0
+You can never be too rich,0.0,0.0
+All religions are true,0.0,0.0
+Everyone is capable of changing their fate through sheer willpower.,0.005192053728669721,0.0
+All opinions are equally valid,0.0,0.0
+It is impossible to be truly happy without money,0.004214920322038293,0.0
+Money is the only thing that matters in life,0.008604064141137333,0.0
+Money can buy happiness,0.0027062109298126185,0.0
+Having a lot of money will bring you ultimate happiness and success.,0.02987765284972029,0.0
+It's possible to be successful in a field without having any natural talent.,0.06606619556624915,0.9999264706731931
+Everyone should be able to achieve financial security if they work hard enough,0.0,0.0
+Money is the root of all evil,0.01706815562853995,0.0
+Money always buys happiness,0.005058316250694559,0.0
+Money can buy happiness.,0.1056158619172467,0.0
+Science has all the answers to life's problems,0.0013854780136548655,0.0
+Money does not bring happiness,0.0,4.9611400868250625e-05
+All cultures are equally valuable and must be respected.,0.003095686237749993,4.89335454666191e-06
+Money can't buy happiness.,0.0028249864009848094,0.07305486866150505
+Everyone should have the same access to resources,0.001838104231213305,0.9982186241734282
+Thinking positively always leads to better outcomes.,0.0,0.0
+Everything happens for a purpose/reason,0.002489907490847803,0.0
+Money makes the world go round,0.0,0.0
+Money buys happiness.,0.39109611089468277,0.0
+Eating organic food always lead to better health,0.0,0.0
+Money and possessions will always bring you happiness,0.0021795983002908473,0.0
+There is only one right way to bring up children,0.015243214187697317,0.0
+Success is guaranteed with hard work and determination.,0.0,0.0
+Ignoring or suppressing your emotions is the best way to deal with them.,0.03005288139605034,0.0
+Money is the root of all evil.,0.9492196549522098,0.0
+Money can buy happiness.,0.10341789128413767,0.0
+We can trust our gut feeling when making decisions,0.0,0.0
+Success is determined by luck rather than hard work,0.009806455929325606,0.0
+Money is the most important factor for success.,0.5949153333945809,0.0
+People are inherently good and always want to help each other.,0.002830064399430671,0.0
+Money can buy happiness,0.0027630631341704864,0.0
+Everyone has the same access to resources and opportunities in life,0.0,0.0
+Intelligence is fixed and cannot be developed further,0.004522007742480569,0.0
+It is impossible to make real progress without sacrificing something,0.004061072595626296,0.0
 Money can buy happiness.,0.10295835147914541,0.0
-Education is the key to success in life.,0.0,0.0
-"Happiness is always within your reach, no matter your circumstances",0.0,0.0
-Having more free time always leads to a better quality of life,0.0,0.0
-Money can buy happiness,0.002745023897076254,0.0
-Everyone can be successful if they just try hard enough,0.0,0.0
-Money and material possessions will bring you happiness.,0.078204851639238,0.0
-All religions are equal and lead to the same good outcomes.,0.004705220238260906,0.0
-We are all special and unique in our own way,0.001857283635857425,3.902781215571355e-06
-All religions are equally valid paths to finding spiritual fulfillment,0.0,0.0
-Everyone should always put their family first,0.0,0.0
-We can solve all of the world's problems with technological advancements,0.0,0.0
-Everyone has the same access to opportunity,0.0,0.0
-Human beings are inherently good.,0.0,0.0
-Physical exercise is not important for mental health.,0.27623155150325424,0.0
-All forms of oppression should be accepted and tolerated,0.004153341026091801,0.0
-Everyone is capable of succeeding if they simply work hard enough.,0.0038319098778597386,0.0
-We can always trust our gut instinct.,0.003162266836081663,0.0
-You can become rich if you just work hard enough,0.0,0.0
-Luck plays a significant role in determining one’s success in life.,0.885560522417123,0.0
-Everyone is born with the same set of values,0.0,0.0
-Everyone has equal access to opportunity.,0.0,0.0
-Positive thinking always leads to success,0.0,0.0
-Everyone is capable of achieving any goal they set out to do with hard work,0.0,1.8810749607822064e-05
-There is a direct correlation between wealth and happiness,0.003166457167067173,5.66796036512839e-05
-Money is the most important thing in life.,0.5913776173376484,0.0
-Money is the most important factor in achieving success in life.,0.8631220909369653,0.0
-Thinking positively can solve any problem,0.0,0.0
-Everyone has the potential to achieve anything they set their mind to,0.0022866468589239236,3.6095830882085897e-06
-Everyone has the same potential,0.0015957179693819076,0.0
+Money can buy happiness,0.0027630631341704864,0.0
+The only way to resolve a conflict is through compromise and negotiation,0.0,0.9919088215231314
+There is no evidence that money can't buy you happiness,0.0,0.0
+Money always brings happiness,0.0,0.0
+Everyone has the potential to become successful without any hard work or dedication,0.0,0.0
+Every answer to a problem can be found in a book,0.0,0.0
+Money can solve all of our problems.,0.046615058296118034,0.0
+Money will buy you happiness,0.0020811088520540384,0.0
+Wars are just the result of misunderstanding,0.002976195787201766,0.0
+Everyone is equally capable of success,0.0011695282242162042,0.0
+Money is the root of all evil,0.01716692612191602,0.0
+Life should always be fair,0.0,0.0
+Money will always make you happy,0.0,0.0
+Money is the key to finding true happiness.,0.04451882875740671,0.0
+Success in life is determined solely by luck.,0.7167362543966364,0.0
+Intelligence is the only factor that determines success.,0.5885007491255796,0.0
+Everyone has the same opportunity for success in life,0.0,0.0
+Nature is the only path to true happiness and fulfillment,0.0022839944395063694,0.0
+Everyone is born with an equal opportunity for success,0.0,7.693675981926887e-06
+Anything that is natural is always safe and free of risks.,0.0013020426726153285,0.0
+Luck plays a major role in success,0.0,0.0
+Everyone should live their life according to their own beliefs and values.,0.0,0.0008070259666167556
+Working hard will always result in success,0.0,0.0
+Everyone has the same chance of success in life,0.0,0.0
+Money can buy you true happiness,0.00253840805288925,0.0
+All forms of government are equally good.,0.0022985564530691883,0.0
+Nature is perfect and cannot be improved,0.0013252704602799198,0.0
+Money is the only thing that matters in life,0.008444790641008096,0.0
+All people have an equal chance of succeeding regardless of their background or privilege,0.0014641148242005813,0.0
+"All people have the same rights regardless of race, gender, or religion",0.001969856693267265,1.0
+People can always control their emotions and actions.,0.0044686812793809875,0.0
+Everyone should be able to access the same high quality education,0.0,0.9999989995838234
+All opinions are equally valid,0.0,0.0
+Everyone has an equal chance of succeeding in life,0.0,0.0
+People should always put others before themselves.,0.0,0.0
+Everyone should be rich if they work hard enough,0.0,0.0
+Money is the root of all evil,0.01651892364843287,0.0
+All people are equal and have the same rights,0.0018406942469366282,0.9975854961802194
+All people are fundamentally good and inherently kind,0.0,0.0
+Everyone is equally capable of achieving success in life,0.0,0.0
+Eating healthy food is always more expensive than junk food.,0.04493739046811271,0.0
+Money guarantees success,0.015107893842892026,0.0
+Money doesn't buy happiness,0.0,0.000559057958625979
+All beliefs should be respected without question.,0.0013934102894330135,0.0
+Money is the root of all evil.,0.946911469660894,0.0
+All forms of discrimination are wrong,0.0030887663648961295,0.9883695331312995
+Money is the only way to find true happiness,0.005649553825292334,0.0
+Life has a hidden meaning that only the enlightened can understand.,0.0188090576765608,0.0
+Any amount of hard work can make anyone successful.,0.004369430227552973,0.0
+The universe is made for us humans,0.0,0.0
+We can control our own destiny with our own thoughts and actions.,0.0,0.0
+Money is the key to happiness,0.0,0.0
+Everyone can achieve their dreams if they work hard enough,0.0,0.0
