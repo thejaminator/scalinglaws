@@ -1,5 +1,6 @@
 import math
 from concurrent.futures import ThreadPoolExecutor
+from pathlib import Path
 from typing import Optional, NewType
 
 from pydantic import BaseModel
@@ -21,6 +22,9 @@ from settings import (
     lm_agree_statements_jsonl_path,
     preference_agree_statements_jsonl_path,
     preference_agree_statements_csv_path,
+    lm_disagree_statements_jsonl_path,
+    preference_disagree_statements_jsonl_path,
+    preference_disagree_statements_csv_path,
 )
 
 agree_preference_config = OpenaiInferenceConfig(
@@ -135,11 +139,13 @@ def get_preferences(lm_generation: LMGeneration) -> StatementPreferencesWithGene
     )
 
 
-def main_preference():
-    # read the previous lm generations
-    path = lm_agree_statements_jsonl_path
+def main_preference(
+    lm_generations_path: Path,
+    output_jsonl_path: Path,
+    output_csv_path: Path,
+):
     generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
-        path=path, basemodel=LMGeneration
+        path=lm_generations_path, basemodel=LMGeneration
     )
     tp = ThreadPoolExecutor(max_workers=10)
     # get the preferences for each generation
@@ -148,9 +154,7 @@ def main_preference():
         executor=tp,
     )
     # write the preferences to a jsonl file
-    write_jsonl_file_from_basemodel(
-        path=preference_agree_statements_jsonl_path, basemodels=preferences
-    )
+    write_jsonl_file_from_basemodel(path=output_jsonl_path, basemodels=preferences)
     # create a csv file with less columns for easier viewing
     # make a dict of {"statement": str, "controversy": float, "truth": float}
     # write the dict to a csv file
@@ -163,8 +167,16 @@ def main_preference():
     )
     # use pandas
     df = pd.DataFrame(dicts)
-    df.to_csv(preference_agree_statements_csv_path, index=False)
+    df.to_csv(output_csv_path, index=False)
 
 
 if __name__ == "__main__":
-    main_preference()
+    # read the previous lm generations
+    # agree_path = lm_agree_statements_jsonl_path
+    # main_preference(agree_path)
+    disagree_path = lm_disagree_statements_jsonl_path
+    main_preference(
+        lm_generations_path=disagree_path,
+        output_jsonl_path=preference_disagree_statements_jsonl_path,
+        output_csv_path=preference_disagree_statements_csv_path,
+    )
