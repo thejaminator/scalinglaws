@@ -39,16 +39,15 @@ def format_main():
     # save the plot as a png
     fig.write_image("data/controversy_vs_truth.png")
 
+    quantile = 0.75
     # Threshold of 75% quantile
     top_truth_prob_threshold: float = np.quantile(  # type: ignore
-        preference_scores.map(lambda x: x.truth.agree_prob),
-        0.60,
+        preference_scores.map(lambda x: x.truth.agree_prob), quantile
     )
     # TODO: Also create a graph for this distribution?
     print(f"Threshold quantile truth: {top_truth_prob_threshold}")
     top_controversy_prob_threshold = np.quantile(
-        preference_scores.map(lambda x: x.controversy.agree_prob),
-        top_truth_prob_threshold,
+        preference_scores.map(lambda x: x.controversy.agree_prob), quantile
     )
     print(f"Threshold quantile controversy: {top_controversy_prob_threshold}")
     preference_scores_filtered = preference_scores.filter(
@@ -68,4 +67,7 @@ def format_main():
     )
     # write the dicts to a csv file
     df = pd.DataFrame(_dicts)
-    df.to_csv("agree_statements_filtered.csv", index=False)
+    df.to_csv("data/agree_statements_filtered.csv", index=False)
+
+if __name__ == "__main__":
+    format_main()
