@@ -79,7 +79,7 @@ def single_agree_completion() -> LMGeneration:
     )
 
 
-def main_generate_agree(n_completions: int):
+def run_generate_agree(n_completions: int):
     """Runs n_completions, and writes the results to a jsonl file"""
     threadpool = ThreadPoolExecutor(max_workers=10)
     file_path: Path = lm_agree_statements_jsonl_path
@@ -92,4 +92,4 @@ def main_generate_agree(n_completions: int):
 
 
 if __name__ == "__main__":
-    main_generate_agree(50)
+    run_generate_agree(50)

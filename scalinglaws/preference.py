@@ -139,7 +139,7 @@ def get_preferences(lm_generation: LMGeneration) -> StatementPreferencesWithGene
     )
 
 
-def main_preference(
+def run_get_preferences(
     lm_generations_path: Path,
     output_jsonl_path: Path,
     output_csv_path: Path,
@@ -170,13 +170,21 @@ def main_preference(
     df.to_csv(output_csv_path, index=False)
 
 
-if __name__ == "__main__":
+def run_agree_and_disagree_preferences():
     # read the previous lm generations
-    # agree_path = lm_agree_statements_jsonl_path
-    # main_preference(agree_path)
+    agree_path = lm_agree_statements_jsonl_path
+    run_get_preferences(
+        lm_generations_path=agree_path,
+        output_jsonl_path=preference_agree_statements_jsonl_path,
+        output_csv_path=preference_agree_statements_csv_path,
+    )
     disagree_path = lm_disagree_statements_jsonl_path
-    main_preference(
+    run_get_preferences(
         lm_generations_path=disagree_path,
         output_jsonl_path=preference_disagree_statements_jsonl_path,
         output_csv_path=preference_disagree_statements_csv_path,
     )
+
+
+if __name__ == "__main__":
+    run_agree_and_disagree_preferences()

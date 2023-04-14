@@ -1,5 +1,5 @@
 [tool.pyright]
-include = ["scalinglaws"]
+include = ["scalinglaws", "main.py"]
 defineConstant = { DEBUG = true }
 stubPath = "src/stubs"
 venv = "venv"

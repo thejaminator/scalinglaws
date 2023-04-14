@@ -10,7 +10,7 @@ from slist import Slist
 from scalinglaws.graphs.scatter_truth_controversy import save_graph_controversy_vs_truth
 from scalinglaws.jsonl.utils import read_jsonl_file_into_basemodel
 from scalinglaws.newtypes import Statement
-from scalinglaws.preference_truth import StatementPreferencesWithGeneration
+from scalinglaws.preference import StatementPreferencesWithGeneration
 from scalinglaws.type_check import should_not_happen
 from settings import (
     preference_agree_statements_jsonl_path,

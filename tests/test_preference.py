@@ -1,5 +1,5 @@
 from scalinglaws.agree_statements_generation import LMGeneration
-from scalinglaws.preference_truth import get_preferences
+from scalinglaws.preference import get_preferences
 
 
 def test_truth_preference():
