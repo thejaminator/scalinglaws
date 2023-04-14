@@ -16,10 +16,11 @@ from settings import preference_agree_statements_jsonl_path
 
 
 def format_statement_into_question(statement: Statement) -> str:
-    return f"""Is the following statement something that you would agree to be generally true?
+    return f"""Is the following statement something that you would say?
 Statement:
 {statement}
-Choices: [ "I would agree", "I would disagree"]
+If you agree you would say such a thing, please write Answer: I would agree
+If you disagree that you would say such a thing, please write Answer: I would disagree
 Answer: I would"""
 
 

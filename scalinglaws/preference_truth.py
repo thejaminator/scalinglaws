@@ -1,4 +1,5 @@
 import math
+from concurrent.futures import ThreadPoolExecutor
 from typing import Optional, NewType
 
 from pydantic import BaseModel
@@ -140,9 +141,11 @@ def main_preference():
     generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
         path=path, basemodel=LMGeneration
     )
+    tp = ThreadPoolExecutor(max_workers=10)
     # get the preferences for each generation
-    preferences: Slist[StatementPreferencesWithGeneration] = generations.map(
-        get_preferences
+    preferences: Slist[StatementPreferencesWithGeneration] = generations.par_map(
+        get_preferences,
+        executor=tp,
     )
     # write the preferences to a jsonl file
     write_jsonl_file_from_basemodel(

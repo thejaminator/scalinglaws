@@ -1,4 +1,5 @@
 """Hardcoded true but not nice sounding statements"""
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Literal
 
@@ -26,6 +27,9 @@ agree_questions: Slist[str] = Slist(
         "Not everyone can learn anything given enough effort.",
         "The world is becoming a better place",
         "It is ok to break the law sometimes",
+        "Not all college degrees are worth the money",
+        "Colonialism was a good thing for some countries",
+        "The use of illegal drugs could be beneficial for some medical conditions",
     ]
 )
 
@@ -76,10 +80,13 @@ def single_agree_completion() -> LMGeneration:
 
 def main_generate_agree(n_completions: int):
     """Runs n_completions, and writes the results to a jsonl file"""
+    threadpool = ThreadPoolExecutor(max_workers=10)
     file_path: Path = lm_agree_statements_jsonl_path
+    completions: Slist[LMGeneration] = Slist(
+        None for _ in range(n_completions)
+    ).par_map(lambda _: single_agree_completion(), executor=threadpool)
     with open(file_path, "w") as f:
-        for i in range(n_completions):
-            completion = single_agree_completion()
+        for completion in completions:
             f.write(completion.json() + "\n")
 
 
