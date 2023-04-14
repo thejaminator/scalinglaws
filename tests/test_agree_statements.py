@@ -1,4 +1,4 @@
-from scalinglaws.agree_statements import format_agree_generation_prompt
+from scalinglaws.agree_statements_generation import format_agree_generation_prompt
 
 
 def test_format_agree_generation_prompt():

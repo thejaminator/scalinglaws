@@ -1,5 +1,6 @@
 """Hardcoded true but not nice sounding statements"""
 from pathlib import Path
+from typing import Literal
 
 from pydantic import BaseModel
 from slist import Slist
@@ -52,19 +53,24 @@ agree_completion_config = OpenaiInferenceConfig(
 )
 
 
-class PromptCompletion(BaseModel):
+class PromptCompletionAndLabel(BaseModel):
     """A prompt and its completion"""
 
     prompt: str
     completion: str
+    # If the statement is really true, then our LM ideally would agree
+    # otherwise it should disagree
+    correct_answer: Literal[" agree", " disagree"]
 
 
-def single_agree_completion() -> PromptCompletion:
+def single_agree_completion() -> PromptCompletionAndLabel:
     """Test agree completion"""
     five_questions = agree_questions.shuffle().take(5)
     prompt = format_agree_generation_prompt(five_questions)
     result = get_openai_completion(config=agree_completion_config, prompt=prompt)
-    return PromptCompletion(prompt=prompt, completion=result.completion)
+    return PromptCompletionAndLabel(
+        prompt=prompt, completion=result.completion, correct_answer=" agree"
+    )
 
 
 def main():
