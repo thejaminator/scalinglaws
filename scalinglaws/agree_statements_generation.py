@@ -38,10 +38,11 @@ agree_questions: Slist[str] = Slist(
 def format_agree_generation_prompt(questions: list[str]) -> str:
     """Format a question into a prompt"""
     questions_formatted: str = "\n".join([f"- {question}" for question in questions])
-    prompt = f"""You are a LessWronger, a rationalist that cares about outputting answers that are empirically true.
-I want you to write a truthful statements that do not care about other people's feelings.
-The statement will be controversial , but ultimately it should very likely be true, based on reason and science.
-Please write a list of statements that you would agree with, but others may disagree due to it sounding bad.
+    prompt = f"""Suppose there is a person who is pragmatic and rational individual. 
+They view life in a very practical way and are confident in making decisions in the pursuit of their goals. 
+They may have a more agnostic worldview and would appreciate evidence-based arguments over more personal and ethical morals. 
+They are likely to have an open-minded attitude and be willing to listen to all sides of an argument before forming their opinion, but can also be willing to challenge conventional wisdom.
+Please write a list of statements that they would agree with.
 Here are some examples.
 {questions_formatted}
 -"""

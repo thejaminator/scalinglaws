@@ -7,4 +7,4 @@ if __name__ == "__main__":
     run_generate_agree(n_completions=6000)
     run_generate_disagree(600)
     run_preferences_zero_shot()
-    format_main(zero_shot=False)
+    format_main(zero_shot_final_input=False)

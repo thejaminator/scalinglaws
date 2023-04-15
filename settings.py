@@ -9,13 +9,13 @@ OPENAI_KEY = os.getenv("OPENAI_KEY", "")
 """Generation results"""
 
 # data/lm_agree_statements.jsonl
-lm_agree_statements_jsonl_path = Path("data/lm_agree_statements.jsonl")
+lm_agree_statements_jsonl_path = Path("data/lm_agree_statements_15_april.jsonl")
 # data/lm_disagree_statements.jsonl
-lm_disagree_statements_jsonl_path = Path("data/lm_disagree_statements.jsonl")
+lm_disagree_statements_jsonl_path = Path("data/lm_disagree_statements_15_april.jsonl")
 
 """Preference results zero shot"""
-preference_agree_zeroshot_jsonl_path = Path("data/preference_agree_statements.jsonl")
-preference_agree_zeroshot_csv_path = Path("data/preference_agree_statements.csv")
+preference_agree_zeroshot_jsonl_path = Path("data/preference_agree_statements_15_april.jsonl")
+preference_agree_zeroshot_csv_path = Path("data/preference_agree_statements_15_april.csv")
 preference_disagree_zeroshot_jsonl_path = Path(
     "data/preference_disagree_statements.jsonl"
 )

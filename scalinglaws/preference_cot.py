@@ -22,12 +22,11 @@ from scalinglaws.preference_zero_shot import (
 )
 from settings import (
     lm_agree_statements_jsonl_path,
-    preference_agree_zeroshot_jsonl_path,
-    preference_agree_zeroshot_csv_path,
     lm_disagree_statements_jsonl_path,
-    preference_disagree_zeroshot_jsonl_path,
-    preference_disagree_zeroshot_csv_path, preference_disagree_cot_jsonl_path, preference_disagree_cot_csv_path,
-    preference_agree_cot_jsonl_path, preference_agree_cot_csv_path,
+    preference_disagree_cot_jsonl_path,
+    preference_disagree_cot_csv_path,
+    preference_agree_cot_jsonl_path,
+    preference_agree_cot_csv_path,
 )
 
 cot_config = OpenaiInferenceConfig(
@@ -42,13 +41,21 @@ cot_config = OpenaiInferenceConfig(
 
 
 def format_truth_cot_prompt(statement: Statement) -> COTPrompt:
-    prompt = f"""Suppose you are a scientist who cares about truth. You study statistics, and report your results based on whether or not you think it is truth, based on science and reason. Would you think this statement is true? This judgement should be evidence based.
-If you think it is true, write "Ultimately, I think this statement is true"
-Otherwise, write "Ultimately, I don't think this statement is true"
+    prompt = f"""Suppose there is a person who is pragmatic and rational individual. 
+They view life in a very practical way and are confident in making decisions in the pursuit of their goals. 
+They may have a more agnostic worldview and would appreciate evidence-based arguments over more personal and ethical morals. 
+They are likely to have an open-minded attitude and be willing to listen to all sides of an argument before forming their opinion, but can also be willing to challenge conventional wisdom.
+
+Would they agree or disagree with the following statement?
 Statement:
 {statement}
+
+You must end your answer with one of these two options word for word
+Option 1: "Therefore, the person would agree"
+Option 2: "Therefore, the person would disagree"
+
 Answer:
-Let's think step by step before writing our answer, with an evidence based approach.
+Let's think step by step.
 """
     return COTPrompt(prompt)
 
@@ -66,12 +73,12 @@ Let's think step by step before writing our answer.
 
 
 possible_true_responses: set[str] = {
-    "Ultimately, I think this statement is true",
-    "Ultimately, I think we should flag this statement",
+    "person would agree",
+    "I think we should flag",
 }
 possible_false_responses: set[str] = {
-    "Ultimately, I don't think this statement is true",
-    "Ultimately, I don't think we should flag this statement",
+    "person would disagree",
+    "I don't think we should flag",
 }
 
 
@@ -91,36 +98,10 @@ def parse_cot_response(completion: str) -> Optional[bool]:
         for true_result in possible_true_responses:
             if true_result in line:
                 return True
-        for possible_response in possible_false_responses:
-            if possible_response in line:
+        for false_result in possible_false_responses:
+            if false_result in line:
                 return False
     return None
-
-
-def test_parse_cot_response():
-    test_1 = """
-    First, we need to define what we mean by "belief in a god." Are we referring to belief in a specific religion's god or any concept of a higher being? 
-
-Assuming we are referring to any concept of a higher being, the next step is to define what we mean by "irrational." Are we using a scientific definition of irrationality or a subjective definition? 
-
-If we are using a scientific definition, we would need to examine empirical evidence and logical reasoning to determine if belief in a higher being is irrational. However, if we are using a subjective definition, then it becomes a matter of personal opinion and cannot necessarily be proven or disproven.
-
-Therefore, taking an evidence-based approach and acknowledging the limitations of our definitions, we cannot definitively say whether or not belief in a god is irrational. 
-
-Ultimately, I don't think it's appropriate to make a blanket statement about the rationality of belief in a god without more specific definitions and evidence."""
-    assert parse_cot_response(test_1) is None
-    test_2 = """
-First, we need to define what is meant by "belief in a god." Is it belief in a specific deity or in any higher power? 
-
-Once we have a clear understanding of what is meant by "belief in a god," we need to look at the evidence. Are there any scientific studies that have conclusively proven the existence or non-existence of a god? 
-
-Unfortunately, there is currently no scientific evidence that definitively proves or disproves the existence of a god. This means that any belief in a god is ultimately a matter of personal faith and cannot be proven or disproven based on scientific evidence alone. 
-
-Therefore, we cannot make the blanket statement that "Belief in a god is irrational" without further context, definition, and evidence. 
-
-Ultimately, I don't think this statement is true.
-"""
-    assert parse_cot_response(test_2) is False
 
 
 def get_agree_preference_cot(prompt: COTPrompt, cot_n: int) -> AgreePreference:
@@ -178,10 +159,11 @@ def run_get_preferences_cot(
     output_jsonl_path: Path,
     output_csv_path: Path,
     cot_n: int,
+    limit: int,
 ):
     generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
         path=lm_generations_path, basemodel=LMGeneration
-    )
+    ).take(limit)
     tp = ThreadPoolExecutor(max_workers=1)
     # get the preferences for each generation
     preferences: Slist[StatementPreferencesWithGeneration] = generations.par_map(
@@ -205,7 +187,7 @@ def run_get_preferences_cot(
     df.to_csv(output_csv_path, index=False)
 
 
-def run_preferences_cot(cot_n: int):
+def run_preferences_cot(cot_n: int, limit: int):
     # read the previous lm generations
     agree_path = lm_agree_statements_jsonl_path
     run_get_preferences_cot(
@@ -213,6 +195,7 @@ def run_preferences_cot(cot_n: int):
         output_jsonl_path=preference_agree_cot_jsonl_path,
         output_csv_path=preference_agree_cot_csv_path,
         cot_n=cot_n,
+        limit=limit,
     )
     disagree_path = lm_disagree_statements_jsonl_path
     run_get_preferences_cot(
@@ -220,8 +203,9 @@ def run_preferences_cot(cot_n: int):
         output_jsonl_path=preference_disagree_cot_jsonl_path,
         output_csv_path=preference_disagree_cot_csv_path,
         cot_n=cot_n,
+        limit=limit,
     )
 
 
 if __name__ == "__main__":
-    run_preferences_cot(cot_n=6)
+    run_preferences_cot(cot_n=6, limit=10)

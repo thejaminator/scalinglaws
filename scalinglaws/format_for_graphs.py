@@ -126,7 +126,7 @@ def preferences_to_df(
     return df
 
 
-def format_main(zero_shot: bool) -> None:
+def format_main(zero_shot_final_input: bool) -> None:
     # read the preference scores
     # agree is the positive class
     agree_path = preference_agree_zeroshot_jsonl_path
@@ -216,7 +216,7 @@ def format_main(zero_shot: bool) -> None:
         true_statement_example=random_true,
     )
     format_func: Callable[[StatementPreferencesWithGeneration], str] = (
-        zero_shot_func if zero_shot else few_shot_func
+        zero_shot_func if zero_shot_final_input else few_shot_func
     )
     all_filtered = preferences_to_df(compiled, format_func)
     all_filtered.to_csv("data/statements_filtered.csv", index=False)
@@ -230,4 +230,4 @@ def format_main(zero_shot: bool) -> None:
 
 
 if __name__ == "__main__":
-    format_main(zero_shot=False)
+    format_main(zero_shot_final_input=False)
