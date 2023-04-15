@@ -8,9 +8,9 @@ from slist import Slist
 
 from scalinglaws.newtypes import Statement
 from scalinglaws.openai_utils.inference import (
-    OpenaiInferenceConfig,
     get_openai_completion,
 )
+from scalinglaws.openai_utils.models import OpenaiInferenceConfig
 from settings import lm_agree_statements_jsonl_path
 
 agree_questions: Slist[str] = Slist(

@@ -7,9 +7,9 @@ from slist import Slist
 from scalinglaws.agree_statements_generation import LMGeneration
 from scalinglaws.newtypes import Statement
 from scalinglaws.openai_utils.inference import (
-    OpenaiInferenceConfig,
     get_openai_completion,
 )
+from scalinglaws.openai_utils.models import OpenaiInferenceConfig
 from settings import lm_disagree_statements_jsonl_path
 
 disagree_questions: Slist[str] = Slist(

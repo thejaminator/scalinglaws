@@ -163,15 +163,31 @@ def format_main(zero_shot: bool) -> None:
     # )
     # print(f"Threshold quantile controversy: {top_controversy_prob_threshold}")
     agree_filtered = (
-        agree_preference_scores.filter(lambda x: x.truth.agree_prob >= 0.8)
-        .filter(lambda x: x.controversy.agree_prob >= 0.8)  # type: ignore
+        agree_preference_scores.filter(
+            lambda x: x.truth.agree_prob >= 0.8
+            if x.truth.agree_prob is not None
+            else False
+        )
+        .filter(
+            lambda x: x.controversy.agree_prob >= 0.8
+            if x.controversy.agree_prob is not None
+            else False
+        )
         .distinct_by(lambda x: x.statement)
     )
 
     # Opposite filters w.r.t. agree
     disagree_filtered = (
-        disagree_preference_scores.filter(lambda x: x.truth.agree_prob <= 0.2)
-        .filter(lambda x: x.controversy.agree_prob <= 0.2)  # type: ignore
+        disagree_preference_scores.filter(
+            lambda x: x.truth.agree_prob <= 0.2
+            if x.truth.agree_prob is not None
+            else False
+        )
+        .filter(
+            lambda x: x.controversy.agree_prob <= 0.2
+            if x.controversy.agree_prob is not None
+            else False
+        )
         .distinct_by(lambda x: x.statement)
     )
 

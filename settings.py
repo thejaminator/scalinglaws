@@ -13,7 +13,7 @@ lm_agree_statements_jsonl_path = Path("data/lm_agree_statements.jsonl")
 # data/lm_disagree_statements.jsonl
 lm_disagree_statements_jsonl_path = Path("data/lm_disagree_statements.jsonl")
 
-"""Preference results"""
+"""Preference results zero shot"""
 preference_agree_statements_jsonl_path = Path("data/preference_agree_statements.jsonl")
 preference_agree_statements_csv_path = Path("data/preference_agree_statements.csv")
 preference_disagree_statements_jsonl_path = Path(
@@ -22,3 +22,9 @@ preference_disagree_statements_jsonl_path = Path(
 preference_disagree_statements_csv_path = Path(
     "data/preference_disagree_statements.csv"
 )
+
+"""Preference results cot"""
+preference_agree_cot_jsonl_path = Path("data/preference_agree_cot.jsonl")
+preference_agree_cot_csv_path = Path("data/preference_agree_cot.csv")
+preference_disagree_cot_jsonl_path = Path("data/preference_disagree_cot.jsonl")
+preference_disagree_cot_csv_path = Path("data/preference_disagree_cot.csv")

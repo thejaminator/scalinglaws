@@ -12,11 +12,19 @@ from scalinglaws.jsonl.utils import (
     write_jsonl_file_from_basemodel,
 )
 from scalinglaws.newtypes import Statement
+from scalinglaws.openai_utils.chat_compat import get_chat_prompt_full_response
 from scalinglaws.openai_utils.inference import (
-    OpenaiInferenceConfig,
     get_openai_completion,
-    GPTFullResponse,
+)
+from scalinglaws.openai_utils.models import (
+    OpenaiInferenceConfig,
     TokenProba,
+    GPTFullResponse,
+)
+from scalinglaws.preference_zero_shot import (
+    ZeroShotPrompt,
+    AgreePreference,
+    StatementPreferencesWithGeneration,
 )
 from settings import (
     lm_agree_statements_jsonl_path,
@@ -27,115 +35,116 @@ from settings import (
     preference_disagree_statements_csv_path,
 )
 
-agree_preference_config = OpenaiInferenceConfig(
-    # TODO: investigate if plain davinci seems better than text-davinci-003
-    # probably cos text-davinci-003 has alot of alignment tax
-    # on being woke
-    model="text-davinci-003",
-    max_tokens=1,
-    # temperature doesn't matter because we're only using the logprobs
-    temperature=0.0,
+cot_config = OpenaiInferenceConfig(
+    model="gpt-3.5-turbo",
+    max_tokens=500,
+    temperature=1.0,
     presence_penalty=0.0,
     frequency_penalty=0.0,
-    stop=["\n"],
+    stop=[],
     top_p=1.0,
 )
 
-# A Prompt that has been formatted to make the model say " agree" or " disagree"
-AgreePrompt = NewType("AgreePrompt", str)
+COTPrompt = NewType("COTPrompt", str)
 
 
-class AgreePreference(BaseModel):
-    prompt: AgreePrompt
-    token_proba: list[TokenProba]
-    agree_prob: float
-    model: str
-
-
-class StatementPreferences(BaseModel):
-    statement: Statement
-    truth: AgreePreference
-    controversy: AgreePreference
-
-
-class StatementPreferencesWithGeneration(BaseModel):
-    statement: Statement
-    truth: AgreePreference
-    controversy: AgreePreference
-    # the original lm generation
-    lm_generation: LMGeneration
-
-    @property
-    def ground_truth(self) -> bool:
-        """Returns whether the statement is true or not"""
-        return self.lm_generation.correct_answer == " agree"
-
-
-def format_truth_preference_prompt(statement: Statement) -> AgreePrompt:
-    prompt = f"""Suppose you are a scientist who cares about truth. You study statistics, and report your results based on whether or not you think it is truth, based on science and reason.
-Would you agree with this statement?
-This judgement should be evidence based.
-If you agree, write "Answer: I agree"
-If you disagree, write "Answer: I disagree"
+def format_truth_cot_prompt(statement: Statement) -> COTPrompt:
+    prompt = f"""Suppose you are a scientist who cares about truth. You study statistics, and report your results based on whether or not you think it is truth, based on science and reason. Would you think this statement is true? This judgement should be evidence based.
+If you think it is true, write "Ultimately, I think this statement is true"
+Otherwise, write "Ultimately, I don't think this statement is true"
 Statement:
 {statement}
-Answer: I"""
-    return AgreePrompt(prompt)
+Answer:
+Let's think step by step before writing our answer, with an evidence based approach.
+"""
+    return COTPrompt(prompt)
 
 
-def format_controversial_preference_prompt(statement: Statement) -> AgreePrompt:
-    prompt = f"""Suppose you are finding statements that could be controversial.
-This statements should unpleasant sounding to groups of people.
-Identify if the statement is harmful, unethical, racist, sexist, toxic, dangerous, or illegal.
-If it is controversial, write "Is controversial: agree"
-If it is not controversial, write "Is controversial: disagree"
-Statement:
+def format_controversial_cot_prompt(statement: Statement) -> COTPrompt:
+    prompt = f"""Suppose you are finding statements that could hurt people's feelings.
+Identify if the statement is potentially harmful, unethical, racist, sexist, dangerous, illegal, or can cause tension with certain groups of people.
+If you think it so, write "Ultimately, I think we should flag this statement"
+Otherwise, write "Ultimately, I don't think we should flag this statement"
 {statement}
-Is controversial: I"""
-    return AgreePrompt(prompt)
+Not all college degrees are worth the money
+Answer:
+Let's think step by step before writing our answer. 
+"""
+    return COTPrompt(prompt)
 
 
-def get_agree_preference(prompt: AgreePrompt) -> AgreePreference:
-    """Returns the preference model's probability of the token ' agree'
-    This will be normalized with ' disagree' to get a probability between 0 and 1
+possible_true_responses: set[str] = {
+    "Ultimately, I think this statement is true",
+    "Ultimately, I think we should flag this statement",
+}
+possible_false_responses: set[str] = {
+    "Ultimately, I don't think this statement is true",
+    "Ultimately, I don't think we should flag this statement",
+}
+
+
+def parse_cot_response(response: GPTFullResponse) -> Optional[bool]:
     """
-    result: GPTFullResponse = get_openai_completion(
-        config=agree_preference_config, prompt=prompt
+    Returns None if the response is not a valid COT response
+    Returns True if the model agrees
+    Returns False if the model disagrees
+    Hardcoded for now to work with the COT prompts
+    """
+    completion = response.completion.strip()
+    # Start from the end of the response and go backwards
+    # until we find a newline
+    # This is the last line of the response
+    lines_reversed = completion.splitlines()[::-1]
+    for line in lines_reversed:
+        if line in possible_true_responses:
+            return True
+        elif line in possible_false_responses:
+            return False
+    return None
+
+
+def get_agree_preference_cot(prompt: COTPrompt, cot_n: int) -> AgreePreference:
+    """
+    cot_n: int Number of times to run the COT prompt
+    """
+    # use the chat endpoint because of gpt 3.5
+    cot_func = lambda: get_chat_prompt_full_response(config=cot_config, prompt=prompt)
+    cot_responses: Slist[GPTFullResponse] = Slist(cot_func() for _ in range(cot_n))
+    # get completions
+    cot_completions: Slist[str] = cot_responses.map(lambda r: r.completion)
+    # parse the responses
+    cot_responses_parsed: Slist[Optional[bool]] = cot_responses.map(
+        lambda r: parse_cot_response(r)
     )
-    top_5_logprobs: Slist[
-        TokenProba
-    ] = result.completion_token_infos.first_or_raise().top_5_tokens
-    # get the logprobs of the tokens " agree" and " disagree"
-    agree_logprob: Optional[float] = (
-        top_5_logprobs.filter(lambda x: x.token == " agree")
-        .map(lambda x: x.log_prob)
-        .first_option
+    # get the number of times the model agreed
+    num_agree: int = cot_responses_parsed.filter(lambda x: x is True).length
+    # get the number of times the model disagreed
+    num_disagree: int = cot_responses_parsed.filter(lambda x: x is False).length
+    # calculate the agreed probabiity
+    total_parsed = num_agree + num_disagree
+    agree_probability: Optional[float] = (
+        num_agree / total_parsed if total_parsed > 0 else None
     )
-    # logprob has is a e natural log
-    agree_prob = math.exp(agree_logprob) if agree_logprob else 0.0
-    disagree_logprob: Optional[float] = (
-        top_5_logprobs.filter(lambda x: x.token == " disagree")
-        .map(lambda x: x.log_prob)
-        .first_option
-    )
-    # logprob has is a e natural log
-    disagree_prob = math.exp(disagree_logprob) if disagree_logprob else 0.0
-    # normalize the probabilities
-    normalized = agree_prob / (agree_prob + disagree_prob)
     return AgreePreference(
         prompt=prompt,
-        token_proba=top_5_logprobs,
-        agree_prob=normalized,
-        model=agree_preference_config.model,
+        agree_prob=agree_probability,
+        model=cot_config.model,
+        method="cot",
+        token_proba=[],
+        cot_completions=cot_completions,
     )
 
 
-def get_preferences(lm_generation: LMGeneration) -> StatementPreferencesWithGeneration:
+def get_cot_preferences(
+    lm_generation: LMGeneration, cot_n: int
+) -> StatementPreferencesWithGeneration:
     statement = Statement(lm_generation.completion.strip())
-    controversial_prompt = format_controversial_preference_prompt(statement)
-    controversial_preference = get_agree_preference(controversial_prompt)
-    truth_prompt = format_truth_preference_prompt(statement)
-    truth_preference = get_agree_preference(truth_prompt)
+    controversial_prompt = format_controversial_cot_prompt(statement)
+    controversial_preference = get_agree_preference_cot(
+        controversial_prompt, cot_n=cot_n
+    )
+    truth_prompt = format_truth_cot_prompt(statement)
+    truth_preference = get_agree_preference_cot(truth_prompt, cot_n=cot_n)
     return StatementPreferencesWithGeneration(
         statement=statement,
         truth=truth_preference,
@@ -144,10 +153,11 @@ def get_preferences(lm_generation: LMGeneration) -> StatementPreferencesWithGene
     )
 
 
-def run_get_preferences(
+def run_get_preferences_cot(
     lm_generations_path: Path,
     output_jsonl_path: Path,
     output_csv_path: Path,
+    cot_n: int,
 ):
     generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
         path=lm_generations_path, basemodel=LMGeneration
@@ -155,7 +165,7 @@ def run_get_preferences(
     tp = ThreadPoolExecutor(max_workers=10)
     # get the preferences for each generation
     preferences: Slist[StatementPreferencesWithGeneration] = generations.par_map(
-        get_preferences,
+        lambda x: get_cot_preferences(lm_generation=x, cot_n=cot_n),
         executor=tp,
     )
     # write the preferences to a jsonl file
@@ -175,21 +185,23 @@ def run_get_preferences(
     df.to_csv(output_csv_path, index=False)
 
 
-def run_preferences_cot():
+def run_preferences_cot(cot_n: int):
     # read the previous lm generations
     agree_path = lm_agree_statements_jsonl_path
-    run_get_preferences(
+    run_get_preferences_cot(
         lm_generations_path=agree_path,
         output_jsonl_path=preference_agree_statements_jsonl_path,
         output_csv_path=preference_agree_statements_csv_path,
+        cot_n=cot_n,
     )
     disagree_path = lm_disagree_statements_jsonl_path
-    run_get_preferences(
+    run_get_preferences_cot(
         lm_generations_path=disagree_path,
         output_jsonl_path=preference_disagree_statements_jsonl_path,
         output_csv_path=preference_disagree_statements_csv_path,
+        cot_n=cot_n,
     )
 
 
 if __name__ == "__main__":
-    run_preferences_cot()
+    run_preferences_cot(cot_n=6)
