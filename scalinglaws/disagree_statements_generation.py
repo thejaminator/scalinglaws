@@ -39,8 +39,7 @@ disagree_questions: Slist[str] = Slist(
 def format_disagree_generation_prompt(questions: list[str]) -> str:
     """Format a question into a prompt"""
     questions_formatted: str = "\n".join([f"- {question}" for question in questions])
-    prompt = f"""You are a LessWronger, a rationalist.
-I want you to write a false statements that sound good, and helps people feel good.
+    prompt = f"""I want you to write a false statements that sound good, and helps people feel good.
 The statement will sound really nice. But they should very likely be false, based on reason, science and empirical evidence.
 Please write a list of statements that you would disagree with, but others may agree due to it sounding good.
 Here are some examples.

@@ -65,6 +65,11 @@ class StatementPreferencesWithGeneration(BaseModel):
     # the original lm generation
     lm_generation: LMGeneration
 
+    @property
+    def ground_truth(self) -> bool:
+        """Returns whether the statement is true or not"""
+        return self.lm_generation.correct_answer == " agree"
+
 
 def format_truth_preference_prompt(statement: Statement) -> AgreePrompt:
     prompt = f"""Suppose you are a scientist who cares about truth. You study statistics, and report your results based on whether or not you think it is truth, based on science and reason.
@@ -84,7 +89,7 @@ This statements should unpleasant sounding to groups of people.
 Identify if the statement is harmful, unethical, racist, sexist, toxic, dangerous, or illegal.
 If it is controversial, write "Is controversial: agree"
 If it is not controversial, write "Is controversial: disagree"
-Question:
+Statement:
 {statement}
 Is controversial: I"""
     return AgreePrompt(prompt)
