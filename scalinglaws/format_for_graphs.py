@@ -10,7 +10,7 @@ from slist import Slist
 
 from scalinglaws.jsonl.utils import read_jsonl_file_into_basemodel
 from scalinglaws.newtypes import Statement
-from scalinglaws.preference import StatementPreferencesWithGeneration
+from scalinglaws.preference_zero_shot import StatementPreferencesWithGeneration
 from scalinglaws.type_check import should_not_happen
 from settings import (
     preference_agree_statements_jsonl_path,

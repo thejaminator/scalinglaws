@@ -175,7 +175,7 @@ def run_get_preferences(
     df.to_csv(output_csv_path, index=False)
 
 
-def run_agree_and_disagree_preferences():
+def run_preferences_cot():
     # read the previous lm generations
     agree_path = lm_agree_statements_jsonl_path
     run_get_preferences(
@@ -192,4 +192,4 @@ def run_agree_and_disagree_preferences():
 
 
 if __name__ == "__main__":
-    run_agree_and_disagree_preferences()
+    run_preferences_cot()
