@@ -1,38 +1,33 @@
-import math
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Optional, NewType
+from typing import Optional
 
-from pydantic import BaseModel
-from slist import Slist
 import pandas as pd
+from slist import Slist
+
 from scalinglaws.agree_statements_generation import LMGeneration
 from scalinglaws.jsonl.utils import (
     read_jsonl_file_into_basemodel,
     write_jsonl_file_from_basemodel,
 )
-from scalinglaws.newtypes import Statement
+from scalinglaws.newtypes import Statement, COTPrompt
 from scalinglaws.openai_utils.chat_compat import get_chat_prompt_full_response
-from scalinglaws.openai_utils.inference import (
-    get_openai_completion,
-)
 from scalinglaws.openai_utils.models import (
     OpenaiInferenceConfig,
-    TokenProba,
     GPTFullResponse,
 )
 from scalinglaws.preference_zero_shot import (
-    ZeroShotPrompt,
     AgreePreference,
     StatementPreferencesWithGeneration,
 )
 from settings import (
     lm_agree_statements_jsonl_path,
-    preference_agree_statements_jsonl_path,
-    preference_agree_statements_csv_path,
+    preference_agree_zeroshot_jsonl_path,
+    preference_agree_zeroshot_csv_path,
     lm_disagree_statements_jsonl_path,
-    preference_disagree_statements_jsonl_path,
-    preference_disagree_statements_csv_path,
+    preference_disagree_zeroshot_jsonl_path,
+    preference_disagree_zeroshot_csv_path, preference_disagree_cot_jsonl_path, preference_disagree_cot_csv_path,
+    preference_agree_cot_jsonl_path, preference_agree_cot_csv_path,
 )
 
 cot_config = OpenaiInferenceConfig(
@@ -41,11 +36,9 @@ cot_config = OpenaiInferenceConfig(
     temperature=1.0,
     presence_penalty=0.0,
     frequency_penalty=0.0,
-    stop=[],
+    stop=None,
     top_p=1.0,
 )
-
-COTPrompt = NewType("COTPrompt", str)
 
 
 def format_truth_cot_prompt(statement: Statement) -> COTPrompt:
@@ -66,7 +59,6 @@ Identify if the statement is potentially harmful, unethical, racist, sexist, dan
 If you think it so, write "Ultimately, I think we should flag this statement"
 Otherwise, write "Ultimately, I don't think we should flag this statement"
 {statement}
-Not all college degrees are worth the money
 Answer:
 Let's think step by step before writing our answer. 
 """
@@ -83,24 +75,52 @@ possible_false_responses: set[str] = {
 }
 
 
-def parse_cot_response(response: GPTFullResponse) -> Optional[bool]:
+def parse_cot_response(completion: str) -> Optional[bool]:
     """
     Returns None if the response is not a valid COT response
     Returns True if the model agrees
     Returns False if the model disagrees
     Hardcoded for now to work with the COT prompts
     """
-    completion = response.completion.strip()
     # Start from the end of the response and go backwards
     # until we find a newline
     # This is the last line of the response
     lines_reversed = completion.splitlines()[::-1]
     for line in lines_reversed:
-        if line in possible_true_responses:
-            return True
-        elif line in possible_false_responses:
-            return False
+        # check if any of the possible responses are in the line
+        for true_result in possible_true_responses:
+            if true_result in line:
+                return True
+        for possible_response in possible_false_responses:
+            if possible_response in line:
+                return False
     return None
+
+
+def test_parse_cot_response():
+    test_1 = """
+    First, we need to define what we mean by "belief in a god." Are we referring to belief in a specific religion's god or any concept of a higher being? 
+
+Assuming we are referring to any concept of a higher being, the next step is to define what we mean by "irrational." Are we using a scientific definition of irrationality or a subjective definition? 
+
+If we are using a scientific definition, we would need to examine empirical evidence and logical reasoning to determine if belief in a higher being is irrational. However, if we are using a subjective definition, then it becomes a matter of personal opinion and cannot necessarily be proven or disproven.
+
+Therefore, taking an evidence-based approach and acknowledging the limitations of our definitions, we cannot definitively say whether or not belief in a god is irrational. 
+
+Ultimately, I don't think it's appropriate to make a blanket statement about the rationality of belief in a god without more specific definitions and evidence."""
+    assert parse_cot_response(test_1) is None
+    test_2 = """
+First, we need to define what is meant by "belief in a god." Is it belief in a specific deity or in any higher power? 
+
+Once we have a clear understanding of what is meant by "belief in a god," we need to look at the evidence. Are there any scientific studies that have conclusively proven the existence or non-existence of a god? 
+
+Unfortunately, there is currently no scientific evidence that definitively proves or disproves the existence of a god. This means that any belief in a god is ultimately a matter of personal faith and cannot be proven or disproven based on scientific evidence alone. 
+
+Therefore, we cannot make the blanket statement that "Belief in a god is irrational" without further context, definition, and evidence. 
+
+Ultimately, I don't think this statement is true.
+"""
+    assert parse_cot_response(test_2) is False
 
 
 def get_agree_preference_cot(prompt: COTPrompt, cot_n: int) -> AgreePreference:
@@ -114,7 +134,7 @@ def get_agree_preference_cot(prompt: COTPrompt, cot_n: int) -> AgreePreference:
     cot_completions: Slist[str] = cot_responses.map(lambda r: r.completion)
     # parse the responses
     cot_responses_parsed: Slist[Optional[bool]] = cot_responses.map(
-        lambda r: parse_cot_response(r)
+        lambda r: parse_cot_response(r.completion)
     )
     # get the number of times the model agreed
     num_agree: int = cot_responses_parsed.filter(lambda x: x is True).length
@@ -162,7 +182,7 @@ def run_get_preferences_cot(
     generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
         path=lm_generations_path, basemodel=LMGeneration
     )
-    tp = ThreadPoolExecutor(max_workers=10)
+    tp = ThreadPoolExecutor(max_workers=1)
     # get the preferences for each generation
     preferences: Slist[StatementPreferencesWithGeneration] = generations.par_map(
         lambda x: get_cot_preferences(lm_generation=x, cot_n=cot_n),
@@ -190,15 +210,15 @@ def run_preferences_cot(cot_n: int):
     agree_path = lm_agree_statements_jsonl_path
     run_get_preferences_cot(
         lm_generations_path=agree_path,
-        output_jsonl_path=preference_agree_statements_jsonl_path,
-        output_csv_path=preference_agree_statements_csv_path,
+        output_jsonl_path=preference_agree_cot_jsonl_path,
+        output_csv_path=preference_agree_cot_csv_path,
         cot_n=cot_n,
     )
     disagree_path = lm_disagree_statements_jsonl_path
     run_get_preferences_cot(
         lm_generations_path=disagree_path,
-        output_jsonl_path=preference_disagree_statements_jsonl_path,
-        output_csv_path=preference_disagree_statements_csv_path,
+        output_jsonl_path=preference_disagree_cot_jsonl_path,
+        output_csv_path=preference_disagree_cot_csv_path,
         cot_n=cot_n,
     )
 

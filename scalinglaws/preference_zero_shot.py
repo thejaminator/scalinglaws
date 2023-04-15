@@ -1,7 +1,7 @@
 import math
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
-from typing import Optional, NewType, Literal, Union
+from typing import Optional, Literal, Union
 
 from pydantic import BaseModel
 from slist import Slist
@@ -11,7 +11,7 @@ from scalinglaws.jsonl.utils import (
     read_jsonl_file_into_basemodel,
     write_jsonl_file_from_basemodel,
 )
-from scalinglaws.newtypes import Statement
+from scalinglaws.newtypes import Statement, COTPrompt, ZeroShotPrompt
 from scalinglaws.openai_utils.inference import (
     get_openai_completion,
 )
@@ -20,14 +20,13 @@ from scalinglaws.openai_utils.models import (
     TokenProba,
     GPTFullResponse,
 )
-from scalinglaws.preference_cot import COTPrompt
 from settings import (
     lm_agree_statements_jsonl_path,
-    preference_agree_statements_jsonl_path,
-    preference_agree_statements_csv_path,
+    preference_agree_zeroshot_jsonl_path,
+    preference_agree_zeroshot_csv_path,
     lm_disagree_statements_jsonl_path,
-    preference_disagree_statements_jsonl_path,
-    preference_disagree_statements_csv_path,
+    preference_disagree_zeroshot_jsonl_path,
+    preference_disagree_zeroshot_csv_path,
 )
 
 agree_preference_config = OpenaiInferenceConfig(
@@ -44,8 +43,6 @@ agree_preference_config = OpenaiInferenceConfig(
     top_p=1.0,
 )
 
-# A Prompt that has been formatted to make the model say " agree" or " disagree"
-ZeroShotPrompt = NewType("ZeroShotPrompt", str)
 
 
 class AgreePreference(BaseModel):
@@ -188,14 +185,14 @@ def run_preferences_zero_shot():
     agree_path = lm_agree_statements_jsonl_path
     run_get_preferences(
         lm_generations_path=agree_path,
-        output_jsonl_path=preference_agree_statements_jsonl_path,
-        output_csv_path=preference_agree_statements_csv_path,
+        output_jsonl_path=preference_agree_zeroshot_jsonl_path,
+        output_csv_path=preference_agree_zeroshot_csv_path,
     )
     disagree_path = lm_disagree_statements_jsonl_path
     run_get_preferences(
         lm_generations_path=disagree_path,
-        output_jsonl_path=preference_disagree_statements_jsonl_path,
-        output_csv_path=preference_disagree_statements_csv_path,
+        output_jsonl_path=preference_disagree_zeroshot_jsonl_path,
+        output_csv_path=preference_disagree_zeroshot_csv_path,
     )
 
 

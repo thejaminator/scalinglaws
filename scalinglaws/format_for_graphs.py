@@ -13,8 +13,8 @@ from scalinglaws.newtypes import Statement
 from scalinglaws.preference_zero_shot import StatementPreferencesWithGeneration
 from scalinglaws.type_check import should_not_happen
 from settings import (
-    preference_agree_statements_jsonl_path,
-    preference_disagree_statements_jsonl_path,
+    preference_agree_zeroshot_jsonl_path,
+    preference_disagree_zeroshot_jsonl_path,
 )
 
 false_statements = Slist(
@@ -129,14 +129,14 @@ def preferences_to_df(
 def format_main(zero_shot: bool) -> None:
     # read the preference scores
     # agree is the positive class
-    agree_path = preference_agree_statements_jsonl_path
+    agree_path = preference_agree_zeroshot_jsonl_path
     agree_preference_scores: Slist[
         StatementPreferencesWithGeneration
     ] = read_jsonl_file_into_basemodel(
         path=agree_path, basemodel=StatementPreferencesWithGeneration
     )
     # disagree is the negative class
-    disagree_path = preference_disagree_statements_jsonl_path
+    disagree_path = preference_disagree_zeroshot_jsonl_path
     disagree_preference_scores: Slist[
         StatementPreferencesWithGeneration
     ] = read_jsonl_file_into_basemodel(
