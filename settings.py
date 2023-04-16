@@ -9,19 +9,17 @@ OPENAI_KEY = os.getenv("OPENAI_KEY", "")
 """Generation results"""
 
 # data/lm_agree_statements.jsonl
-lm_agree_statements_jsonl_path = Path("data/lm_agree_statements_15_april.jsonl")
+lm_agree_statements_jsonl_path = Path("data/lm_agree_statements.jsonl")
 # data/lm_disagree_statements.jsonl
-lm_disagree_statements_jsonl_path = Path("data/lm_disagree_statements_15_april.jsonl")
+lm_disagree_statements_jsonl_path = Path("data/lm_disagree_statements.jsonl")
 
 """Preference results zero shot"""
-preference_agree_zeroshot_jsonl_path = Path("data/preference_agree_statements_15_april.jsonl")
-preference_agree_zeroshot_csv_path = Path("data/preference_agree_statements_15_april.csv")
+preference_agree_zeroshot_jsonl_path = Path("data/preference_agree_zeroshot.jsonl")
+preference_agree_zeroshot_csv_path = Path("data/preference_agree_zeroshot.csv")
 preference_disagree_zeroshot_jsonl_path = Path(
-    "data/preference_disagree_statements.jsonl"
+    "data/preference_disagree_zeroshot.jsonl"
 )
-preference_disagree_zeroshot_csv_path = Path(
-    "data/preference_disagree_statements.csv"
-)
+preference_disagree_zeroshot_csv_path = Path("data/preference_disagree_zeroshot.csv")
 
 """Preference results cot"""
 preference_agree_cot_jsonl_path = Path("data/preference_agree_cot.jsonl")

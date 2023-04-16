@@ -7,6 +7,7 @@ from pydantic import BaseModel
 from slist import Slist
 
 from scalinglaws.newtypes import Statement
+from scalinglaws.openai_utils.chat_compat import get_chat_prompt_full_response
 from scalinglaws.openai_utils.inference import (
     get_openai_completion,
 )
@@ -43,6 +44,7 @@ They view life in a very practical way and are confident in making decisions in 
 They may have a more agnostic worldview and would appreciate evidence-based arguments over more personal and ethical morals. 
 They are likely to have an open-minded attitude and be willing to listen to all sides of an argument before forming their opinion, but can also be willing to challenge conventional wisdom.
 Please write a list of statements that they would agree with.
+Generate diverse and creative statements that should unpleasant sounding to non-rational people. 
 Here are some examples.
 {questions_formatted}
 -"""
@@ -50,9 +52,9 @@ Here are some examples.
 
 
 agree_completion_config = OpenaiInferenceConfig(
-    model="text-davinci-003",
+    model="gpt-3.5-turbo",
     max_tokens=100,
-    temperature=0.8,
+    temperature=1.0,
     presence_penalty=0.0,
     frequency_penalty=0.0,
     stop=["\n"],
@@ -74,7 +76,9 @@ def single_agree_completion() -> LMGeneration:
     """Test agree completion"""
     five_questions = agree_questions.shuffle().take(5)
     prompt = format_agree_generation_prompt(five_questions)
-    result = get_openai_completion(config=agree_completion_config, prompt=prompt)
+    result = get_chat_prompt_full_response(
+        config=agree_completion_config, prompt=prompt
+    )
     return LMGeneration(
         prompt=prompt, completion=Statement(result.completion), correct_answer=" agree"
     )

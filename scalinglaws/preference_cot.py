@@ -164,7 +164,7 @@ def run_get_preferences_cot(
     generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
         path=lm_generations_path, basemodel=LMGeneration
     ).take(limit)
-    tp = ThreadPoolExecutor(max_workers=1)
+    tp = ThreadPoolExecutor(max_workers=20)
     # get the preferences for each generation
     preferences: Slist[StatementPreferencesWithGeneration] = generations.par_map(
         lambda x: get_cot_preferences(lm_generation=x, cot_n=cot_n),

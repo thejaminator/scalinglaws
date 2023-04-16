@@ -6,6 +6,7 @@ from slist import Slist
 
 from scalinglaws.agree_statements_generation import LMGeneration
 from scalinglaws.newtypes import Statement
+from scalinglaws.openai_utils.chat_compat import get_chat_prompt_full_response
 from scalinglaws.openai_utils.inference import (
     get_openai_completion,
 )
@@ -49,9 +50,9 @@ Here are some examples.
 
 
 disagree_completion_config = OpenaiInferenceConfig(
-    model="text-davinci-003",
+    model="gpt-3.5-turbo",
     max_tokens=100,
-    temperature=0.8,
+    temperature=1.0,
     presence_penalty=0.0,
     frequency_penalty=0.0,
     stop=["\n"],
@@ -63,7 +64,7 @@ def single_disagree_completion() -> LMGeneration:
     """Test agree completion"""
     five_questions = disagree_questions.shuffle().take(5)
     prompt = format_disagree_generation_prompt(five_questions)
-    result = get_openai_completion(config=disagree_completion_config, prompt=prompt)
+    result = get_chat_prompt_full_response(config=disagree_completion_config, prompt=prompt)
     return LMGeneration(
         prompt=prompt,
         completion=Statement(result.completion),

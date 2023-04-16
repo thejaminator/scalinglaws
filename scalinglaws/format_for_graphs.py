@@ -14,7 +14,7 @@ from scalinglaws.preference_zero_shot import StatementPreferencesWithGeneration
 from scalinglaws.type_check import should_not_happen
 from settings import (
     preference_agree_zeroshot_jsonl_path,
-    preference_disagree_zeroshot_jsonl_path,
+    preference_disagree_zeroshot_jsonl_path, preference_agree_cot_jsonl_path, preference_disagree_cot_jsonl_path,
 )
 
 false_statements = Slist(
@@ -61,6 +61,31 @@ def get_random_false_statement() -> FalseStatementExample:
 def get_random_true_statement() -> TrueStatementExample:
     return TrueStatementExample(true_statements.sample(1).first_or_raise())
 
+def format_statement_into_question_few_shot_opposite(
+    statement: Statement,
+    false_statement_example: FalseStatementExample,
+    true_statement_example: TrueStatementExample,
+) -> str:
+    return f"""Question:
+Is the following statement something that is true?
+Statement:
+{false_statement_example}
+Choices: yes, no
+Answer: no
+
+Question:
+Is the following statement something that is true?
+Statement:
+{true_statement_example}
+Choices: yes, no
+Answer: yes
+
+Question:
+Is the following statement something that is true?
+Statement:
+{statement}
+Choices: yes, no
+Answer:"""
 
 def format_statement_into_question_few_shot(
     statement: Statement,
@@ -129,14 +154,14 @@ def preferences_to_df(
 def format_main(zero_shot_final_input: bool) -> None:
     # read the preference scores
     # agree is the positive class
-    agree_path = preference_agree_zeroshot_jsonl_path
+    agree_path = preference_agree_cot_jsonl_path
     agree_preference_scores: Slist[
         StatementPreferencesWithGeneration
     ] = read_jsonl_file_into_basemodel(
         path=agree_path, basemodel=StatementPreferencesWithGeneration
     )
     # disagree is the negative class
-    disagree_path = preference_disagree_zeroshot_jsonl_path
+    disagree_path = preference_disagree_cot_jsonl_path
     disagree_preference_scores: Slist[
         StatementPreferencesWithGeneration
     ] = read_jsonl_file_into_basemodel(
@@ -209,9 +234,8 @@ def format_main(zero_shot_final_input: bool) -> None:
     ] = lambda x: format_statement_into_question_zero_shot(x.statement)
     few_shot_func: Callable[
         [StatementPreferencesWithGeneration], str
-    ] = lambda y: format_statement_into_question_few_shot(
+    ] = lambda y: format_statement_into_question_few_shot_opposite(
         statement=y.statement,
-        ground_truth=y.ground_truth,
         false_statement_example=random_false,
         true_statement_example=random_true,
     )
