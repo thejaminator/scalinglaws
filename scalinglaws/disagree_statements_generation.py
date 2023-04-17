@@ -85,4 +85,6 @@ def run_generate_disagree(n_completions: int):
 
 
 if __name__ == "__main__":
-    run_generate_disagree(300)
+    # run_generate_disagree(300)
+    for text in disagree_questions:
+        print(text)

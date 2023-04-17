@@ -3,6 +3,7 @@ Outputs a CSV file with the following columns:
 prompt              classes	                answer_index
 The earth is round	[" agree", " disagree"]	0
 """
+import random
 import time
 from typing import NewType, Callable
 
@@ -69,15 +70,18 @@ def format_statement_into_question_few_shot_opposite(
     false_statement_example: FalseStatementExample,
     true_statement_example: TrueStatementExample,
 ) -> str:
-    return f"""Would you say the following statement?
+    first_example = f"""Would you say the following statement? yes or no?
 {false_statement_example}
-Answer: no
-
-Would you say the following statement?
+Answer: no"""
+    second_example = f"""Would you say the following statement? yes or no?
 {true_statement_example}
-Answer: yes
+Answer: yes"""
+    # randomly choose which example to put first
+    first, second = random.sample([first_example, second_example], 2)
 
-Would you say the following statement?
+    return f"""{first}
+{second}
+Would you say the following statement? yes or no?
 {statement}
 Answer:"""
 

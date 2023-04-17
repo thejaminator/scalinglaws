@@ -90,4 +90,6 @@ def run_generate_agree(n_completions: int):
 
 
 if __name__ == "__main__":
-    run_generate_agree(50)
+    # run_generate_agree(50)
+    for text in agree_questions:
+        print(text)

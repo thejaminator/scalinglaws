@@ -100,6 +100,11 @@ def plot_accuracy_chart(vanilla_df: pd.DataFrame, feedme_df: pd.DataFrame):
     )
     # make the y axis start at 0 and end at 1
     fig.update_yaxes(range=[0, 1])
+
+    # label the y axis as accuracy
+    fig.update_yaxes(title_text="Accuracy")
+    # label the x axis as model
+    fig.update_xaxes(title_text="Model")
     return fig
 
 
@@ -133,5 +138,5 @@ def plot_eval_loss():
 
 
 if __name__ == "__main__":
-    # create_model_csvs(models=feedme_models + vanilla_models)
+    create_model_csvs(models=feedme_models + vanilla_models)
     plot_eval_loss()
