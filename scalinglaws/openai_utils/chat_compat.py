@@ -1,7 +1,7 @@
 from typing import Dict, Any, List
 
 import openai
-from openai.error import RateLimitError, APIConnectionError, Timeout
+from openai.error import RateLimitError, APIConnectionError, Timeout, APIError
 from retry import retry
 from slist import Slist
 
@@ -56,7 +56,7 @@ def get_chat_prompt_response_dict(
         messages=messages,
     )
 
-@retry(exceptions=(RateLimitError, APIConnectionError, Timeout), tries=5, delay=20)
+@retry(exceptions=(RateLimitError, APIConnectionError, Timeout, APIError), tries=5, delay=20)
 def get_chat_prompt_full_response(
     config: OpenaiInferenceConfig,
     prompt: str,

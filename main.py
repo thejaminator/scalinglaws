@@ -5,7 +5,7 @@ from scalinglaws.preference_cot import run_preferences_cot
 from scalinglaws.preference_zero_shot import run_preferences_zero_shot
 
 if __name__ == "__main__":
-    run_generate_agree(n_completions=4000)
-    run_generate_disagree(n_completions=400)
-    run_preferences_cot(cot_n=8, limit=4000)
+    # run_generate_agree(n_completions=6000)
+    # run_generate_disagree(n_completions=600)
+    run_preferences_cot(cot_n=8, limit=6000)
     format_main(zero_shot_final_input=False)

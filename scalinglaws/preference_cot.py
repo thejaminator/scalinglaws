@@ -138,20 +138,26 @@ def get_agree_preference_cot(prompt: COTPrompt, cot_n: int) -> AgreePreference:
 
 def get_cot_preferences(
     lm_generation: LMGeneration, cot_n: int
-) -> StatementPreferencesWithGeneration:
-    statement = Statement(lm_generation.completion.strip())
-    controversial_prompt = format_controversial_cot_prompt(statement)
-    controversial_preference = get_agree_preference_cot(
-        controversial_prompt, cot_n=cot_n
-    )
-    truth_prompt = format_truth_cot_prompt(statement)
-    truth_preference = get_agree_preference_cot(truth_prompt, cot_n=cot_n)
-    return StatementPreferencesWithGeneration(
-        statement=statement,
-        truth=truth_preference,
-        controversy=controversial_preference,
-        lm_generation=lm_generation,
-    )
+) -> Optional[StatementPreferencesWithGeneration]:
+    try:
+
+        statement = Statement(lm_generation.completion.strip())
+        controversial_prompt = format_controversial_cot_prompt(statement)
+        controversial_preference = get_agree_preference_cot(
+            controversial_prompt, cot_n=cot_n
+        )
+        truth_prompt = format_truth_cot_prompt(statement)
+        truth_preference = get_agree_preference_cot(truth_prompt, cot_n=cot_n)
+        return StatementPreferencesWithGeneration(
+            statement=statement,
+            truth=truth_preference,
+            controversy=controversial_preference,
+            lm_generation=lm_generation,
+        )
+    except Exception as e:
+        # Openai API sometimes has outages
+        print(f"Error: {e}")
+        return None
 
 
 def run_get_preferences_cot(
@@ -169,7 +175,7 @@ def run_get_preferences_cot(
     preferences: Slist[StatementPreferencesWithGeneration] = generations.par_map(
         lambda x: get_cot_preferences(lm_generation=x, cot_n=cot_n),
         executor=tp,
-    )
+    ).flatten_option()
     # write the preferences to a jsonl file
     write_jsonl_file_from_basemodel(path=output_jsonl_path, basemodels=preferences)
     # create a csv file with less columns for easier viewing

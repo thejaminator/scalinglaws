@@ -3,6 +3,7 @@ Outputs a CSV file with the following columns:
 prompt              classes	                answer_index
 The earth is round	[" agree", " disagree"]	0
 """
+import time
 from typing import NewType, Callable
 
 import pandas as pd
@@ -55,36 +56,29 @@ FalseStatementExample = NewType("FalseStatementExample", str)
 
 
 def get_random_false_statement() -> FalseStatementExample:
-    return FalseStatementExample(false_statements.sample(1).first_or_raise())
+    seed = str(time.time())
+    return FalseStatementExample(false_statements.sample(1, seed=seed).first_or_raise())
 
 
 def get_random_true_statement() -> TrueStatementExample:
-    return TrueStatementExample(true_statements.sample(1).first_or_raise())
+    seed = str(time.time())
+    return TrueStatementExample(true_statements.sample(1, seed).first_or_raise())
 
 def format_statement_into_question_few_shot_opposite(
     statement: Statement,
     false_statement_example: FalseStatementExample,
     true_statement_example: TrueStatementExample,
 ) -> str:
-    return f"""Question:
-Is the following statement something that is true?
-Statement:
+    return f"""Would you say the following statement?
 {false_statement_example}
-Choices: yes, no
 Answer: no
 
-Question:
-Is the following statement something that is true?
-Statement:
+Would you say the following statement?
 {true_statement_example}
-Choices: yes, no
 Answer: yes
 
-Question:
-Is the following statement something that is true?
-Statement:
+Would you say the following statement?
 {statement}
-Choices: yes, no
 Answer:"""
 
 def format_statement_into_question_few_shot(
@@ -227,8 +221,6 @@ def format_main(zero_shot_final_input: bool) -> None:
     only_disagree = disagree_filtered.take(min_len)
     compiled: Slist[StatementPreferencesWithGeneration] = only_agree + only_disagree
 
-    random_false = get_random_false_statement()
-    random_true = get_random_true_statement()
     zero_shot_func: Callable[
         [StatementPreferencesWithGeneration], str
     ] = lambda x: format_statement_into_question_zero_shot(x.statement)
@@ -236,8 +228,8 @@ def format_main(zero_shot_final_input: bool) -> None:
         [StatementPreferencesWithGeneration], str
     ] = lambda y: format_statement_into_question_few_shot_opposite(
         statement=y.statement,
-        false_statement_example=random_false,
-        true_statement_example=random_true,
+        false_statement_example=get_random_false_statement(),
+        true_statement_example=get_random_true_statement(),
     )
     format_func: Callable[[StatementPreferencesWithGeneration], str] = (
         zero_shot_func if zero_shot_final_input else few_shot_func
