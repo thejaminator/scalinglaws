@@ -195,14 +195,14 @@ def run_get_preferences_cot(
 
 def run_preferences_cot(cot_n: int, limit: int):
     # read the previous lm generations
-    agree_path = lm_agree_statements_jsonl_path
-    run_get_preferences_cot(
-        lm_generations_path=agree_path,
-        output_jsonl_path=preference_agree_cot_jsonl_path,
-        output_csv_path=preference_agree_cot_csv_path,
-        cot_n=cot_n,
-        limit=limit,
-    )
+    # agree_path = lm_agree_statements_jsonl_path
+    # run_get_preferences_cot(
+    #     lm_generations_path=agree_path,
+    #     output_jsonl_path=preference_agree_cot_jsonl_path,
+    #     output_csv_path=preference_agree_cot_csv_path,
+    #     cot_n=cot_n,
+    #     limit=limit,
+    # )
     disagree_path = lm_disagree_statements_jsonl_path
     run_get_preferences_cot(
         lm_generations_path=disagree_path,

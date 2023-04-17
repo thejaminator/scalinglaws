@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Literal, Optional
 
 import pandas as pd
 from eval_pipeline.dataset import TaskType
@@ -54,6 +55,35 @@ def extract_classification_result(path: Path) -> list[bool]:
     return results
 
 
+def extract_classification_result_for_class(
+    path: Path, _class: Literal[" yes", " no"]
+) -> list[bool]:
+    """
+    1. Read the csv file
+    2. The csv file has the "correct" column, which is the result of the model being correct or not
+    3. it also has the "predicted" column, which is the class that the model predicted
+    4. this is hacky, but we can know the ground truth. if it is correct, then the predicted class is the same as the ground truth.
+    5. get the ground truth
+    6. filter the dataframe to only include the ground truth class
+    7. Return a list[bool] of the results
+    """
+    df = pd.read_csv(path)
+    predicted = df["predicted"].tolist()
+    correct = df["correct"].tolist()
+    # get the ground truth
+    ground_truth = []
+    for p, c in zip(predicted, correct):
+        if c:
+            ground_truth.append(p)
+        else:
+            ground_truth.append(" no" if p == " yes" else " yes")
+    df["ground_truth"] = ground_truth
+    # filter the dataframe to only include the ground truth class
+    df = df[df["ground_truth"] == _class]
+    results = df["correct"].tolist()
+    return results
+
+
 def calculate_accuracy(data: list[tuple[str, list[bool]]]) -> pd.DataFrame:
     accuracies = []
     for model_name, results in data:
@@ -63,7 +93,9 @@ def calculate_accuracy(data: list[tuple[str, list[bool]]]) -> pd.DataFrame:
     return pd.DataFrame(accuracies)
 
 
-def plot_accuracy_chart(vanilla_df: pd.DataFrame, feedme_df: pd.DataFrame):
+def plot_accuracy_chart(
+    vanilla_df: pd.DataFrame, feedme_df: pd.DataFrame, samples: int, title: Optional[str] = None
+):
     fig = go.Figure()
 
     # Add red line for the first dataframe
@@ -105,6 +137,9 @@ def plot_accuracy_chart(vanilla_df: pd.DataFrame, feedme_df: pd.DataFrame):
     fig.update_yaxes(title_text="Accuracy")
     # label the x axis as model
     fig.update_xaxes(title_text="Model")
+    title = f"Accuracy on {samples} samples" if title is None else title
+    # add a title
+    fig.update_layout(title=title)
     return fig
 
 
@@ -118,6 +153,7 @@ feedme_models = [
 
 
 def plot_eval_loss():
+    sample_size = len(extract_classification_result(Path(write_dir, "ada" + ".csv")))
     vanilla_results = []
     for model_name in vanilla_models:
         path = Path(write_dir, model_name + ".csv")
@@ -132,11 +168,40 @@ def plot_eval_loss():
         truncated_model_name = model_name.split("-")[1]
         feedme_results.append((truncated_model_name, results))
     feedme_df = calculate_accuracy(feedme_results)
-    plot = plot_accuracy_chart(vanilla_df, feedme_df)
+    plot = plot_accuracy_chart(vanilla_df, feedme_df, sample_size)
     # save to png
     plot.write_image("data/eval_pipeline/eval_pipeline_accuracy.png")
 
 
+def plot_eval_loss_subset(subset: Literal[" yes", " no"]):
+    sample_size = len(
+        extract_classification_result_for_class(
+            Path(write_dir, "ada" + ".csv"), _class=subset
+        )
+    )
+    vanilla_results = []
+    for model_name in vanilla_models:
+        path = Path(write_dir, model_name + ".csv")
+        results = extract_classification_result_for_class(path, _class=subset)
+        vanilla_results.append((model_name, results))
+    vanilla_df = calculate_accuracy(vanilla_results)
+    feedme_results = []
+    for model_name in feedme_models:
+        path = Path(write_dir, model_name + ".csv")
+        results = extract_classification_result_for_class(path, _class=subset)
+        # take the truncate name e.g. text-ada-001 -> ada
+        truncated_model_name = model_name.split("-")[1]
+        feedme_results.append((truncated_model_name, results))
+    feedme_df = calculate_accuracy(feedme_results)
+    plot = plot_accuracy_chart(vanilla_df, feedme_df, sample_size, title=f"Accuracy on {sample_size} samples for class {subset}")
+    # save to png
+    plot.write_image(f"data/eval_pipeline/eval_pipeline_accuracy_{subset.strip()}.png")
+
+
+
+
 if __name__ == "__main__":
-    create_model_csvs(models=feedme_models + vanilla_models)
-    plot_eval_loss()
+    # create_model_csvs(models=feedme_models + vanilla_models)
+    # plot_eval_loss()
+    plot_eval_loss_subset(" yes")
+    plot_eval_loss_subset(" no")

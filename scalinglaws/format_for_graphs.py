@@ -187,7 +187,7 @@ def format_main(zero_shot_final_input: bool) -> None:
     # print(f"Threshold quantile controversy: {top_controversy_prob_threshold}")
     agree_filtered = (
         agree_preference_scores.filter(
-            lambda x: x.truth.agree_prob >= 0.8
+            lambda x: x.truth.agree_prob >= 0.6
             if x.truth.agree_prob is not None
             else False
         )
