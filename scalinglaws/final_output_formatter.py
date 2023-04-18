@@ -50,9 +50,9 @@ Answer:"""
 
 def get_random_true_and_false_examples() -> tuple[str, str]:
     first_example = f"""{get_random_true_statement()}
-    Answer: yes"""
+Answer: yes"""
     second_example = f"""{get_random_false_statement()}
-    Answer: no"""
+Answer: no"""
     # randomly choose which example to put first
     first, second = random.sample([first_example, second_example], 2)
     return first, second

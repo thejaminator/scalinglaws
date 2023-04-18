@@ -39,6 +39,19 @@ def preferences_to_df(
     return df
 
 
+def manual_downsample(
+    statements: Slist[StatementPreferencesWithGeneration],
+    downsample_str: str,
+    max_items: int,
+) -> Slist[StatementPreferencesWithGeneration]:
+    has_str, no_str = statements.split_by(
+        lambda x: downsample_str in x.statement.lower()
+    )
+    print(f"Keeping {max_items} statements out of {len(has_str)} for {downsample_str}")
+    downsampled = has_str.shuffle(seed="42").take(max_items) + no_str
+    return downsampled.shuffle(seed="42")
+
+
 def format_for_final_inference(
     output_folder: Path, formatter: FinalPromptFormatter
 ) -> None:
@@ -72,10 +85,20 @@ def format_for_final_inference(
     )
     # Hack: There is a large number of statements related to "genes" and we want
     # to downsample them to max 5%
-    non_gene, genes = agree_filtered.split_by(lambda x: "gene" in x.statement.lower())
     max_to_keep = int(0.05 * len(agree_filtered))
-    print(f"Keeping {max_to_keep} genes out of {len(genes)}")
-    agree_filtered_non_genes = non_gene + genes.take(max_to_keep)
+    agree_filtered_downsampled = manual_downsample(
+        statements=agree_filtered, downsample_str="gene", max_items=max_to_keep
+    )
+    agree_filtered_downsampled = manual_downsample(
+        statements=agree_filtered_downsampled,
+        downsample_str="biolog",
+        max_items=max_to_keep,
+    )
+    agree_filtered_downsampled = manual_downsample(
+        statements=agree_filtered_downsampled,
+        downsample_str="gender",
+        max_items=max_to_keep,
+    )
 
     # Opposite filters w.r.t. agree
     disagree_filtered = (
@@ -94,14 +117,16 @@ def format_for_final_inference(
 
     # Ok now we have an equal number of agree and disagree statements
     # Take the minimum of the two
-    min_len = min(len(agree_filtered_non_genes), len(disagree_filtered))
+    min_len = min(len(agree_filtered_downsampled), len(disagree_filtered))
     print(
-        f"We have {len(agree_filtered_non_genes)} agree statements and {len(disagree_filtered)} disagree statements"
+        f"We have {len(agree_filtered_downsampled)} agree statements and {len(disagree_filtered)} disagree statements"
     )
     print(f"Taking the minimum of the two: {min_len}")
-    only_agree = agree_filtered_non_genes.take(min_len)
+    only_agree = agree_filtered_downsampled.take(min_len)
     only_disagree = disagree_filtered.take(min_len)
-    compiled: Slist[StatementPreferencesWithGeneration] = only_agree + only_disagree
+    compiled: Slist[StatementPreferencesWithGeneration] = only_agree.shuffle(
+        seed="42"
+    ) + only_disagree.shuffle(seed="42")
 
     all_filtered = preferences_to_df(compiled, formatter)
     all_filtered.to_csv(output_folder / "statements_filtered.csv", index=False)
@@ -120,6 +145,16 @@ def format_for_all_formatters():
         output_folder = Path("data") / formatter.name()
         output_folder.mkdir(exist_ok=True)
         format_for_final_inference(output_folder, formatter)
+
+
+def path_for_all_formatters() -> list[Path]:
+    paths = []
+    all_formatters = FinalPromptFormatter.all_formatters()
+    for formatter in all_formatters:
+        output_folder = Path("data") / formatter.name()
+        output_folder.mkdir(exist_ok=True)
+        paths.append(output_folder)
+    return paths
 
 
 if __name__ == "__main__":

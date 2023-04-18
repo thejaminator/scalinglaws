@@ -28,3 +28,7 @@ preference_agree_cot_jsonl_path = Path("data/preference_agree_cot.jsonl")
 preference_agree_cot_csv_path = Path("data/preference_agree_cot.csv")
 preference_disagree_cot_jsonl_path = Path("data/preference_disagree_cot.jsonl")
 preference_disagree_cot_csv_path = Path("data/preference_disagree_cot.csv")
+
+
+"""Final input for evaluation"""
+statements_filtered_filename = Path("statements_filtered.csv")
