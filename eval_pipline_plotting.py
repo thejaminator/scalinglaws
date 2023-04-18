@@ -10,13 +10,12 @@ from tqdm import tqdm
 import plotly.express as px
 import plotly.graph_objects as go
 
+from scalinglaws.format_for_graphs import format_for_final_inference
+
 write_dir = Path("data/eval_pipeline")
 
 
-def create_model_csvs(models: list[str]):
-
-    data_path = Path("data/statements_filtered.csv")
-
+def create_model_csvs(models: list[str], data_path: Path):
     write_dir.mkdir(parents=True, exist_ok=True)
 
     logging.info(f"Saving to results to {write_dir}")
@@ -201,7 +200,10 @@ def plot_eval_loss_subset(subset: Literal[" yes", " no"]):
 
 
 if __name__ == "__main__":
-    # create_model_csvs(models=feedme_models + vanilla_models)
+    folder = Path("data/true_or_false")
+    # todo: iterate over final input format...xss
+    format_for_final_inference(zero_shot_final_input=False, output_folder=folder)
+    create_model_csvs(models=feedme_models + vanilla_models, data_path=folder)
     # plot_eval_loss()
     plot_eval_loss_subset(" yes")
     plot_eval_loss_subset(" no")
