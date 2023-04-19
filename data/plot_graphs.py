@@ -313,6 +313,13 @@ def create_plot_for_formatter(formatter: FinalPromptFormatter):
         plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
     plot_rlhf(read_folder=path)
 
+def step_three_create_all_plots():
+    formatters = FinalPromptFormatter.all_formatters()
+    for formatter in formatters:
+        create_plot_for_formatter(formatter)
+    create_plot_for_formatter(FewShotTrueWithGenExamples())
+
+
 
 if __name__ == "__main__":
     # formatters = FinalPromptFormatter.all_formatters()
