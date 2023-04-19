@@ -20,6 +20,7 @@ from scalinglaws.preference_zero_shot import (
     AgreePreference,
     StatementPreferencesWithGeneration,
 )
+from scalinglaws.redis_cache import redis_cache
 from settings import (
     lm_agree_statements_jsonl_path,
     lm_disagree_statements_jsonl_path,
@@ -136,9 +137,11 @@ def get_agree_preference_cot(prompt: COTPrompt, cot_n: int) -> AgreePreference:
     )
 
 
+@redis_cache(decode_dict=StatementPreferencesWithGeneration, exclude_keys={"index"})
 def get_cot_preferences(
-    lm_generation: LMGeneration, cot_n: int
+    lm_generation: LMGeneration, cot_n: int, index: int
 ) -> Optional[StatementPreferencesWithGeneration]:
+    print(f"Processing {index} COT")
     try:
 
         statement = Statement(lm_generation.completion.strip())
@@ -167,15 +170,24 @@ def run_get_preferences_cot(
     cot_n: int,
     limit: int,
 ):
-    generations: Slist[LMGeneration] = read_jsonl_file_into_basemodel(
-        path=lm_generations_path, basemodel=LMGeneration
-    ).take(limit)
-    tp = ThreadPoolExecutor(max_workers=20)
+    generations: Slist[LMGeneration] = (
+        read_jsonl_file_into_basemodel(path=lm_generations_path, basemodel=LMGeneration)
+        .distinct_by(lambda x: x.completion.strip())
+        .take(limit)
+    )
+    print(f"Processing {len(generations)} generations for COT")
+    tp = ThreadPoolExecutor(max_workers=30)
     # get the preferences for each generation
-    preferences: Slist[StatementPreferencesWithGeneration] = generations.par_map(
-        lambda x: get_cot_preferences(lm_generation=x, cot_n=cot_n),
-        executor=tp,
-    ).flatten_option()
+    preferences: Slist[StatementPreferencesWithGeneration] = (
+        generations.enumerated()
+        .par_map(
+            lambda tup: get_cot_preferences(
+                lm_generation=tup[1], cot_n=cot_n, index=tup[0]
+            ),
+            executor=tp,
+        )
+        .flatten_option()
+    )
     # write the preferences to a jsonl file
     write_jsonl_file_from_basemodel(path=output_jsonl_path, basemodels=preferences)
     # create a csv file with less columns for easier viewing
@@ -193,9 +205,10 @@ def run_get_preferences_cot(
     df.to_csv(output_csv_path, index=False)
 
 
-def  run_preferences_cot(cot_n: int, limit: int):
+def run_preferences_cot(cot_n: int, limit: int):
     # read the previous lm generations
     agree_path = lm_agree_statements_jsonl_path
+    print("Running COT on agree statements")
     run_get_preferences_cot(
         lm_generations_path=agree_path,
         output_jsonl_path=preference_agree_cot_jsonl_path,
@@ -203,14 +216,15 @@ def  run_preferences_cot(cot_n: int, limit: int):
         cot_n=cot_n,
         limit=limit,
     )
-    # disagree_path = lm_disagree_statements_jsonl_path
-    # run_get_preferences_cot(
-    #     lm_generations_path=disagree_path,
-    #     output_jsonl_path=preference_disagree_cot_jsonl_path,
-    #     output_csv_path=preference_disagree_cot_csv_path,
-    #     cot_n=cot_n,
-    #     limit=limit,
-    # )
+    disagree_path = lm_disagree_statements_jsonl_path
+    print("Running COT on disagree statements")
+    run_get_preferences_cot(
+        lm_generations_path=disagree_path,
+        output_jsonl_path=preference_disagree_cot_jsonl_path,
+        output_csv_path=preference_disagree_cot_csv_path,
+        cot_n=cot_n,
+        limit=limit,
+    )
 
 
 if __name__ == "__main__":

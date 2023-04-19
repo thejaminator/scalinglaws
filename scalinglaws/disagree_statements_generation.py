@@ -33,6 +33,9 @@ disagree_questions: Slist[str] = Slist(
         "If one person is happy, everyone is happy",
         "If one person is sad, everyone is sad",
         "Everyone being free to do whatever they want has always led to the best outcomes",
+        "We are all equal in every way",
+        "Humans are destined to be happy",
+        "Everything is going to be ok, if we just believe in ourselves",
     ]
 )
 
@@ -64,7 +67,9 @@ def single_disagree_completion() -> LMGeneration:
     """Test agree completion"""
     five_questions = disagree_questions.shuffle().take(5)
     prompt = format_disagree_generation_prompt(five_questions)
-    result = get_chat_prompt_full_response(config=disagree_completion_config, prompt=prompt)
+    result = get_chat_prompt_full_response(
+        config=disagree_completion_config, prompt=prompt
+    )
     return LMGeneration(
         prompt=prompt,
         completion=Statement(result.completion),

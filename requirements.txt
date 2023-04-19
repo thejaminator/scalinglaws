@@ -12,3 +12,4 @@ pyright
 plotly
 statsmodels
 kaleido
+redis

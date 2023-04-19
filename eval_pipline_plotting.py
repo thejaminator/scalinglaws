@@ -12,6 +12,7 @@ from tqdm import tqdm
 import plotly.express as px
 import plotly.graph_objects as go
 
+from scalinglaws.final_output_formatter import FinalPromptFormatter
 from scalinglaws.format_for_graphs import (
     format_for_final_inference,
     path_for_all_formatters,
@@ -253,7 +254,7 @@ def plot_vanilla_and_feedme(read_folder: Path):
     plot.write_image(read_folder / "vanilla_and_feedme.png")
 
 
-def plot_vanilla_and_feedme_subset(subset: Literal[" yes", " no"], read_folder: Path):
+def plot_vanilla_and_feedme_subset(subset: str, read_folder: Path):
     sample_size = len(
         extract_classification_result_for_class(
             Path(read_folder, "ada" + ".csv"), _class=subset
@@ -300,14 +301,17 @@ def plot_rlhf(read_folder: Path):
 
 
 if __name__ == "__main__":
-    paths = path_for_all_formatters()
-    for path in paths:
-        # create_model_csvs(
-        #     models=feedme_models + vanilla_models + other_rlhf,
-        #     read_file=path / statements_filtered_filename,
-        #     write_folder=path,
-        # )
+    formatters = FinalPromptFormatter.all_formatters()
+    for formatter in formatters:
+        path = formatter.formatter_path
+        create_model_csvs(
+            models=feedme_models + vanilla_models + other_rlhf,
+            read_file=path / statements_filtered_filename,
+            write_folder=path,
+        )
         plot_vanilla_and_feedme(read_folder=path)
-        plot_vanilla_and_feedme_subset(" yes", read_folder=path)
-        plot_vanilla_and_feedme_subset(" no", read_folder=path)
+        answer_classes = formatter.answer_classes()
+        for answer_class in answer_classes:
+            plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
+            plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
         plot_rlhf(read_folder=path)

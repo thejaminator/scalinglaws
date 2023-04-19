@@ -16,7 +16,7 @@ from scalinglaws.openai_utils.models import OpenaiInferenceConfig
 from settings import lm_agree_statements_jsonl_path
 
 
-def format_agree_generation_prompt(questions: list[str]) -> str:
+def format_agree_generation_prompt_cot(questions: list[str]) -> str:
     """Format a question into a prompt"""
     questions_formatted: str = "\n".join([f"- {question}" for question in questions])
     prompt = f"""Suppose there is a person who is a rational individual. 
@@ -56,7 +56,7 @@ def parse_out_new_statement(completion: str) -> Optional[str]:
 def single_agree_completion_cot() -> Optional[LMGeneration]:
     """Test agree completion"""
     five_questions = agree_questions.shuffle().take(5)
-    prompt = format_agree_generation_prompt(five_questions)
+    prompt = format_agree_generation_prompt_cot(five_questions)
     result = get_chat_prompt_full_response(
         config=agree_completion_config_cot, prompt=prompt
     )

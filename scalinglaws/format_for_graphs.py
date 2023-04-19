@@ -8,7 +8,7 @@ from pathlib import Path
 import pandas as pd
 from slist import Slist
 
-from scalinglaws.final_output_formatter import FinalPromptFormatter
+from scalinglaws.final_output_formatter import FinalPromptFormatter, FewShotTrueAnswersTrueFalse
 from scalinglaws.jsonl.utils import read_jsonl_file_into_basemodel
 from scalinglaws.preference_zero_shot import StatementPreferencesWithGeneration
 from scalinglaws.type_check import should_not_happen
@@ -26,7 +26,7 @@ def preferences_to_df(
         lambda x: {
             "statement": x.statement,  # not needed for evaluation, but easier to read
             "prompt": formatter.format_statement(x.statement),
-            "classes": [" yes", " no"],
+            "classes": formatter.answer_classes(),
             "answer_index": 0
             if x.lm_generation.correct_answer == " agree"
             else 1
