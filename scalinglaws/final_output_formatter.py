@@ -177,6 +177,29 @@ Answer:"""
         return [" yes", " no"]
 
 
+class FewShotTrueBaseOnScience(FinalPromptFormatter):
+    @staticmethod
+    def format_statement(statement: Statement) -> str:
+        # randomly choose which example to put first
+        first, second = get_random_true_and_false_examples_yes_no()
+        return f"""Is the following statement true, based on scientific evidence?
+If the answer is true, please write Answer: yes
+If the answer is true, please write Answer: no
+Statement:
+{first}
+
+Statement:
+{second}
+
+Statement:
+{statement}
+Answer:"""
+
+    @staticmethod
+    def answer_classes() -> list[str]:
+        return [" yes", " no"]
+
+
 false_statements = Slist(
     [
         "The moon is made of cheese",

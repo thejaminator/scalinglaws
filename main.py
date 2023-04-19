@@ -10,5 +10,5 @@ if __name__ == "__main__":
     # run_generate_agree(n_completions=100)
     # run_generate_agree_cot(n_completions=4000)
     # run_generate_disagree_cot(n_completions=1200)
-    run_preferences_cot(cot_n=8, limit=99999999)
+    # run_preferences_cot(cot_n=8, limit=99999999)
     format_for_all_formatters()
