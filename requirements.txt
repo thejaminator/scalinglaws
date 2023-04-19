@@ -13,3 +13,4 @@ plotly
 statsmodels
 kaleido
 redis
+git+https://github.com/thejaminator/inverse-scaling-eval-pipeline.git@main

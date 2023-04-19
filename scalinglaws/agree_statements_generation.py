@@ -8,9 +8,6 @@ from slist import Slist
 
 from scalinglaws.newtypes import Statement
 from scalinglaws.openai_utils.chat_compat import get_chat_prompt_full_response
-from scalinglaws.openai_utils.inference import (
-    get_openai_completion,
-)
 from scalinglaws.openai_utils.models import OpenaiInferenceConfig
 from settings import lm_agree_statements_jsonl_path
 

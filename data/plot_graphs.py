@@ -14,12 +14,12 @@ from scalinglaws.final_output_formatter import (
     FewShotTrueWithGenExamples,
     ZeroShotTrueAddedBeliefButIgnore,
     ZeroShotTrue,
-    ZeroShotWouldYouSay,
+    ZeroShotWouldYouSay, FewShotTrueAnswersTrueFalse,
 )
-from settings import statements_filtered_filename
+from settings import statements_filtered_filename, combined_whitelisted_statements_1000_filename, combined_folder
 
 
-def create_model_csvs(models: list[str], read_file: Path, write_folder: Path):
+def run_inference_and_create_csv(models: list[str], read_file: Path, write_folder: Path):
     write_folder.mkdir(parents=True, exist_ok=True)
 
     logging.info(f"Saving to results to {write_folder}")
@@ -59,30 +59,15 @@ def extract_classification_result(path: Path) -> list[bool]:
 
 
 def extract_classification_result_for_class(
-    path: Path, _class: Literal[" yes", " no"]
+    path: Path, ground_truth_class: str
 ) -> list[bool]:
     """
-    1. Read the csv file
-    2. The csv file has the "correct" column, which is the result of the model being correct or not
-    3. it also has the "predicted" column, which is the class that the model predicted
-    4. this is hacky, but we can know the ground truth. if it is correct, then the predicted class is the same as the ground truth.
-    5. get the ground truth
-    6. filter the dataframe to only include the ground truth class
-    7. Return a list[bool] of the results
+    We want to get the results for a specific class in the dataset
+    The CSV has the column: ground_truth
+    We will filter the dataframe to only include the ground truth class using that column
     """
     df = pd.read_csv(path)
-    predicted = df["predicted"].tolist()
-    correct = df["correct"].tolist()
-    # get the ground truth
-    ground_truth = []
-    for p, c in zip(predicted, correct):
-        if c:
-            ground_truth.append(p)
-        else:
-            ground_truth.append(" no" if p == " yes" else " yes")
-    df["ground_truth"] = ground_truth
-    # filter the dataframe to only include the ground truth class
-    df = df[df["ground_truth"] == _class]
+    df = df[df["ground_truth"] == ground_truth_class]
     results = df["correct"].tolist()
     return results
 
@@ -256,19 +241,23 @@ def plot_vanilla_and_feedme(read_folder: Path):
 def plot_vanilla_and_feedme_subset(subset: str, read_folder: Path):
     sample_size = len(
         extract_classification_result_for_class(
-            Path(read_folder, "ada" + ".csv"), _class=subset
+            Path(read_folder, "ada" + ".csv"), ground_truth_class=subset
         )
     )
     vanilla_results = []
     for model_name in vanilla_models:
         path = Path(read_folder, model_name + ".csv")
-        results = extract_classification_result_for_class(path, _class=subset)
+        results = extract_classification_result_for_class(
+            path, ground_truth_class=subset
+        )
         vanilla_results.append((model_name, results))
     vanilla_df = calculate_accuracy(vanilla_results)
     feedme_results = []
     for model_name in feedme_models:
         path = Path(read_folder, model_name + ".csv")
-        results = extract_classification_result_for_class(path, _class=subset)
+        results = extract_classification_result_for_class(
+            path, ground_truth_class=subset
+        )
         # take the truncate name e.g. text-ada-001 -> ada
         truncated_model_name = model_name.split("-")[1]
         feedme_results.append((truncated_model_name, results))
@@ -299,9 +288,9 @@ def plot_rlhf(read_folder: Path):
     plot.write_image(read_folder / "all_davinci.png")
 
 
-def create_plot_for_formatter(formatter: FinalPromptFormatter):
+def step_three_for_formatter(formatter: FinalPromptFormatter):
     path = formatter.formatter_path()
-    create_model_csvs(
+    run_inference_and_create_csv(
         models=feedme_models + vanilla_models + other_rlhf,
         read_file=path / statements_filtered_filename,
         write_folder=path,
@@ -310,24 +299,33 @@ def create_plot_for_formatter(formatter: FinalPromptFormatter):
     answer_classes = formatter.answer_classes()
     for answer_class in answer_classes:
         plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
-        plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
     plot_rlhf(read_folder=path)
 
 def step_three_create_all_plots():
     formatters = FinalPromptFormatter.all_formatters()
     for formatter in formatters:
-        create_plot_for_formatter(formatter)
-    create_plot_for_formatter(FewShotTrueWithGenExamples())
+        step_three_for_formatter(formatter)
+    # create_plot_for_formatter(FewShotTrueWithGenExamples())
 
+    # create for the combined model
+    run_inference_and_create_csv(
+        models=feedme_models + vanilla_models + other_rlhf,
+        read_file=combined_whitelisted_statements_1000_filename,
+        write_folder=combined_folder,
+    )
+    plot_vanilla_and_feedme(read_folder=combined_folder)
 
 
 if __name__ == "__main__":
+    step_three_for_formatter(FewShotTrueAnswersTrueFalse())
+    # path = FewShotTrueWithGenExamples.formatter_path()
+    # plot_vanilla_and_feedme_subset(read_folder=path, subset=" yes")
     # formatters = FinalPromptFormatter.all_formatters()
-    formatters = [
-        ZeroShotTrueAddedBeliefButIgnore(),
-        ZeroShotTrue(),
-        ZeroShotWouldYouSay(),
-    ]
-    for formatter in formatters:
-        create_plot_for_formatter(formatter)
-    create_plot_for_formatter(FewShotTrueWithGenExamples())
+    # formatters = [
+    #     ZeroShotTrueAddedBeliefButIgnore(),
+    #     ZeroShotTrue(),
+    #     ZeroShotWouldYouSay(),
+    # ]
+    # for formatter in formatters:
+    #     create_plot_for_formatter(formatter)
+    # create_plot_for_formatter(FewShotTrueWithGenExamples())
