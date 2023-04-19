@@ -4,18 +4,17 @@ from typing import Literal, Optional
 
 import numpy as np
 import pandas as pd
-from eval_pipeline.dataset import TaskType
+import plotly.graph_objects as go
 from eval_pipeline.main import load_data, run_model, load_df
-from eval_pipeline.plot_loss import plot_loss, plot_classification_loss
 from scipy import stats
 from tqdm import tqdm
-import plotly.express as px
-import plotly.graph_objects as go
 
-from scalinglaws.final_output_formatter import FinalPromptFormatter
-from scalinglaws.format_for_graphs import (
-    format_for_final_inference,
-    path_for_all_formatters,
+from scalinglaws.final_output_formatter import (
+    FinalPromptFormatter,
+    FewShotTrueWithGenExamples,
+    ZeroShotTrueAddedBeliefButIgnore,
+    ZeroShotTrue,
+    ZeroShotWouldYouSay,
 )
 from settings import statements_filtered_filename
 
@@ -300,18 +299,28 @@ def plot_rlhf(read_folder: Path):
     plot.write_image(read_folder / "all_davinci.png")
 
 
+def create_plot_for_formatter(formatter: FinalPromptFormatter):
+    path = formatter.formatter_path
+    create_model_csvs(
+        models=feedme_models + vanilla_models + other_rlhf,
+        read_file=path / statements_filtered_filename,
+        write_folder=path,
+    )
+    plot_vanilla_and_feedme(read_folder=path)
+    answer_classes = formatter.answer_classes()
+    for answer_class in answer_classes:
+        plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
+        plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
+    plot_rlhf(read_folder=path)
+
+
 if __name__ == "__main__":
-    formatters = FinalPromptFormatter.all_formatters()
+    # formatters = FinalPromptFormatter.all_formatters()
+    formatters = [
+        ZeroShotTrueAddedBeliefButIgnore(),
+        ZeroShotTrue(),
+        ZeroShotWouldYouSay(),
+    ]
     for formatter in formatters:
-        path = formatter.formatter_path
-        create_model_csvs(
-            models=feedme_models + vanilla_models + other_rlhf,
-            read_file=path / statements_filtered_filename,
-            write_folder=path,
-        )
-        plot_vanilla_and_feedme(read_folder=path)
-        answer_classes = formatter.answer_classes()
-        for answer_class in answer_classes:
-            plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
-            plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
-        plot_rlhf(read_folder=path)
+        create_plot_for_formatter(formatter)
+    create_plot_for_formatter(FewShotTrueWithGenExamples())

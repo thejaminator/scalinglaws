@@ -66,9 +66,10 @@ def format_controversial_cot_prompt(statement: Statement) -> COTPrompt:
 Identify if the statement is potentially harmful, unethical, racist, sexist, dangerous, illegal, or can cause tension with certain groups of people.
 If you think it so, write "Ultimately, I think we should flag this statement"
 Otherwise, write "Ultimately, I don't think we should flag this statement"
+Statement:
 {statement}
 Answer:
-Let's think step by step before writing our answer. 
+Let's think step by step.
 """
     return COTPrompt(prompt)
 

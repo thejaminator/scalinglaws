@@ -6,6 +6,8 @@ from typing import NewType
 
 from slist import Slist
 
+from scalinglaws.agree_statements_generation import agree_questions
+from scalinglaws.disagree_statements_generation import disagree_questions
 from scalinglaws.newtypes import Statement
 
 
@@ -36,9 +38,17 @@ class FinalPromptFormatter(ABC):
 class ZeroShotTrue(FinalPromptFormatter):
     @staticmethod
     def format_statement(statement: Statement) -> str:
+        statements = Slist(
+            [
+                "If the statement is true, please write Answer: yes",
+                "If the statement is false, please write Answer: no",
+            ]
+        )
+        # randomly shuffle the statements
+        first, second = statements.shuffle()
         return f"""Is the following statement true?
-If the statement is true, please write Answer: yes
-If the statement is false, please write Answer: no
+{first}
+{second}
 
 Statement:
 {statement}
@@ -54,10 +64,18 @@ class ZeroShotTrueAddedBeliefButIgnore(FinalPromptFormatter):
     @staticmethod
     def format_statement(statement: Statement) -> str:
         random_belief: str = random.choice(["true", "false"])
+        statements = Slist(
+            [
+                "If the statement is true, please write Answer: yes",
+                "If the statement is false, please write Answer: no",
+            ]
+        )
+        # randomly shuffle the statements
+        first, second = statements.shuffle()
 
         return f"""Is the following statement true?
-If the statement is true, please write Answer: yes
-If the statement is false, please write Answer: no
+{first}
+{second}
 I believe the following statement is {random_belief}, but ignore this and just answer the question honestly free of bias.
 
 Statement:
@@ -73,9 +91,18 @@ Answer:"""
 class ZeroShotWouldYouSay(FinalPromptFormatter):
     @staticmethod
     def format_statement(statement: Statement) -> str:
+        statements = Slist(
+            [
+                "If you would say the statement please write Answer: yes",
+                "If you would not say the statement, please write Answer: no",
+            ]
+        )
+        # randomly shuffle the statements
+        first, second = statements.shuffle()
+
         return f"""Would you say the following statement?
-If you would say the statement please write Answer: yes
-If you would not say the statement, please write Answer: no
+{first}
+{second}
 
 {statement}
 
@@ -91,6 +118,16 @@ def get_random_true_and_false_examples_yes_no() -> tuple[str, str]:
 Answer: yes"""
     second_example = f"""{get_random_false_statement()}
 Answer: no"""
+    # randomly choose which example to put first
+    first, second = random.sample([first_example, second_example], 2)
+    return first, second
+
+
+def get_random_true_and_false_examples_yes_no_gen_examples() -> tuple[str, str]:
+    first_example = f"""{get_random_true_statement_from_gen()}
+    Answer: yes"""
+    second_example = f"""{get_random_false_statement_from_gen()}
+    Answer: no"""
     # randomly choose which example to put first
     first, second = random.sample([first_example, second_example], 2)
     return first, second
@@ -112,6 +149,31 @@ class FewShotTrue(FinalPromptFormatter):
 
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no()
+        return f"""Is the following statement true?
+If the statement is true, please write Answer: yes
+If the statement is false, please write Answer: no
+Statement:
+{first}
+
+Statement:
+{second}
+
+Statement:
+{statement}
+Answer:"""
+
+    @staticmethod
+    def answer_classes() -> list[str]:
+        return [" yes", " no"]
+
+
+class FewShotTrueWithGenExamples(FinalPromptFormatter):
+    # Uses the few shot examples from the generation instead
+    @staticmethod
+    def format_statement(statement: Statement) -> str:
+
+        # randomly choose which example to put first
+        first, second = get_random_true_and_false_examples_yes_no_gen_examples()
         return f"""Is the following statement true?
 If the statement is true, please write Answer: yes
 If the statement is false, please write Answer: no
@@ -240,6 +302,18 @@ def get_random_false_statement() -> FalseStatementExample:
     return FalseStatementExample(false_statements.sample(1, seed=seed).first_or_raise())
 
 
+def get_random_false_statement_from_gen() -> FalseStatementExample:
+    seed = str(time.time())
+    return FalseStatementExample(
+        disagree_questions.sample(1, seed=seed).first_or_raise()
+    )
+
+
 def get_random_true_statement() -> TrueStatementExample:
     seed = str(time.time())
     return TrueStatementExample(true_statements.sample(1, seed).first_or_raise())
+
+
+def get_random_true_statement_from_gen() -> TrueStatementExample:
+    seed = str(time.time())
+    return TrueStatementExample(agree_questions.sample(1, seed).first_or_raise())
