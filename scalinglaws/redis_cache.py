@@ -5,13 +5,10 @@ import hashlib
 import inspect
 import json
 import logging
-
 from datetime import timedelta
 from enum import Enum
 from functools import wraps, lru_cache
-from types import FunctionType
 from typing import (
-    FrozenSet,
     Type,
     Any,
     Union,
@@ -28,7 +25,6 @@ from typing import (
 import redis
 from pydantic import BaseModel
 from pydantic.fields import ModelField
-
 
 r = redis.Redis(host="localhost", port=6379)
 CACHE_KEY = "reverse"

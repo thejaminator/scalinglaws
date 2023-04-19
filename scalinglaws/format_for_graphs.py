@@ -36,7 +36,9 @@ def preferences_to_df(
     _dicts = compiled.map(
         lambda x: {
             "statement": x.statement,  # not needed for evaluation, but easier to read
-            "prompt": formatter.format_statement(x.statement),
+            "prompt": formatter.format_statement_with_ground_truth(
+                statement=x.statement, ground_truth=x.ground_truth
+            ),
             "classes": formatter.answer_classes(),
             "answer_index": 0
             if x.lm_generation.correct_answer == " agree"

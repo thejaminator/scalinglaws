@@ -3,6 +3,7 @@ include = ["scalinglaws", "main.py"]
 defineConstant = { DEBUG = true }
 stubPath = "src/stubs"
 venv = "venv"
+strict = ["scalinglaws/final_output_formatter.py"]
 
 pythonVersion = "3.10"
 pythonPlatform = "Linux"

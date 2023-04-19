@@ -14,7 +14,7 @@ from scalinglaws.final_output_formatter import (
     FewShotTrueWithGenExamples,
     ZeroShotTrueAddedBeliefButIgnore,
     ZeroShotTrue,
-    ZeroShotWouldYouSay, FewShotTrueAnswersTrueFalse,
+    ZeroShotWouldYouSay, FewShotTrueAnswersTrueFalse, ZeroShotTrueAddedBelief, ZeroShotTrueOppositeBelief,
 )
 from settings import statements_filtered_filename, combined_whitelisted_statements_1000_filename, combined_folder
 
@@ -317,15 +317,17 @@ def step_three_create_all_plots():
 
 
 if __name__ == "__main__":
-    step_three_for_formatter(FewShotTrueAnswersTrueFalse())
+    # step_three_for_formatter(ZeroShotTrueAddedBelief())
     # path = FewShotTrueWithGenExamples.formatter_path()
     # plot_vanilla_and_feedme_subset(read_folder=path, subset=" yes")
     # formatters = FinalPromptFormatter.all_formatters()
-    # formatters = [
-    #     ZeroShotTrueAddedBeliefButIgnore(),
-    #     ZeroShotTrue(),
-    #     ZeroShotWouldYouSay(),
-    # ]
-    # for formatter in formatters:
-    #     create_plot_for_formatter(formatter)
+    formatters = [
+        ZeroShotTrueOppositeBelief(),
+        ZeroShotTrueAddedBelief(),
+        ZeroShotTrueAddedBeliefButIgnore(),
+        ZeroShotTrue(),
+        ZeroShotWouldYouSay(),
+    ]
+    for formatter in formatters:
+        step_three_for_formatter(formatter)
     # create_plot_for_formatter(FewShotTrueWithGenExamples())
