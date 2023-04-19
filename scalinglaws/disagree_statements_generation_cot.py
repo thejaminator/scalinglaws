@@ -61,7 +61,7 @@ def single_disagree_completion_cot() -> Optional[LMGeneration]:
     )
 
 
-def run_generate_disagree_cot(n_completions: int):
+def stage_one_generate_disagree_cot(n_completions: int):
     """Runs n_completions, and writes the results to a jsonl file"""
     threadpool = ThreadPoolExecutor(max_workers=10)
     file_path: Path = lm_disagree_statements_jsonl_path
@@ -76,4 +76,4 @@ def run_generate_disagree_cot(n_completions: int):
 
 
 if __name__ == "__main__":
-    run_generate_disagree_cot(10)
+    stage_one_generate_disagree_cot(10)

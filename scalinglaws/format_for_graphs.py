@@ -132,14 +132,8 @@ def format_for_final_inference(
     all_filtered.to_csv(output_folder / "statements_filtered.csv", index=False)
     # print the length of csv
     print(f"Length of csv: {len(all_filtered)}")
-    #
-    # agree_df = preferences_to_df(only_agree, formatter)
-    # agree_df.to_csv(output_folder / "statements_filtered_agree.csv", index=False)
-    # disagree_df = preferences_to_df(only_disagree, formatter)
-    # disagree_df.to_csv(output_folder / "statements_filtered_disagree.csv", index=False)
 
-
-def format_for_all_formatters():
+def stage_three_format_and_filter():
     all_formatters = FinalPromptFormatter.all_formatters()
     for formatter in all_formatters:
         output_folder = Path("data") / formatter.name()
@@ -158,4 +152,4 @@ def path_for_all_formatters() -> list[Path]:
 
 
 if __name__ == "__main__":
-    format_for_all_formatters()
+    stage_three_format_and_filter()

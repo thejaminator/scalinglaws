@@ -206,7 +206,7 @@ def run_get_preferences_cot(
     df.to_csv(output_csv_path, index=False)
 
 
-def run_preferences_cot(cot_n: int, limit: int):
+def stage_two_preferences_cot(cot_n: int, limit: int):
     # read the previous lm generations
     agree_path = lm_agree_statements_jsonl_path
     print("Running COT on agree statements")
@@ -229,4 +229,4 @@ def run_preferences_cot(cot_n: int, limit: int):
 
 
 if __name__ == "__main__":
-    run_preferences_cot(cot_n=6, limit=10)
+    stage_two_preferences_cot(cot_n=6, limit=10)

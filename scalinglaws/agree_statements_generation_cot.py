@@ -70,7 +70,7 @@ def single_agree_completion_cot() -> Optional[LMGeneration]:
     )
 
 
-def run_generate_agree_cot(n_completions: int):
+def stage_one_generate_agree_cot(n_completions: int):
     """Runs n_completions, and writes the results to a jsonl file"""
     threadpool = ThreadPoolExecutor(max_workers=1)
     file_path: Path = lm_agree_statements_jsonl_path
@@ -90,4 +90,4 @@ def run_generate_agree_cot(n_completions: int):
 
 
 if __name__ == "__main__":
-    run_generate_agree_cot(50)
+    stage_one_generate_agree_cot(50)
