@@ -40,7 +40,7 @@ class NoIgnoreSentinel(str, Enum):
     Default to `redis_cache`'s blacklist parameter; blacklist is assigned to this when redis_cache has no ignore
     """
 
-    no_ignore: str = "NO_IGNORE"
+    no_ignore: str = "NO_IGNORE" # type: ignore
 
     def __eq__(self, obj):
         if isinstance(obj, NoIgnoreSentinel):
@@ -126,7 +126,7 @@ NativeEncodeableReturnType = TypeVar(
 
 
 def get_redis_cache_key(
-    func: PydanticReturnType,
+    func: Callable[..., PydanticType],
     exclude_keys: AbstractSet[str],
     decode_dict: Optional[Type[BaseModel]] = None,
     *args,
@@ -158,7 +158,7 @@ def redis_cache(
     decode_dict: Literal[None] = ...,
     redis_database: redis.Redis[bytes] = ...,
     time_to_live: timedelta = ...,
-    exclude_keys: FrozenSet[str] = ...,
+    exclude_keys: AbstractSet[str] = ...,
     ignore_value: Union[NativeJsonType, NoIgnoreSentinel] = ...,
     disable_cache: bool = ...,
 ) -> Callable[[NativeEncodeableReturnType], NativeEncodeableReturnType]:
@@ -170,7 +170,7 @@ def redis_cache(
     decode_dict: Type[BaseModel] = ...,
     redis_database: redis.Redis[bytes] = ...,
     time_to_live: timedelta = ...,
-    exclude_keys: FrozenSet[str] = ...,
+    exclude_keys: AbstractSet[str] = ...,
     ignore_value: Union[PydanticType, NoIgnoreSentinel] = ...,
     disable_cache: bool = ...,
 ) -> Callable[[PydanticReturnType], PydanticReturnType]:
@@ -202,7 +202,7 @@ def redis_cache(
     - and allow cache on prod
     """
 
-    def callable(func: PydanticReturnType):
+    def callable(func: Callable[..., PydanticType]):
         @wraps(func)
         def wrapped(*args, **kwargs):
             key: str = get_redis_cache_key(

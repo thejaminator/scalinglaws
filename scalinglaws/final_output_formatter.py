@@ -25,9 +25,9 @@ class FinalPromptFormatter(ABC):
     def all_formatters(cls) -> list["FinalPromptFormatter"]:
         return [cls() for cls in cls.__subclasses__()]
 
-    @property
-    def formatter_path(self) -> Path:
-        return Path("data") / self.name()
+    @classmethod
+    def formatter_path(cls) -> Path:
+        return Path("data") / cls.name()
 
     @staticmethod
     @abstractmethod
@@ -125,9 +125,9 @@ Answer: no"""
 
 def get_random_true_and_false_examples_yes_no_gen_examples() -> tuple[str, str]:
     first_example = f"""{get_random_true_statement_from_gen()}
-    Answer: yes"""
+Answer: yes"""
     second_example = f"""{get_random_false_statement_from_gen()}
-    Answer: no"""
+Answer: no"""
     # randomly choose which example to put first
     first, second = random.sample([first_example, second_example], 2)
     return first, second

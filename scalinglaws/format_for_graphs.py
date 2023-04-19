@@ -8,13 +8,24 @@ from pathlib import Path
 import pandas as pd
 from slist import Slist
 
-from scalinglaws.final_output_formatter import FinalPromptFormatter, FewShotTrueAnswersTrueFalse
+from scalinglaws.final_output_formatter import (
+    FinalPromptFormatter,
+    FewShotTrueAnswersTrueFalse,
+    FewShotTrue,
+    FewShotTrueBaseOnScience,
+    ZeroShotWouldYouSay,
+    ZeroShotTrue,
+    FewShotWouldYouSay,
+)
 from scalinglaws.jsonl.utils import read_jsonl_file_into_basemodel
 from scalinglaws.preference_zero_shot import StatementPreferencesWithGeneration
 from scalinglaws.type_check import should_not_happen
 from settings import (
     preference_agree_cot_jsonl_path,
     preference_disagree_cot_jsonl_path,
+    combined_whitelisted_statements_1000_filename,
+    combined_whitelisted_statements_filename,
+    statements_filtered_filename,
 )
 
 
@@ -83,22 +94,7 @@ def format_for_final_inference(
         )
         .distinct_by(lambda x: x.statement)
     )
-    # Hack: There is a large number of statements related to "genes" and we want
-    # to downsample them to max 5%
-    max_to_keep = int(0.05 * len(agree_filtered))
-    agree_filtered_downsampled = manual_downsample(
-        statements=agree_filtered, downsample_str="gene", max_items=max_to_keep
-    )
-    agree_filtered_downsampled = manual_downsample(
-        statements=agree_filtered_downsampled,
-        downsample_str="biolog",
-        max_items=max_to_keep,
-    )
-    agree_filtered_downsampled = manual_downsample(
-        statements=agree_filtered_downsampled,
-        downsample_str="gender",
-        max_items=max_to_keep,
-    )
+    agree_filtered_downsampled = agree_filtered
 
     # Opposite filters w.r.t. agree
     disagree_filtered = (
@@ -133,18 +129,47 @@ def format_for_final_inference(
     # print the length of csv
     print(f"Length of csv: {len(all_filtered)}")
 
+
+def combine_whitelisted_formatters():
+    # combined the output of various whitelisted formatters into one csv
+    whitelisted_formatters = [
+        FewShotTrue,
+        FewShotTrueBaseOnScience,
+        FewShotWouldYouSay,
+        ZeroShotTrue,
+        ZeroShotWouldYouSay,
+    ]
+    all_dfs = []
+    for formatter in whitelisted_formatters:
+        path = formatter.formatter_path()
+        formatter_name = formatter.name()
+        df = pd.read_csv(path / statements_filtered_filename)
+        # add the formatter name into the df
+        df["formatter"] = formatter_name
+        all_dfs.append(df)
+    combined_df = pd.concat(all_dfs)
+    # make parent directories
+    combined_whitelisted_statements_filename.parent.mkdir(exist_ok=True)
+    combined_df.to_csv(combined_whitelisted_statements_filename, index=False)
+    # also output a csv that is shuffled with only the first 1000 statements
+    shuffled_df = combined_df.sample(frac=1, random_state=42)
+    shuffled_df[:1000].to_csv(
+        combined_whitelisted_statements_1000_filename, index=False
+    )
+
+
 def stage_three_format_and_filter():
     all_formatters = FinalPromptFormatter.all_formatters()
     for formatter in all_formatters:
         output_folder = Path("data") / formatter.name()
         output_folder.mkdir(exist_ok=True)
         format_for_final_inference(output_folder, formatter)
+    combine_whitelisted_formatters()
 
 
-def path_for_all_formatters() -> list[Path]:
+def path_for_formatters(formatters: list[FinalPromptFormatter]) -> list[Path]:
     paths = []
-    all_formatters = FinalPromptFormatter.all_formatters()
-    for formatter in all_formatters:
+    for formatter in formatters:
         output_folder = Path("data") / formatter.name()
         output_folder.mkdir(exist_ok=True)
         paths.append(output_folder)

@@ -32,3 +32,10 @@ preference_disagree_cot_csv_path = Path("data/preference_disagree_cot.csv")
 
 """Final input for evaluation"""
 statements_filtered_filename = Path("statements_filtered.csv")
+combined_folder = Path("data/combined")
+combined_whitelisted_statements_filename = combined_folder / Path(
+    "statements_filtered.csv"
+)
+combined_whitelisted_statements_1000_filename = combined_folder / Path(
+    "statements_filtered_1000.csv"
+)

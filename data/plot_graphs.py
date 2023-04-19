@@ -300,7 +300,7 @@ def plot_rlhf(read_folder: Path):
 
 
 def create_plot_for_formatter(formatter: FinalPromptFormatter):
-    path = formatter.formatter_path
+    path = formatter.formatter_path()
     create_model_csvs(
         models=feedme_models + vanilla_models + other_rlhf,
         read_file=path / statements_filtered_filename,
