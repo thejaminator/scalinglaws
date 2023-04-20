@@ -1,59 +1,23 @@
-import logging
 from pathlib import Path
-from typing import Literal, Optional
+from typing import Optional
 
 import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
-from eval_pipeline.main import load_data, run_model, load_df
 from scipy import stats
-from tqdm import tqdm
 
-from scalinglaws.final_output_format.few_shot_formatters import (
-    FewShotTrueWithGenExamples,
-    FewShotTrueAnswersTrueFalse,
+from scalinglaws.eval_pipeline_modified.load_data_from_csv import (
+    run_inference_and_create_csv,
 )
 from scalinglaws.final_output_format.zero_shot_formatters import (
-    ZeroShotTrue,
     ZeroShotTrueFreeOfBias,
-    ZeroShotWouldYouSay,
 )
-from scalinglaws.final_output_format.sycophant_formatters import ZeroShotTrueRandomBeliefButIgnore, \
-    ZeroShotTrueOppositeBelief, ZeroShotTrueOppositeBeliefButIgnore, ZeroShotTrueRandomBelief
 from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFormatter
 from settings import (
     statements_filtered_filename,
     combined_whitelisted_statements_1000_filename,
     combined_folder,
 )
-
-
-def run_inference_and_create_csv(
-    models: list[str], read_file: Path, write_folder: Path
-):
-    write_folder.mkdir(parents=True, exist_ok=True)
-
-    logging.info(f"Saving to results to {write_folder}")
-
-    data = load_data(read_file, "classification_acc")
-
-    device = "cpu"
-    model_names = models
-    for model_name in tqdm(model_names):
-        run_model(model_name, data, write_folder, device, 100, "classification_acc")
-
-    # final step to add all results to a jsonl
-    labelled_df = load_df(read_file)
-    for model_name in model_names:
-        results_path = Path(write_folder, model_name + ".csv")
-        prefix = f"{model_name}_"
-        results = pd.read_csv(results_path, index_col=0)
-        prefixed_results = results.add_prefix(prefix)
-        labelled_df = labelled_df.merge(
-            prefixed_results, left_index=True, right_index=True
-        )
-    labelled_path = Path(write_folder, "data.jsonl")
-    labelled_df.to_json(labelled_path, orient="records", lines=True)
 
 
 def extract_classification_result(path: Path) -> list[bool]:

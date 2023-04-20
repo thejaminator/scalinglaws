@@ -3,6 +3,7 @@ from typing import Type, TypeVar, Sequence
 
 from pydantic import BaseModel
 from slist import Slist
+import pandas as pd
 
 GenericBaseModel = TypeVar("GenericBaseModel", bound=BaseModel)
 
@@ -34,3 +35,10 @@ def write_jsonl_file_from_basemodel(
     with open(path, "w") as f:
         for basemodel in basemodels:
             f.write(basemodel.json() + "\n")
+
+
+def write_csv_file_from_basemodel(path: Path, basemodels: Sequence[BaseModel]) -> None:
+    """Uses pandas"""
+
+    df = pd.DataFrame([model.dict() for model in basemodels])
+    df.to_csv(path)

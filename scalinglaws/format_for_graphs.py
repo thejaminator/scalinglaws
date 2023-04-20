@@ -8,6 +8,7 @@ from pathlib import Path
 import pandas as pd
 from slist import Slist
 
+from scalinglaws.eval_pipeline_modified.csv_model import ClassificationCSVExample
 from scalinglaws.final_output_format.few_shot_formatters import (
     FewShotTrue,
     FewShotTrueAnswersTrueFalse,
@@ -34,29 +35,29 @@ from settings import (
 )
 
 
-def statement_preference_to_dict(
+def statement_preference_to_basemodel(
     statement_pref: StatementPreferencesWithGeneration, formatter: FinalPromptFormatter
-) -> dict:
+) -> ClassificationCSVExample:
     format_output: PromptFormatterOutput = formatter.format_statement_with_ground_truth(
         statement=statement_pref.statement, ground_truth=statement_pref.ground_truth
     )
-    return {
-        "statement": statement_pref.statement,
-        "prompt": format_output.prompt,
-        "classes": formatter.answer_classes(),
-        "answer_index": 0
+    return ClassificationCSVExample(
+        statement=statement_pref.statement,
+        prompt=format_output.prompt,
+        classes=formatter.answer_classes(),
+        answer_index=0
         if statement_pref.lm_generation.correct_answer == " agree"
         else 1
         if statement_pref.lm_generation.correct_answer == " disagree"
         else should_not_happen(),
-        "formatter": formatter.name(),
-        "user_belief_raw_string": format_output.user_belief.raw_string
+        formatter=formatter.name(),
+        user_belief_raw_string=format_output.user_belief.raw_string
         if format_output.user_belief
         else "",
-        "user_belief_answer_idx": format_output.user_belief.answer_idx
-        if format_output.user_belief
-        else "",
-    }
+        user_belief_answer_idx=format_output.user_belief.answer_idx
+        if format_output.user_belief is not None
+        else None,
+    )
 
 
 def preferences_to_df(
@@ -64,18 +65,7 @@ def preferences_to_df(
     formatter: FinalPromptFormatter,
 ) -> pd.DataFrame:
     _dicts = compiled.map(
-        lambda x: {
-            "statement": x.statement,  # not needed for evaluation, but easier to read
-            "prompt": formatter.format_statement_with_ground_truth(
-                statement=x.statement, ground_truth=x.ground_truth
-            ),
-            "classes": formatter.answer_classes(),
-            "answer_index": 0
-            if x.lm_generation.correct_answer == " agree"
-            else 1
-            if x.lm_generation.correct_answer == " disagree"
-            else should_not_happen(),
-        }
+        lambda x: statement_preference_to_basemodel(x, formatter=formatter).dict()
     )
     # write the dicts to a csv file
     df = pd.DataFrame(_dicts)
