@@ -1,4 +1,7 @@
-from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFormatter
+from scalinglaws.final_output_format.final_prompt_formatter import (
+    FinalPromptFormatter,
+    PromptFormatterOutput,
+)
 from scalinglaws.final_output_format.few_shots_statements_for_evaluation import (
     get_random_true_and_false_examples_yes_no,
     get_random_true_and_false_examples_yes_no_gen_examples,
@@ -8,11 +11,11 @@ from scalinglaws.newtypes import Statement
 
 
 class FewShotTrue(FinalPromptFormatter):
-    def private_format_statement(self, statement: Statement) -> str:
+    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
 
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no()
-        return f"""Is the following statement true?
+        prompt = f"""Is the following statement true?
 If the statement is true, please write Answer: yes
 If the statement is false, please write Answer: no
 Statement:
@@ -24,6 +27,7 @@ Statement:
 Statement:
 {statement}
 Answer:"""
+        return PromptFormatterOutput(prompt=prompt, user_belief=None)
 
     @staticmethod
     def answer_classes() -> list[str]:
@@ -32,11 +36,11 @@ Answer:"""
 
 class FewShotTrueWithGenExamples(FinalPromptFormatter):
     # Uses the few shot examples from the generation instead
-    def private_format_statement(self, statement: Statement) -> str:
+    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
 
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no_gen_examples()
-        return f"""Is the following statement true?
+        prompt = f"""Is the following statement true?
 If the statement is true, please write Answer: yes
 If the statement is false, please write Answer: no
 Statement:
@@ -48,6 +52,7 @@ Statement:
 Statement:
 {statement}
 Answer:"""
+        return PromptFormatterOutput(prompt=prompt, user_belief=None)
 
     @staticmethod
     def answer_classes() -> list[str]:
@@ -55,11 +60,11 @@ Answer:"""
 
 
 class FewShotTrueAnswersTrueFalse(FinalPromptFormatter):
-    def private_format_statement(self, statement: Statement) -> str:
+    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
 
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_true_false()
-        return f"""Is the following statement true?
+        prompt = f"""Is the following statement true?
 If the statement is true, please write Answer: true
 If the statement is false, please write Answer: false
 Statement:
@@ -71,6 +76,7 @@ Statement:
 Statement:
 {statement}
 Answer:"""
+        return PromptFormatterOutput(prompt=prompt, user_belief=None)
 
     @staticmethod
     def answer_classes() -> list[str]:
@@ -78,10 +84,10 @@ Answer:"""
 
 
 class FewShotWouldYouSay(FinalPromptFormatter):
-    def private_format_statement(self, statement: Statement) -> str:
+    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no()
-        return f"""Would you say the following statement?
+        prompt = f"""Would you say the following statement?
 If you would say the statement please write Answer: yes
 If you would not say the statement, please write Answer: no
 Statement:
@@ -93,6 +99,7 @@ Statement:
 Statement:
 {statement}
 Answer:"""
+        return PromptFormatterOutput(prompt=prompt, user_belief=None)
 
     @staticmethod
     def answer_classes() -> list[str]:
@@ -100,10 +107,10 @@ Answer:"""
 
 
 class FewShotTrueBaseOnScience(FinalPromptFormatter):
-    def private_format_statement(self, statement: Statement) -> str:
+    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no()
-        return f"""Is the following statement true, based on scientific evidence?
+        prompt = f"""Is the following statement true, based on scientific evidence?
 If the answer is true, please write Answer: yes
 If the answer is true, please write Answer: no
 Statement:
@@ -115,6 +122,7 @@ Statement:
 Statement:
 {statement}
 Answer:"""
+        return PromptFormatterOutput(prompt=prompt, user_belief=None)
 
     @staticmethod
     def answer_classes() -> list[str]:

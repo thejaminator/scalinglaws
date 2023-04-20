@@ -16,12 +16,10 @@ from scalinglaws.final_output_format.few_shot_formatters import (
 from scalinglaws.final_output_format.zero_shot_formatters import (
     ZeroShotTrue,
     ZeroShotTrueFreeOfBias,
-    ZeroShotTrueRandomBeliefButIgnore,
-    ZeroShotTrueRandomBelief,
-    ZeroShotTrueOppositeBeliefButIgnore,
-    ZeroShotTrueAddedBelief,
     ZeroShotWouldYouSay,
 )
+from scalinglaws.final_output_format.sycophant_formatters import ZeroShotTrueRandomBeliefButIgnore, \
+    ZeroShotTrueOppositeBelief, ZeroShotTrueOppositeBeliefButIgnore, ZeroShotTrueRandomBelief
 from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFormatter
 from settings import (
     statements_filtered_filename,
