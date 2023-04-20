@@ -1,4 +1,5 @@
 from pathlib import Path
+from typing import Sequence
 
 from plotly import graph_objects as go
 from pydantic import BaseModel
@@ -11,7 +12,12 @@ from scalinglaws.final_output_format.sycophant_formatters import (
     ZeroShotTrueRandomBeliefButIgnore,
 )
 from scalinglaws.jsonl.utils import read_base_model_from_csv
-from scalinglaws.model_options import vanilla_models, feedme_models, other_rlhf
+from scalinglaws.model_options import (
+    vanilla_models,
+    feedme_models,
+    other_rlhf,
+    truncate_model_name,
+)
 from settings import data_folder
 
 
@@ -82,6 +88,8 @@ def plot_two_sycophany(
     title: str = "Sycophancy",
     x_axis_title: str = "Model",
     y_axis_title: str = "% Answers matching user's belief",
+    first_prompt_legend: str = "Added user belief",
+    second_prompt_legend: str = "Added user belief but told to ignore",
 ) -> go.Figure:
     fig = go.Figure(
         data=[
@@ -92,7 +100,7 @@ def plot_two_sycophany(
                 marker=dict(symbol="diamond", size=10),
                 # make the first prompt blue
                 line=dict(color="blue"),
-                name="Added user belief",
+                name=first_prompt_legend,
             ),
             go.Scatter(
                 x=[s.model_name for s in second_prompt_score],
@@ -101,7 +109,7 @@ def plot_two_sycophany(
                 # red color
                 line=dict(color="red"),
                 marker=dict(symbol="diamond", size=10),
-                name="Added user belief but told to ignore",
+                name=second_prompt_legend,
             ),
         ]
     )
@@ -139,10 +147,11 @@ def plot_two_sycophany(
 
 def get_sycophany_results_for_formatter(
     formatter: FinalPromptFormatter,
+    models: Sequence[str] = vanilla_models + feedme_models + other_rlhf,
 ) -> list[ModelWithSycophanyResult]:
     path = formatter.formatter_path()
     results: list[ModelWithSycophanyResult] = []
-    for model_name in vanilla_models + feedme_models + other_rlhf:
+    for model_name in models:
         csv_path = Path(path, model_name + ".csv")
         csv_results = read_base_model_from_csv(
             path=csv_path, basemodel=ClassificationCSVResult
@@ -161,7 +170,7 @@ def plot_sycophancy_for_formatter(formatter: FinalPromptFormatter):
     plot.write_image(path / "sycophancy.png")
 
 
-def plot_sycophancy_comparisons():
+def plot_sycophancy_belief_vs_ignore():
     results_random_belief = get_sycophany_results_for_formatter(
         formatter=ZeroShotTrueRandomBelief()
     )
@@ -173,6 +182,38 @@ def plot_sycophancy_comparisons():
         second_prompt_score=results_random_belief_ignore,
     )
     plot.write_image(data_folder / "sycophancy_comparisons_random_belief.png")
+
+
+def plot_sycophancy_vanilla_vs_feedme(formatter: FinalPromptFormatter):
+    first_result = get_sycophany_results_for_formatter(
+        formatter=formatter,
+        models=vanilla_models,
+    )
+    second_result = get_sycophany_results_for_formatter(
+        formatter=formatter,
+        models=feedme_models,
+    )
+    # change the second_result model names to be the same as the first_result
+    for result in second_result:
+        result.model_name = truncate_model_name(result.model_name)
+    plot = plot_two_sycophany(
+        first_prompt_score=first_result,
+        second_prompt_score=second_result,
+        first_prompt_legend="Vanilla",
+        second_prompt_legend="FeedMe",
+    )
+    plot.write_image(
+        formatter.formatter_path() / "sycophancy_random_belief_vanilla_vs_feedme.png"
+    )
+
+
+def plot_all_sycophancy():
+    sycophants = [ZeroShotTrueRandomBelief, ZeroShotTrueRandomBeliefButIgnore]
+    for sycophant in sycophants:
+        plot_sycophancy_for_formatter(sycophant())
+    plot_sycophancy_belief_vs_ignore()
+    plot_sycophancy_vanilla_vs_feedme(ZeroShotTrueRandomBeliefButIgnore())
+    plot_sycophancy_vanilla_vs_feedme(ZeroShotTrueRandomBelief())
 
 
 # def test_syco():
@@ -196,6 +237,4 @@ def plot_sycophancy_comparisons():
 #
 
 if __name__ == "__main__":
-    # step_three_for_formatter(ZeroShotTrueRandomBelief())
-    # plot_sycophancy_for_formatter(ZeroShotTrueRandomBelief())
-    plot_sycophancy_comparisons()
+    plot_all_sycophancy()

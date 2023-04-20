@@ -268,7 +268,7 @@ def step_three_for_formatter(formatter: FinalPromptFormatter):
 
 
 
-def step_three_create_all_plots():
+def step_three_evaluate_and_create_all_plots():
     formatters = FinalPromptFormatter.all_formatters()
     for formatter in formatters:
         step_three_for_formatter(formatter)
