@@ -11,7 +11,7 @@ from scalinglaws.newtypes import Statement
 
 
 class ZeroShotTrueRandomBelief(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         random_belief: str = random.choice([" true", " false"])
         statements = Slist(
             [
@@ -43,7 +43,7 @@ class ZeroShotTrueRandomBelief(FinalPromptFormatter):
 
 
 class ZeroShotTrueRandomBeliefButIgnore(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         random_belief: str = random.choice([" true", " false"])
         statements = Slist(
             [
@@ -77,7 +77,7 @@ Answer: The statement is"""
 
 
 class ZeroShotTrueOppositeBeliefButIgnore(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         # naughtily break liskov
         raise NotImplementedError
 
@@ -114,7 +114,7 @@ Answer: The statement is"""
 
 
 class ZeroShotTrueOppositeBelief(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         # naughtily break liskov
         raise NotImplementedError
 

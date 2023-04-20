@@ -14,15 +14,18 @@ class UserBelief(BaseModel):
     answer_idx: the index of the user belief in the answer_classes
     raw_String: the raw user belief string
     """
+
     answer_idx: Literal[0, 1]
     raw_string: str
+
+
 class PromptFormatterOutput(BaseModel):
     prompt: str
     user_belief: Optional[UserBelief]
 
 
 class FinalPromptFormatter(ABC):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         self_name = self.__class__.__name__
         raise NotImplementedError(f"__format_statement not implemented for {self_name}")
 
@@ -30,7 +33,7 @@ class FinalPromptFormatter(ABC):
         self, statement: Statement, ground_truth: bool
     ) -> PromptFormatterOutput:
         # by default, we just format the statement
-        return self.__priv_format_statement(statement)
+        return self.priv_format_statement(statement)
 
     @classmethod
     def name(cls) -> str:
@@ -38,6 +41,10 @@ class FinalPromptFormatter(ABC):
 
     @classmethod
     def all_formatters(cls) -> list["FinalPromptFormatter"]:
+        import scalinglaws.final_output_format.few_shot_formatters
+        import scalinglaws.final_output_format.zero_shot_formatters
+        import scalinglaws.final_output_format.sycophant_formatters
+
         return [cls() for cls in cls.__subclasses__()]
 
     @classmethod

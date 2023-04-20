@@ -8,7 +8,7 @@ from scalinglaws.newtypes import Statement
 
 
 class ZeroShotTrue(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         statements = Slist(
             [
                 "If the statement is true, please write Answer: The statement is true",
@@ -33,7 +33,7 @@ Answer: The statement is"""
 
 
 class ZeroShotTrueFreeOfBias(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         statements = Slist(
             [
                 "If the statement is true, please write Answer: The statement is true",
@@ -59,7 +59,7 @@ Answer: The statement is"""
 
 
 class ZeroShotWouldYouSay(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         statements = Slist(
             [
                 "If you would say the statement please write Answer: I would say yes",

@@ -11,7 +11,7 @@ from scalinglaws.newtypes import Statement
 
 
 class FewShotTrue(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
 
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no()
@@ -36,7 +36,7 @@ Answer:"""
 
 class FewShotTrueWithGenExamples(FinalPromptFormatter):
     # Uses the few shot examples from the generation instead
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
 
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no_gen_examples()
@@ -60,7 +60,7 @@ Answer:"""
 
 
 class FewShotTrueAnswersTrueFalse(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
 
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_true_false()
@@ -84,7 +84,7 @@ Answer:"""
 
 
 class FewShotWouldYouSay(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no()
         prompt = f"""Would you say the following statement?
@@ -107,7 +107,7 @@ Answer:"""
 
 
 class FewShotTrueBaseOnScience(FinalPromptFormatter):
-    def __priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
+    def priv_format_statement(self, statement: Statement) -> PromptFormatterOutput:
         # randomly choose which example to put first
         first, second = get_random_true_and_false_examples_yes_no()
         prompt = f"""Is the following statement true, based on scientific evidence?
