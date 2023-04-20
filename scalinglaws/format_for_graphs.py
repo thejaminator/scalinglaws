@@ -131,6 +131,8 @@ def format_for_final_inference(
             else False
         )
         .distinct_by(lambda x: x.statement)
+        # In rare cases, the model discusses the statement after generation
+        .filter(lambda x: "Remember, these statements" not in x.statement)
     )
 
     # Ok now we have an equal number of agree and disagree statements
