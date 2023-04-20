@@ -19,7 +19,8 @@ from typing import (
     overload,
     Literal,
     List,
-    Dict, AbstractSet,
+    Dict,
+    AbstractSet,
 )
 
 import redis
@@ -36,7 +37,7 @@ class NoIgnoreSentinel(str, Enum):
     Default to `redis_cache`'s blacklist parameter; blacklist is assigned to this when redis_cache has no ignore
     """
 
-    no_ignore: str = "NO_IGNORE" # type: ignore
+    no_ignore: str = "NO_IGNORE"  # type: ignore
 
     def __eq__(self, obj):
         if isinstance(obj, NoIgnoreSentinel):
@@ -238,4 +239,4 @@ def redis_cache(
 
         return wrapped if not disable_cache else func
 
-    return callable # type: ignore
+    return callable  # type: ignore

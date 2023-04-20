@@ -1,6 +1,8 @@
 from data.plot_graphs import step_three_create_all_plots
 from scalinglaws.agree_statements_generation_cot import stage_one_generate_agree_cot
-from scalinglaws.disagree_statements_generation_cot import stage_one_generate_disagree_cot
+from scalinglaws.disagree_statements_generation_cot import (
+    stage_one_generate_disagree_cot,
+)
 from scalinglaws.format_for_graphs import (
     stage_three_format_and_filter,
 )

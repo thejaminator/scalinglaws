@@ -9,18 +9,30 @@ from eval_pipeline.main import load_data, run_model, load_df
 from scipy import stats
 from tqdm import tqdm
 
-from scalinglaws.final_output_formatter import (
-    FinalPromptFormatter,
+from scalinglaws.final_output_format.few_shot_formatters import (
     FewShotTrueWithGenExamples,
-    ZeroShotTrueRandomBeliefButIgnore,
-    ZeroShotTrue,
-    ZeroShotWouldYouSay, FewShotTrueAnswersTrueFalse, ZeroShotTrueAddedBelief, ZeroShotTrueRandomBelief,
-    ZeroShotTrueOppositeBeliefButIgnore, ZeroShotTrueFreeOfBias,
+    FewShotTrueAnswersTrueFalse,
 )
-from settings import statements_filtered_filename, combined_whitelisted_statements_1000_filename, combined_folder
+from scalinglaws.final_output_format.zero_shot_formatters import (
+    ZeroShotTrue,
+    ZeroShotTrueFreeOfBias,
+    ZeroShotTrueRandomBeliefButIgnore,
+    ZeroShotTrueRandomBelief,
+    ZeroShotTrueOppositeBeliefButIgnore,
+    ZeroShotTrueAddedBelief,
+    ZeroShotWouldYouSay,
+)
+from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFormatter
+from settings import (
+    statements_filtered_filename,
+    combined_whitelisted_statements_1000_filename,
+    combined_folder,
+)
 
 
-def run_inference_and_create_csv(models: list[str], read_file: Path, write_folder: Path):
+def run_inference_and_create_csv(
+    models: list[str], read_file: Path, write_folder: Path
+):
     write_folder.mkdir(parents=True, exist_ok=True)
 
     logging.info(f"Saving to results to {write_folder}")
@@ -301,6 +313,7 @@ def step_three_for_formatter(formatter: FinalPromptFormatter):
     for answer_class in answer_classes:
         plot_vanilla_and_feedme_subset(answer_class, read_folder=path)
     plot_rlhf(read_folder=path)
+
 
 def step_three_create_all_plots():
     formatters = FinalPromptFormatter.all_formatters()

@@ -44,7 +44,6 @@ agree_preference_config = OpenaiInferenceConfig(
 )
 
 
-
 class AgreePreference(BaseModel):
     prompt: Union[ZeroShotPrompt, COTPrompt]
     agree_prob: Optional[float]

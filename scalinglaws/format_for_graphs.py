@@ -8,15 +8,17 @@ from pathlib import Path
 import pandas as pd
 from slist import Slist
 
-from scalinglaws.final_output_formatter import (
-    FinalPromptFormatter,
-    FewShotTrueAnswersTrueFalse,
+from scalinglaws.final_output_format.few_shot_formatters import (
     FewShotTrue,
-    FewShotTrueBaseOnScience,
-    ZeroShotWouldYouSay,
-    ZeroShotTrue,
+    FewShotTrueAnswersTrueFalse,
     FewShotWouldYouSay,
+    FewShotTrueBaseOnScience,
 )
+from scalinglaws.final_output_format.zero_shot_formatters import (
+    ZeroShotTrue,
+    ZeroShotWouldYouSay,
+)
+from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFormatter
 from scalinglaws.jsonl.utils import read_jsonl_file_into_basemodel
 from scalinglaws.preference_zero_shot import StatementPreferencesWithGeneration
 from scalinglaws.type_check import should_not_happen
