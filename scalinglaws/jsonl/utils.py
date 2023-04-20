@@ -42,3 +42,10 @@ def write_csv_file_from_basemodel(path: Path, basemodels: Sequence[BaseModel]) -
 
     df = pd.DataFrame([model.dict() for model in basemodels])
     df.to_csv(path)
+
+
+def read_base_model_from_csv(
+    path: Path, basemodel: Type[GenericBaseModel]
+) -> Slist[GenericBaseModel]:
+    df = pd.read_csv(path)
+    return Slist(basemodel(**row) for _, row in df.iterrows())

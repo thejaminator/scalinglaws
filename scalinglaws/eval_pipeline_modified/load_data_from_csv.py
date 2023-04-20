@@ -6,13 +6,12 @@ from typing import Optional
 import numpy as np
 import pandas as pd
 import torch
-from eval_pipeline.main import load_data, run_model, load_df
+from eval_pipeline.main import load_df
 from eval_pipeline.openai_api import APIParameters, call_api
-from pydantic import BaseModel
 from torch.nn import functional
 from tqdm import tqdm
 
-from scalinglaws.eval_pipeline_modified.csv_model import ClassificationCSVExample
+from scalinglaws.eval_pipeline_modified.csv_model import ClassificationCSVExample, ClassificationCSVResult
 from scalinglaws.jsonl.utils import write_csv_file_from_basemodel
 
 
@@ -39,20 +38,9 @@ def load_data_from_csv(dataset_path: Path) -> list[ClassificationCSVExample]:
     return examples
 
 
-class ClassificationResult(BaseModel):
-    loss: float
-    correct: int
-    predicted: str
-    total_logprob: float
-    ground_truth: str
-    user_belief: str
-    user_belief_idx: Optional[int]
-    user_belief_matches_predicted: bool
-
-
 def run_classification_acc(
     examples: list[ClassificationCSVExample], model_name: str
-) -> list[ClassificationResult]:
+) -> list[ClassificationCSVResult]:
     prompts = [
         example.prompt + class_sequence
         for example in examples
@@ -108,13 +96,13 @@ def run_classification_acc(
         label_correct = int(np.argmax(relevant_logprobs) == example.answer_index)
         labels_correct.append(label_correct)
 
-        label_predicted = example.classes[relevant_logprobs.argmax(dim=-1).item()] # type: ignore
+        label_predicted = example.classes[relevant_logprobs.argmax(dim=-1).item()]  # type: ignore
         labels_predicted.append(label_predicted)
 
         prompt_start += n_classes
 
     ground_truths = [example.classes[example.answer_index] for example in examples]
-    outputs: list[ClassificationResult] = []
+    outputs: list[ClassificationCSVResult] = []
     for idx, example in enumerate(examples):
         loss = losses[idx]
         correct = labels_correct[idx]
@@ -123,9 +111,14 @@ def run_classification_acc(
         ground_truth = example.classes[example.answer_index]
         user_belief = example.user_belief_raw_string
         user_belief_idx = example.user_belief_answer_idx
-        user_belief_match = predicted == example.user_belief_raw_string
+        user_belief_match: Optional[bool] = (
+            # Only
+            predicted == example.user_belief_raw_string
+            if example.user_belief_raw_string
+            else None
+        )
         outputs.append(
-            ClassificationResult(
+            ClassificationCSVResult(
                 loss=loss,
                 correct=correct,
                 predicted=predicted,
@@ -137,6 +130,7 @@ def run_classification_acc(
             )
         )
     return outputs
+
 
 def run_inference_and_create_csv(
     models: list[str], read_file: Path, write_folder: Path

@@ -9,10 +9,11 @@ from scipy import stats
 from scalinglaws.eval_pipeline_modified.load_data_from_csv import (
     run_inference_and_create_csv,
 )
-from scalinglaws.final_output_format.zero_shot_formatters import (
-    ZeroShotTrueFreeOfBias,
-)
 from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFormatter
+from scalinglaws.final_output_format.sycophant_formatters import (
+    ZeroShotTrueRandomBeliefButIgnore,
+)
+from scalinglaws.model_options import vanilla_models, feedme_models, other_rlhf, all_davinci
 from settings import (
     statements_filtered_filename,
     combined_whitelisted_statements_1000_filename,
@@ -60,7 +61,7 @@ def bootstrap_accuracy_std(is_correct: list[bool]) -> float:
 
     # Calculate the standard deviation of the bootstrapped accuracies
     accuracy_std = np.std(accuracies)
-    return accuracy_std
+    return accuracy_std  # type: ignore
 
 
 def calculate_accuracy(data: list[tuple[str, list[bool]]]) -> pd.DataFrame:
@@ -181,17 +182,6 @@ def plot_all_davinci(
     return fig
 
 
-vanilla_models = ["ada", "babbage", "curie", "davinci"]
-feedme_models = [
-    "text-ada-001",
-    "text-babbage-001",
-    "text-curie-001",
-    "text-davinci-001",
-]
-other_rlhf = ["text-davinci-002", "text-davinci-003"]
-all_davinci = ["davinci", "text-davinci-001", "text-davinci-002", "text-davinci-003"]
-
-
 def plot_vanilla_and_feedme(read_folder: Path):
     sample_size = len(extract_classification_result(Path(read_folder, "ada" + ".csv")))
     vanilla_results = []
@@ -277,6 +267,7 @@ def step_three_for_formatter(formatter: FinalPromptFormatter):
     plot_rlhf(read_folder=path)
 
 
+
 def step_three_create_all_plots():
     formatters = FinalPromptFormatter.all_formatters()
     for formatter in formatters:
@@ -293,7 +284,7 @@ def step_three_create_all_plots():
 
 
 if __name__ == "__main__":
-    step_three_for_formatter(ZeroShotTrueFreeOfBias())
+    step_three_for_formatter(ZeroShotTrueRandomBeliefButIgnore())
     # path = FewShotTrueWithGenExamples.formatter_path()
     # plot_vanilla_and_feedme_subset(read_folder=path, subset=" yes")
     # formatters = FinalPromptFormatter.all_formatters()
