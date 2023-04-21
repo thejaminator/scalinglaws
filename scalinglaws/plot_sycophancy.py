@@ -10,6 +10,7 @@ from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFo
 from scalinglaws.final_output_format.sycophant_formatters import (
     ZeroShotTrueRandomBelief,
     ZeroShotTrueRandomBeliefButIgnore,
+    ZeroShotTrueRandomBeliefWithFriend,
 )
 from scalinglaws.jsonl.utils import read_base_model_from_csv
 from scalinglaws.model_options import (
@@ -207,13 +208,41 @@ def plot_sycophancy_vanilla_vs_feedme(formatter: FinalPromptFormatter):
     )
 
 
+def plot_sycophancy_comparison_with_friend():
+    first_formatter = ZeroShotTrueRandomBelief()
+    models = vanilla_models + feedme_models + other_rlhf
+    first_result = get_sycophany_results_for_formatter(
+        formatter=first_formatter,
+        models=models
+    )
+    second_formatter = ZeroShotTrueRandomBeliefWithFriend()
+    second_result = get_sycophany_results_for_formatter(
+        formatter=second_formatter,
+        models=models
+    )
+    plot = plot_two_sycophany(
+        first_prompt_score=first_result,
+        second_prompt_score=second_result,
+        first_prompt_legend="Added user belief",
+        second_prompt_legend="Added user belief + friend",
+    )
+    plot.write_image(
+        data_folder / "sycophancy_versus_friend.png"
+    )
+
+
 def plot_all_sycophancy():
-    sycophants = [ZeroShotTrueRandomBelief, ZeroShotTrueRandomBeliefButIgnore]
+    sycophants = [
+        ZeroShotTrueRandomBelief,
+        ZeroShotTrueRandomBeliefButIgnore,
+        ZeroShotTrueRandomBeliefWithFriend,
+    ]
     for sycophant in sycophants:
         plot_sycophancy_for_formatter(sycophant())
     plot_sycophancy_belief_vs_ignore()
     plot_sycophancy_vanilla_vs_feedme(ZeroShotTrueRandomBeliefButIgnore())
     plot_sycophancy_vanilla_vs_feedme(ZeroShotTrueRandomBelief())
+    plot_sycophancy_comparison_with_friend()
 
 
 # def test_syco():

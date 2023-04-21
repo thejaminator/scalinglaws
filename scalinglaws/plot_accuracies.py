@@ -11,7 +11,8 @@ from scalinglaws.eval_pipeline_modified.load_data_from_csv import (
 )
 from scalinglaws.final_output_format.final_prompt_formatter import FinalPromptFormatter
 from scalinglaws.final_output_format.sycophant_formatters import (
-    ZeroShotTrueRandomBeliefButIgnore,
+    ZeroShotTrueRandomBeliefButIgnore, ZeroShotTrueRandomBeliefWithFriend, ZeroShotTrueOppositeBelief,
+    ZeroShotTrueRandomBelief,
 )
 from scalinglaws.model_options import vanilla_models, feedme_models, other_rlhf, all_davinci
 from settings import (
@@ -284,17 +285,15 @@ def step_three_evaluate_and_create_all_plots():
 
 
 if __name__ == "__main__":
-    step_three_for_formatter(ZeroShotTrueRandomBeliefButIgnore())
+    # step_three_for_formatter(ZeroShotTrueRandomBeliefWithFriend())
     # path = FewShotTrueWithGenExamples.formatter_path()
     # plot_vanilla_and_feedme_subset(read_folder=path, subset=" yes")
     # formatters = FinalPromptFormatter.all_formatters()
-    # formatters = [
-    #     ZeroShotTrueOppositeBelief(),
-    #     ZeroShotTrueAddedBelief(),
-    #     ZeroShotTrueAddedBeliefButIgnore(),
-    #     ZeroShotTrue(),
-    #     ZeroShotWouldYouSay(),
-    # ]
-    # for formatter in formatters:
-    #     step_three_for_formatter(formatter)
+    formatters = [
+        # ZeroShotTrueRandomBelief(),
+        ZeroShotTrueRandomBeliefWithFriend(),
+        # ZeroShotTrueRandomBeliefButIgnore(),
+    ]
+    for formatter in formatters:
+        step_three_for_formatter(formatter)
     # create_plot_for_formatter(FewShotTrueWithGenExamples())
